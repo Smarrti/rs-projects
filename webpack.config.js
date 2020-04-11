@@ -77,9 +77,6 @@ const config = {
               sourceMap: true
             }
           }, {
-            loader: 'postcss-loader',
-            options: { sourceMap: true, config: { path: './postcss.config.js' } }
-          }, {
             loader: 'sass-loader',
             options: {
               sourceMap: true
@@ -93,7 +90,7 @@ const config = {
           {
             loader: 'file-loader',
             options: {
-              outputPath: 'img',
+              outputPath: 'assets',
               name: '[name].[ext]'
             }},
           {
