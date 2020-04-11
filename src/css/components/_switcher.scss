@@ -1,0 +1,39 @@
+.switch-input {
+	display: none;
+}
+
+.switch {
+	cursor: pointer;
+	text-indent: -9999px;
+	width: 60px;
+	height: 30px;
+	background: grey;
+	display: block;
+	border-radius: 100px;
+	position: relative;
+}
+
+.switch:after {
+	content: '';
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	width: 20px;
+	height: 20px;
+	background: #fff;
+	border-radius: 90px;
+	transition: 0.3s;
+}
+
+.switch-input:checked + .switch {
+	background: #bada55;
+}
+
+.switch-input:checked + .switch:after {
+	left: calc(100% - 5px);
+	transform: translateX(-100%);
+}
+
+.switch:active:after {
+	width: 130px;
+}
