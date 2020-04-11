@@ -1,7 +1,7 @@
 {
-  "name": "webpack-boilerplate",
-  "version": "1.0.1",
-  "description": "WebPack: HTML, CSS, SCSS, JS, Img, Fonts",
+  "name": "english-for-kids",
+  "version": "1.0.0",
+  "description": "",
   "main": "",
   "browserslist": [
     "> 0.25%, not dead"
@@ -12,11 +12,10 @@
     "lint": "eslint ./**/*.js",
     "clear": "del-cli dist"
   },
-  "author": "Netizen",
-  "license": "ISC",
+  "author": "Smarrti",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Net-zen/webpack-boilerplate.git"
+    "url": "git+https://github.com/Smarrti/english-for-kids.git"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
