@@ -1,7 +1,7 @@
 .switch-input {
 	display: none;
 	&:checked + .switch {
-		background: #bada55;
+		background: $color-primary;
 	}
 	&:checked + .switch:after {
 		left: calc(100% - 5px);
@@ -11,7 +11,6 @@
 
 .switch {
 	cursor: pointer;
-	text-indent: -9999px;
 	width: 60px;
 	height: 30px;
 	background: grey;
@@ -25,7 +24,7 @@
 		left: 5px;
 		width: 20px;
 		height: 20px;
-		background: #fff;
+		background: $color-additional;
 		border-radius: 90px;
 		transition: 0.3s;
 	}
