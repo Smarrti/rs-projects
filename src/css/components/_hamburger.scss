@@ -1,9 +1,16 @@
+.hamburger {
+    transition: all 0.3s ease;
+    &_active {
+        transform: rotate(90deg);
+        z-index: 1;
+    }
+}
+
 .hamburger-menu {
     position: relative;
     width: 30px;
     height: 30px;
     cursor: pointer;
-    z-index: 1;
 }
 
 .hamburger-menu__line, 
