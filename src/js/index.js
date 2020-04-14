@@ -1,5 +1,7 @@
 import '../css/style.scss';
+import * as Cards from './Dictionary';
 
+const dictionary = Cards.default.cards;
 const burgerButton = document.querySelector('.hamburger-menu');
 const sidebarWrapper = document.querySelector('.sidebar-wrapper');
 
