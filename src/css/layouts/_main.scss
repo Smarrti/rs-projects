@@ -1,9 +1,10 @@
 .main {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    
-    // @include media-desktop-big {
-    //     width: 1200px;
-    // }
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+
+	&>a {
+		color: $color-text;
+		text-decoration: none;
+	}
 }

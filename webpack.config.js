@@ -85,12 +85,12 @@ const config = {
         ]
       },
       {
-        test: /\.(jpe?g|png|svg|gif)$/,
+        test: /\.(jpe?g|png|svg|gif|jpg)$/,
         use: [
           {
             loader: 'file-loader',
             options: {
-              outputPath: 'assets',
+              outputPath: 'assets/img',
               name: '[name].[ext]'
             }},
           {
@@ -129,6 +129,18 @@ const config = {
             outputPath: 'fonts'
           }
         }]
+      },
+      {
+        test: /\.(mp3)$/,
+        use: [
+            {
+                loader: 'file-loader',
+                options: {
+                  outputPath: 'assets/audio',
+                  name: '[name].[ext]'
+                },
+            }
+        ]
       }
     ]
   },
