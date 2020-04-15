@@ -1,5 +1,5 @@
 const cards = [ 
-  ['Action (set A)', 'Action (set B)', 'Animal (set A)', 'Animal (set B)', 'Clothes', 'Emotions'],
+  ['Action (set A)', 'Action (set B)', 'Animal (set A)', 'Animal (set B)', 'Clothes', 'Emotions', 'Rooms in a house', 'Transports'],
   [
     {
       word: 'cry',
@@ -299,6 +299,106 @@ const cards = [
       image: '../assets/img/laugh.jpg',
       audioSrc: '../assets/audio/laugh.mp3'
     }
+  ],
+  [
+    {
+      word: 'bathroom',
+      translation: 'ванная комната',
+      image: '../assets/img/bathroom.jpg',
+      audioSrc: '../assets/audio/bathroom.mp3',
+    },
+    {
+      word: 'dressing room',
+      translation: 'гардеробная',
+      image: '../assets/img/dressing-room.jpg',
+      audioSrc: '../assets/audio/dressing-room.mp3',
+    },
+    {
+      word: 'bedroom',
+      translation: 'спальная комната',
+      image: '../assets/img/bedroom.jpg',
+      audioSrc: '../assets/audio/bedroom.mp3',
+    },
+    {
+      word: 'kitchen',
+      translation: 'кухня',
+      image: '../assets/img/kitchen.jpg',
+      audioSrc: '../assets/audio/kitchen.mp3',
+    },
+    {
+      word: 'garage',
+      translation: 'гараж',
+      image: '../assets/img/garage.jpg',
+      audioSrc: '../assets/audio/garage.mp3',
+    },
+    {
+      word: 'toilet',
+      translation: 'туалет',
+      image: '../assets/img/toilet.jpg',
+      audioSrc: '../assets/audio/toilet.mp3',
+    },
+    {
+      word: 'basement',
+      translation: 'подвал',
+      image: '../assets/img/basement.jpg',
+      audioSrc: '../assets/audio/basement.mp3',
+    },
+    {
+      word: 'living room',
+      translation: 'гостинная',
+      image: '../assets/img/living-room.jpg',
+      audioSrc: '../assets/audio/living_room.mp3',
+    }
+  ],
+  [
+    {
+      word: 'bicycle',
+      translation: 'велосипед',
+      image: '../assets/img/cycle.jpg',
+      audioSrc: '../assets/audio/bicycle.mp3',
+    },
+    {
+      word: 'bus',
+      translation: 'автобус',
+      image: '../assets/img/bus.jpg',
+      audioSrc: '../assets/audio/bus.mp3',
+    },
+    {
+      word: 'car',
+      translation: 'машина',
+      image: '../assets/img/car.jpg',
+      audioSrc: '../assets/audio/car.mp3',
+    },
+    {
+      word: 'scooter',
+      translation: 'самокат',
+      image: '../assets/img/scooter.jpg',
+      audioSrc: '../assets/audio/scooter.mp3',
+    },
+    {
+      word: 'train',
+      translation: 'поезд',
+      image: '../assets/img/train.jpg',
+      audioSrc: '../assets/audio/train.mp3',
+    },
+    {
+      word: 'ship',
+      translation: 'корабль',
+      image: '../assets/img/ship.jpg',
+      audioSrc: '../assets/audio/ship.mp3',
+    },
+    {
+      word: 'lorry',
+      translation: 'грузовой автомобиль',
+      image: '../assets/img/lorry.jpg',
+      audioSrc: '../assets/audio/lorry.mp3',
+    },
+    {
+      word: 'plane',
+      translation: 'самолет',
+      image: '../assets/img/plane.jpg',
+      audioSrc: '../assets/audio/plane.mp3',
+    },
   ]
 ]
 
