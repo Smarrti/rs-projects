@@ -33,8 +33,8 @@ function generateStartContent() {
 		cardImage.setAttribute('src', dictionary[index + 1][0].image);
 
 		card.classList.add('category-card', 'card');
-		cardWrapper.classList.add('card__wrapper');
-		cardImage.classList.add('card__image');
+		cardWrapper.classList.add('category-card__wrapper');
+		cardImage.classList.add('category-card__image');
 		cardText.classList.add('card__text');
 
 		cardText.innerHTML = category;
@@ -57,6 +57,6 @@ function generateSidebar() {
 	});
 }
 
-	deleteContent();
-	generateStartContent();
-	generateSidebar()
+deleteContent();
+generateStartContent();
+generateSidebar()
