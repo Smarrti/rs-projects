@@ -57,6 +57,49 @@ function generateSidebar() {
 	});
 }
 
+function generateTrainMode(categoryId) {
+	const mainContent = document.querySelector('.main');
+	dictionary[categoryId].forEach((wordObject) => {
+		const card = document.createElement('a');
+		const cardFront = document.createElement('div');
+		const cardWrapper = document.createElement('div');
+		const cardImage = document.createElement('img');
+		const cardTextRu = document.createElement('p');
+		const cardTextEn = document.createElement('p');
+		const cardRotate = document.createElement('div');
+
+		card.setAttribute('href', '#');
+		cardImage.setAttribute('src', wordObject.image);
+		card.classList.add('word-card', 'card');
+		cardFront.classList.add('word-card_front');
+		cardWrapper.classList.add('word-card__wrapper');
+		cardImage.classList.add('word-card__image');
+		cardTextRu.classList.add('card__text', 'word-card__text');
+		cardTextEn.classList.add('card__text', 'word-card__text');
+		cardRotate.classList.add('word-card__rotate');
+
+		cardTextEn.innerHTML = wordObject.word;
+		cardTextRu.innerHTML = wordObject.translation;
+
+		cardWrapper.append(cardImage);
+		cardFront.append(cardWrapper);
+		cardFront.append(cardTextEn);
+
+		const cardBack = document.createElement('div');
+		cardBack.innerHTML = cardFront.innerHTML;
+		cardBack.classList.remove('word-card_front');
+		cardBack.classList.add('word-card_back');
+		card.append(cardBack);
+
+		cardFront.append(cardRotate);
+		card.append(cardFront);
+
+		mainContent.append(card);
+	});
+}
+
 deleteContent();
-generateStartContent();
+generateTrainMode(1);
+// generateStartContent();
 generateSidebar()
+

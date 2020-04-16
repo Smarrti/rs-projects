@@ -125,3 +125,4 @@ import '../assets/img/lorry.jpg';
 import '../assets/audio/lorry.mp3';
 import '../assets/img/plane.jpg';
 import '../assets/audio/plane.mp3';
+import '../assets/img/rotate.svg';
