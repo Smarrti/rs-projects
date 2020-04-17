@@ -113,12 +113,12 @@ generateSidebar();
 
 document.querySelector('body').addEventListener('click', (event) => {
 	event.preventDefault();
-	const { target } = event;
+	const { target, path } = event;
 	if (target.classList.contains('word-card__rotate')) {
-		rotateCard(event.path[2]);
+		rotateCard(path[2]);
 	} else { 
-		for (let i = 0; i < event.path.length - 2; i += 1) {
-			const tag = event.path[i];
+		for (let i = 0; i < path.length - 2; i += 1) {
+			const tag = path[i];
 			if (tag.classList.contains('category-card')) {
 				deleteContent();
 				generateTrainMode(dictionary[0].indexOf(tag.dataset.category) + 1);
@@ -127,9 +127,9 @@ document.querySelector('body').addEventListener('click', (event) => {
 	}
 })
 
-document.querySelector('body').addEventListener('mouseout', (e) => {
-	const { target, toElement } = e;
+document.querySelector('body').addEventListener('mouseout', (event) => {
+	const { target, toElement } = event;
 	if (target.classList.contains('word-card') && toElement.classList.contains('main')) {
-		rotateCard(e.target);
+		rotateCard(target);
 	}
 })
