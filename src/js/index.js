@@ -114,7 +114,7 @@ generateSidebar();
 document.querySelector('body').addEventListener('click', (event) => {
 	event.preventDefault();
 	const { target } = event;
-	if (target.classList.contains === 'word-card__rotate') {
+	if (target.classList.contains('word-card__rotate')) {
 		rotateCard(event.path[2]);
 	} else { 
 		for (let i = 0; i < event.path.length - 2; i += 1) {
