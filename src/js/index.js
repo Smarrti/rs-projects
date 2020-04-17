@@ -121,7 +121,7 @@ document.querySelector('body').addEventListener('click', (event) => {
 			const tag = event.path[i];
 			if (tag.classList.contains('category-card')) {
 				deleteContent();
-				generateTrainMode(dictionary[0].indexOf(tag.dataset.category));
+				generateTrainMode(dictionary[0].indexOf(tag.dataset.category) + 1);
 			}	
 		}
 	}
