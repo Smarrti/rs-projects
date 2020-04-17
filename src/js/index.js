@@ -1,8 +1,7 @@
 import '../css/style.scss';
-import * as Cards from './Dictionary';
-import './Content';
+import { cards } from './Dictionary';
 
-const dictionary = Cards.default.cards;
+const dictionary = cards;
 const burgerButton = document.querySelector('.hamburger-menu');
 const sidebarWrapper = document.querySelector('.sidebar-wrapper');
 
@@ -14,12 +13,12 @@ function moveSidebar() {
 	sidebar.classList.toggle('sidebar_active');
 }
 
-burgerButton.addEventListener('click', moveSidebar);
-sidebarWrapper.addEventListener('click', moveSidebar);
-
 function deleteContent() {
 	document.querySelector('.main').innerHTML = '';
 }
+
+burgerButton.addEventListener('click', moveSidebar);
+sidebarWrapper.addEventListener('click', moveSidebar);
 
 function generateStartContent() {
 	const mainContent = document.querySelector('.main');
@@ -28,6 +27,8 @@ function generateStartContent() {
 		const cardWrapper = document.createElement('div');
 		const cardImage = document.createElement('img');
 		const cardText = document.createElement('p');
+
+		card.dataset.category = category;
 
 		card.setAttribute('href', '#');
 		cardImage.setAttribute('src', dictionary[index + 1][0].image);
@@ -70,6 +71,7 @@ function generateTrainMode(categoryId) {
 
 		card.setAttribute('href', '#');
 		cardImage.setAttribute('src', wordObject.image);
+
 		card.classList.add('word-card', 'card');
 		cardFront.classList.add('word-card_front');
 		cardWrapper.classList.add('word-card__wrapper');
@@ -98,8 +100,36 @@ function generateTrainMode(categoryId) {
 	});
 }
 
-deleteContent();
-generateTrainMode(1);
-// generateStartContent();
-generateSidebar()
+function rotateCard(card) {
+	const cardFront = card.querySelector('.word-card_front');
+	const cardBack = card.querySelector('.word-card_back');
+	cardFront.classList.toggle('rotated-front');
+	cardBack.classList.toggle('rotated-back');
+}
 
+deleteContent();
+generateStartContent();
+generateSidebar();
+
+document.querySelector('body').addEventListener('click', (event) => {
+	event.preventDefault();
+	const { target } = event;
+	if (target.classList.contains === 'word-card__rotate') {
+		rotateCard(event.path[2]);
+	} else { 
+		for (let i = 0; i < event.path.length - 2; i += 1) {
+			const tag = event.path[i];
+			if (tag.classList.contains('category-card')) {
+				deleteContent();
+				generateTrainMode(dictionary[0].indexOf(tag.dataset.category));
+			}	
+		}
+	}
+})
+
+document.querySelector('body').addEventListener('mouseout', (e) => {
+	const { target } = e;
+	if (target.classList.contains('word-card')) {
+		rotateCard(e.target);
+	}
+})

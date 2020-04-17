@@ -45,7 +45,7 @@ const config = {
       },
       {
         test: /\.js$/,
-        use: ['babel-loader'/* , 'eslint-loader' */],
+        use: ['babel-loader'],
         exclude: [
           /node_modules/
         ]
@@ -101,7 +101,6 @@ const config = {
                 progressive: true,
                 quality: 75
               },
-              // optipng.enabled: false will disable optipng
               optipng: {
                 enabled: false,
               },
@@ -113,7 +112,6 @@ const config = {
                 interlaced: false,
                 optimizationLevel: 1
               },
-              // the webp option will enable WEBP
               webp: {
                 quality: 75
               }
@@ -154,8 +152,10 @@ const config = {
       filename: './index.html'
     }),
     new CopyWebpackPlugin([
-      // {from: './src/static', to: './'},
-      // {from: './src/img', to: './img/'},
+      {
+        from: './src/assets',
+        to: './assets'
+      }
     ]),
   ],
 
