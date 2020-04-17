@@ -128,8 +128,8 @@ document.querySelector('body').addEventListener('click', (event) => {
 })
 
 document.querySelector('body').addEventListener('mouseout', (e) => {
-	const { target } = e;
-	if (target.classList.contains('word-card')) {
+	const { target, toElement } = e;
+	if (target.classList.contains('word-card') && toElement.classList.contains('main')) {
 		rotateCard(e.target);
 	}
 })
