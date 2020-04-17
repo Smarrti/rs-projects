@@ -72,13 +72,13 @@ function generateTrainMode(categoryId) {
 		card.setAttribute('href', '#');
 		cardImage.setAttribute('src', wordObject.image);
 
-		card.classList.add('word-card', 'card');
-		cardFront.classList.add('word-card_front');
-		cardWrapper.classList.add('word-card__wrapper');
-		cardImage.classList.add('word-card__image');
-		cardTextRu.classList.add('card__text', 'word-card__text');
-		cardTextEn.classList.add('card__text', 'word-card__text');
-		cardRotate.classList.add('word-card__rotate');
+		card.classList.add('word-card', 'card', 'cardElement');
+		cardFront.classList.add('word-card_front', 'cardElement');
+		cardWrapper.classList.add('word-card__wrapper', 'cardElement');
+		cardImage.classList.add('word-card__image', 'cardElement');
+		cardTextRu.classList.add('card__text', 'word-card__text', 'cardElement');
+		cardTextEn.classList.add('card__text', 'word-card__text', 'cardElement');
+		cardRotate.classList.add('word-card__rotate', 'cardElement');
 
 		cardTextEn.innerHTML = wordObject.word;
 		cardTextRu.innerHTML = wordObject.translation;
@@ -129,7 +129,7 @@ document.querySelector('body').addEventListener('click', (event) => {
 
 document.querySelector('body').addEventListener('mouseout', (event) => {
 	const { target, toElement } = event;
-	if (target.classList.contains('word-card') && toElement.classList.contains('main')) {
+	if (target.classList.contains('cardElement') && toElement.classList.contains('main')) {
 		rotateCard(target);
 	}
 })
