@@ -111,8 +111,10 @@ function generateTrainMode(categoryId) {
 function rotateCard(card) {
 	const cardFront = card.querySelector('.word-card_front');
 	const cardBack = card.querySelector('.word-card_back');
-	cardFront.classList.toggle('rotated-front');
-	cardBack.classList.toggle('rotated-back');
+	if (cardFront !== null && cardBack !== null) {
+		cardFront.classList.toggle('rotated-front');
+		cardBack.classList.toggle('rotated-back');
+	}
 }
 
 deleteContent();
