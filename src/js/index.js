@@ -118,7 +118,9 @@ function rotateCard(card) {
 }
 
 deleteContent();
-generateStartContent();
+// generateStartContent();
+
+generateTrainMode(1);
 generateSidebar();
 
 document.querySelector('body').addEventListener('click', (event) => {
@@ -172,7 +174,9 @@ document.querySelector('body').addEventListener('click', (event) => {
 
 document.querySelector('body').addEventListener('mouseout', (event) => {
 	const { target, toElement } = event;
-	if (target.classList.contains('cardElement') && toElement.classList.contains('main')) {
-		rotateCard(target);
+	if (toElement !== null) {
+		if (target.classList.contains('cardElement') && toElement.classList.contains('main')) {
+			rotateCard(target);
+		}
 	}
 })
