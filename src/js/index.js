@@ -78,7 +78,7 @@ function generateTrainMode(categoryId) {
 	mainContent.append(title);
 
 	openCategoryId = categoryId;
-	
+
 	dictionary[categoryId].forEach((wordObject) => {
 		const card = document.createElement('a');
 		const cardFront = document.createElement('div');
@@ -133,8 +133,10 @@ generateStartContent();
 generateSidebar();
 
 document.querySelector('body').addEventListener('click', (event) => {
-	event.preventDefault();
 	const { target, path, } = event;
+	if (!target.classList.contains('switch') && !target.classList.contains('switch-input')) {
+		event.preventDefault();
+	}
 	const textEvent = target.innerText;
 	const audio = new Audio();
 	let cardText;
