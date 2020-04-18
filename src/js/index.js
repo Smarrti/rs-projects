@@ -118,8 +118,9 @@ generateSidebar();
 
 document.querySelector('body').addEventListener('click', (event) => {
 	event.preventDefault();
-	const { target, path } = event;
-	
+	const { target, path, } = event;
+	const textEvent = target.innerText;
+
 	switch (true) {
 		case target.classList.contains('word-card__rotate'):
 			rotateCard(path[2]);
@@ -131,6 +132,14 @@ document.querySelector('body').addEventListener('click', (event) => {
 					deleteContent();
 					generateTrainMode(dictionary[0].indexOf(tag.dataset.category) + 1);
 				}	
+			}
+			break;
+		case target.classList.contains('sidebar__link'):
+			deleteContent();
+			if (textEvent === 'Main Page') {
+				generateStartContent();
+			} else {
+				generateTrainMode(dictionary[0].indexOf(textEvent) + 1);
 			}
 			break;
 		default:
