@@ -47,14 +47,19 @@ function generateStartContent() {
 	})
 }
 
+function createSidebarElement(tag, href, className, nameLink) {
+	const link = document.createElement(tag);
+	link.setAttribute('href', href);
+	link.classList.add(className);
+	link.innerHTML = nameLink;
+	return link;
+}
+
 function generateSidebar() {
 	const sidebar = document.querySelector('.sidebar');
+	sidebar.append(createSidebarElement('a', '#', 'sidebar__link', 'Main Page'))
 	dictionary[0].forEach((category) => {
-		const link = document.createElement('a');
-		link.setAttribute('href', '#');
-		link.classList.add('sidebar__link');
-		link.innerHTML = category;
-		sidebar.append(link);
+		sidebar.append(createSidebarElement('a', '#', 'sidebar__link', category));
 	});
 }
 
