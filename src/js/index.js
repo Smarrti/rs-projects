@@ -71,7 +71,14 @@ let openCategoryId;
 
 function generateTrainMode(categoryId) {
 	const mainContent = document.querySelector('.main');
+
+	const title = document.createElement('div');
+	title.classList.add('main__title');
+	title.innerText = dictionary[0][categoryId];
+	mainContent.append(title);
+
 	openCategoryId = categoryId;
+	
 	dictionary[categoryId].forEach((wordObject) => {
 		const card = document.createElement('a');
 		const cardFront = document.createElement('div');
@@ -122,9 +129,7 @@ function rotateCard(card) {
 }
 
 deleteContent();
-// generateStartContent();
-
-generateTrainMode(1);
+generateStartContent();
 generateSidebar();
 
 document.querySelector('body').addEventListener('click', (event) => {
