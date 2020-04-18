@@ -33,10 +33,10 @@ function generateStartContent() {
 		card.setAttribute('href', '#');
 		cardImage.setAttribute('src', dictionary[index + 1][0].image);
 
-		card.classList.add('category-card', 'card');
-		cardWrapper.classList.add('category-card__wrapper');
-		cardImage.classList.add('category-card__image');
-		cardText.classList.add('card__text');
+		card.classList.add('category-card', 'card', 'category');
+		cardWrapper.classList.add('category-card__wrapper', 'category');
+		cardImage.classList.add('category-card__image', 'category');
+		cardText.classList.add('card__text', 'category');
 
 		cardText.innerHTML = category;
 
@@ -119,18 +119,24 @@ generateSidebar();
 document.querySelector('body').addEventListener('click', (event) => {
 	event.preventDefault();
 	const { target, path } = event;
-	if (target.classList.contains('word-card__rotate')) {
-		rotateCard(path[2]);
-	} else { 
-		for (let i = 0; i < path.length - 2; i += 1) {
-			const tag = path[i];
-			if (tag.classList.contains('category-card')) {
-				deleteContent();
-				generateTrainMode(dictionary[0].indexOf(tag.dataset.category) + 1);
-			}	
-		}
+	
+	switch (true) {
+		case target.classList.contains('word-card__rotate'):
+			rotateCard(path[2]);
+			break;
+		case target.classList.contains('category'):
+			for (let i = 0; i < path.length - 2; i += 1) {
+				const tag = path[i];
+				if (tag.classList.contains('category-card')) {
+					deleteContent();
+					generateTrainMode(dictionary[0].indexOf(tag.dataset.category) + 1);
+				}	
+			}
+			break;
+		default:
+			break;
 	}
-})
+});
 
 document.querySelector('body').addEventListener('mouseout', (event) => {
 	const { target, toElement } = event;
