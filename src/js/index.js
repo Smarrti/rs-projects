@@ -82,11 +82,10 @@ function generateTrainMode(categoryId) {
 		cardWrapper.classList.add('word-card__wrapper', 'cardElement');
 		cardImage.classList.add('word-card__image', 'cardElement');
 		cardTextRu.classList.add('card__text', 'word-card__text', 'cardElement');
-		cardTextEn.classList.add('card__text', 'word-card__text', 'cardElement');
+		cardTextEn.classList.add('card__text', 'word-card__text', 'word-card__translation', 'cardElement');
 		cardRotate.classList.add('word-card__rotate', 'cardElement');
 
 		cardTextEn.innerHTML = wordObject.word;
-		cardTextRu.innerHTML = wordObject.translation;
 
 		cardWrapper.append(cardImage);
 		cardFront.append(cardWrapper);
@@ -97,6 +96,7 @@ function generateTrainMode(categoryId) {
 		cardBack.classList.remove('word-card_front');
 		cardBack.classList.add('word-card_back');
 		card.append(cardBack);
+		cardBack.querySelector('.word-card__translation').innerHTML = wordObject.translation;
 
 		cardFront.append(cardRotate);
 		card.append(cardFront);
