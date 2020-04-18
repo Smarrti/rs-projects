@@ -18,7 +18,11 @@ function deleteContent() {
 }
 
 burgerButton.addEventListener('click', moveSidebar);
-sidebarWrapper.addEventListener('click', moveSidebar);
+sidebarWrapper.addEventListener('click', () => {
+	if (sidebarWrapper.classList.contains('sidebar-wrapper_active')) {
+		moveSidebar();
+	}
+});
 
 function generateStartContent() {
 	const mainContent = document.querySelector('.main');
