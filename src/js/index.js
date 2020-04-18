@@ -63,8 +63,11 @@ function generateSidebar() {
 	});
 }
 
+let openCategoryId;
+
 function generateTrainMode(categoryId) {
 	const mainContent = document.querySelector('.main');
+	openCategoryId = categoryId;
 	dictionary[categoryId].forEach((wordObject) => {
 		const card = document.createElement('a');
 		const cardFront = document.createElement('div');
@@ -120,6 +123,8 @@ document.querySelector('body').addEventListener('click', (event) => {
 	event.preventDefault();
 	const { target, path, } = event;
 	const textEvent = target.innerText;
+	const audio = new Audio();
+	let cardText;
 
 	switch (true) {
 		case target.classList.contains('word-card__rotate'):
@@ -131,6 +136,7 @@ document.querySelector('body').addEventListener('click', (event) => {
 				if (tag.classList.contains('category-card')) {
 					deleteContent();
 					generateTrainMode(dictionary[0].indexOf(tag.dataset.category) + 1);
+					break;
 				}	
 			}
 			break;
@@ -141,6 +147,21 @@ document.querySelector('body').addEventListener('click', (event) => {
 			} else {
 				generateTrainMode(dictionary[0].indexOf(textEvent) + 1);
 			}
+			break;
+		case target.classList.contains('cardElement'):
+			for (let i = 0; i < path.length; i += 1) {
+				const element = path[i];
+				if (element.classList.contains('word-card')) {
+					cardText = event.path[i].querySelector('.word-card__text').innerText;
+					break;
+				}
+			}
+			dictionary[openCategoryId].forEach((element) => {
+				if (element.translation === cardText) {
+					audio.src = element.audioSrc;
+					audio.play();
+				}
+			})
 			break;
 		default:
 			break;
