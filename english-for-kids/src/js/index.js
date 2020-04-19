@@ -154,7 +154,7 @@ function changeSidebarLinkActive(text) {
 	});
 }
 
-let wordTurn = [];
+const wordTurn = [];
 
 function generateRandomNumber(min, max) {
 	return Math.floor(Math.random() * (max - min) + min);
@@ -171,9 +171,9 @@ function soundWord(wordTurn, index) {
 }
 
 function startGame(categoryId) {
-	let turn = [];
-	let categoryWords = dictionary[categoryId + 1];
-	let categoryWordsLength = categoryWords.length
+	const turn = [];
+	const categoryWords = dictionary[categoryId + 1];
+	const categoryWordsLength = categoryWords.length
 	for (let i = 0; i < categoryWordsLength; i++) {
 		let number = generateRandomNumber(categoryWordsLength, 0);
 		while (turn.includes(number)) {
