@@ -197,7 +197,6 @@ document.querySelector('body').addEventListener('click', (event) => {
 		event.preventDefault();
 	}
 	const textEvent = target.innerText;
-	const audio = new Audio();
 	let cardText;
 	switch (true) {
 		case target.classList.contains('word-card__rotate'):
@@ -233,8 +232,7 @@ document.querySelector('body').addEventListener('click', (event) => {
 			}
 			dictionary[openCategoryId].forEach((element) => {
 				if (element.translation === cardText) {
-					audio.src = element.audioSrc;
-					audio.play();
+					playSound(element.audioSrc);
 				}
 			})
 			break;
