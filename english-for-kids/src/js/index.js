@@ -4,6 +4,7 @@ import { cards } from './Dictionary';
 const dictionary = cards;
 const burgerButton = document.querySelector('.hamburger-menu');
 const sidebarWrapper = document.querySelector('.sidebar-wrapper');
+const switcher = document.querySelector('.switch-input');
 
 function moveSidebar() {
 	const hamburgerButton = document.querySelector('.hamburger');
@@ -69,7 +70,7 @@ function generateSidebar() {
 
 let openCategoryId;
 
-function generateTrainMode(categoryId) {
+function generateTrainMode(categoryId, playMode) {
 	const mainContent = document.querySelector('.main');
 
 	const title = document.createElement('div');
@@ -102,22 +103,27 @@ function generateTrainMode(categoryId) {
 		cardTextEn.innerHTML = wordObject.word;
 
 		cardWrapper.append(cardImage);
-		cardFront.append(cardWrapper);
-		cardFront.append(cardTextEn);
+		if (playMode) {
+			card.append(cardWrapper);
+			card.classList.add('word-card_play');
+		} else {
+			cardFront.append(cardWrapper);
+			cardFront.append(cardTextEn);
 
-		const cardBack = document.createElement('div');
-		cardBack.innerHTML = cardFront.innerHTML;
-		cardBack.classList.remove('word-card_front');
-		cardBack.classList.add('word-card_back');
-		card.append(cardBack);
-		cardBack.querySelector('.word-card__translation').innerHTML = wordObject.translation;
+			const cardBack = document.createElement('div');
+			cardBack.innerHTML = cardFront.innerHTML;
+			cardBack.classList.remove('word-card_front');
+			cardBack.classList.add('word-card_back');
+			card.append(cardBack);
+			cardBack.querySelector('.word-card__translation').innerHTML = wordObject.translation;
 
-		cardFront.append(cardRotate);
-		card.append(cardFront);
+			cardFront.append(cardRotate);
+			card.append(cardFront);
+		}
 
 		mainContent.append(card);
 	});
-}
+} 
 
 function rotateCard(card) {
 	const cardFront = card.querySelector('.word-card_front');
@@ -155,7 +161,6 @@ document.querySelector('body').addEventListener('click', (event) => {
 	const textEvent = target.innerText;
 	const audio = new Audio();
 	let cardText;
-
 	switch (true) {
 		case target.classList.contains('word-card__rotate'):
 			rotateCard(path[2]);
@@ -195,6 +200,13 @@ document.querySelector('body').addEventListener('click', (event) => {
 				}
 			})
 			break;
+		case target.classList.contains('switch-input'): {
+			if (document.querySelector('.main__title').innerText) {
+				const categoryName = document.querySelector('.main__title').innerText;
+				deleteContent();
+				generateTrainMode(dictionary[0].indexOf(categoryName) + 1, switcher.checked);
+			}
+		}
 		default:
 			break;
 	}
@@ -203,9 +215,6 @@ document.querySelector('body').addEventListener('click', (event) => {
 document.querySelector('body').addEventListener('mouseout', (event) => {
 	const { target, toElement } = event;
 	if (toElement !== null) {
-		// if (target.classList.contains('cardElement') && toElement.classList.contains('main')) {
-		// 	rotateCard(target);
-		// }
 		const cardId = target.classList[0];
 		if (target.classList.contains('cardElement') && !toElement.classList.contains(cardId)) {
 			rotateCard(target);

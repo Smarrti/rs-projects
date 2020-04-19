@@ -82,6 +82,9 @@
 	&_back {
 		transform: rotateY(180deg);
 	}
+	&_play {
+		height: 235px;
+	}
 	&:hover {
 		transform: scale(1.05);
 	}
