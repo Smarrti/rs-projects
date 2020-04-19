@@ -154,6 +154,39 @@ function changeSidebarLinkActive(text) {
 	});
 }
 
+let wordTurn = [];
+
+function generateRandomNumber(min, max) {
+	return Math.floor(Math.random() * (max - min) + min);
+}
+
+function playSound(src) {
+	const audio = new Audio();
+	audio.src = src;
+	audio.play();
+}
+
+function soundWord(wordTurn, index) {
+	playSound(wordTurn[index].audioSrc);
+}
+
+function startGame(categoryId) {
+	let turn = [];
+	let categoryWords = dictionary[categoryId + 1];
+	let categoryWordsLength = categoryWords.length
+	for (let i = 0; i < categoryWordsLength; i++) {
+		let number = generateRandomNumber(categoryWordsLength, 0);
+		while (turn.includes(number)) {
+			number = generateRandomNumber(categoryWordsLength, 0);
+		}
+		turn.push(number);
+	};
+	turn.forEach((element) => {
+		wordTurn.push(categoryWords[element]);
+	});
+	soundWord(wordTurn, 0);
+}
+
 deleteContent();
 generateStartContent();
 generateSidebar();
@@ -205,7 +238,7 @@ document.querySelector('body').addEventListener('click', (event) => {
 				}
 			})
 			break;
-		case target.classList.contains('switch-input'): {
+		case target.classList.contains('switch-input'):
 			if (document.querySelector('.main__title') !== null) {
 				if (document.querySelector('.main__title').innerText) {
 					const categoryName = document.querySelector('.main__title').innerText;
@@ -213,7 +246,10 @@ document.querySelector('body').addEventListener('click', (event) => {
 					generateTrainMode(dictionary[0].indexOf(categoryName) + 1, switcher.checked);
 				}	
 			}
-		}
+			break;
+		case target.classList.contains('button__start'):
+			startGame(dictionary[0].indexOf(document.querySelector('.main__title').innerText));
+			break;
 		default:
 			break;
 	}
