@@ -120,9 +120,14 @@ function generateTrainMode(categoryId, playMode) {
 			cardFront.append(cardRotate);
 			card.append(cardFront);
 		}
-
 		mainContent.append(card);
 	});
+	if (playMode) {
+		const gameButton = document.createElement('button');
+		gameButton.classList.add('button', 'button__start');
+		gameButton.innerText = 'Start game';
+		mainContent.append(gameButton);
+	}
 } 
 
 function rotateCard(card) {

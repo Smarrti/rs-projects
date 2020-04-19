@@ -1,0 +1,11 @@
+.button {
+    font-family: 'Baloo Paaji 2', Verdana, Geneva, sans-serif;
+    font-size: 2.0rem;
+    background: linear-gradient(45deg, $color-button-first, $color-button-second);
+    border: none;
+    &__start {
+        width: 400px;
+        height: 40px;
+        border-radius: 20px;
+    }
+}
