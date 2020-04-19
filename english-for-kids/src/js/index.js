@@ -79,7 +79,7 @@ function generateTrainMode(categoryId) {
 
 	openCategoryId = categoryId;
 
-	dictionary[categoryId].forEach((wordObject) => {
+	dictionary[categoryId].forEach((wordObject, index) => {
 		const card = document.createElement('a');
 		const cardFront = document.createElement('div');
 		const cardWrapper = document.createElement('div');
@@ -91,13 +91,13 @@ function generateTrainMode(categoryId) {
 		card.setAttribute('href', '#');
 		cardImage.setAttribute('src', wordObject.image);
 
-		card.classList.add('word-card', 'card', 'cardElement');
-		cardFront.classList.add('word-card_front', 'cardElement');
-		cardWrapper.classList.add('word-card__wrapper', 'cardElement');
-		cardImage.classList.add('word-card__image', 'cardElement');
-		cardTextRu.classList.add('card__text', 'word-card__text', 'cardElement');
-		cardTextEn.classList.add('card__text', 'word-card__text', 'word-card__translation', 'cardElement');
-		cardRotate.classList.add('word-card__rotate', 'cardElement');
+		card.classList.add(`card${index}`, 'word-card', 'card', 'cardElement',);
+		cardFront.classList.add(`card${index}`, 'word-card_front', 'cardElement');
+		cardWrapper.classList.add(`card${index}`, 'word-card__wrapper', 'cardElement');
+		cardImage.classList.add(`card${index}`, 'word-card__image', 'cardElement');
+		cardTextRu.classList.add(`card${index}`, 'card__text', 'word-card__text', 'cardElement');
+		cardTextEn.classList.add(`card${index}`, 'card__text', 'word-card__text', 'word-card__translation', 'cardElement');
+		cardRotate.classList.add(`card${index}`, 'word-card__rotate', 'cardElement');
 
 		cardTextEn.innerHTML = wordObject.word;
 
@@ -125,6 +125,9 @@ function rotateCard(card) {
 	if (cardFront !== null && cardBack !== null) {
 		cardFront.classList.toggle('rotated-front');
 		cardBack.classList.toggle('rotated-back');
+	} else {
+		document.querySelector('.rotated-back').classList.remove('rotated-back');
+		document.querySelector('.rotated-front').classList.remove('rotated-front');
 	}
 }
 
@@ -200,7 +203,11 @@ document.querySelector('body').addEventListener('click', (event) => {
 document.querySelector('body').addEventListener('mouseout', (event) => {
 	const { target, toElement } = event;
 	if (toElement !== null) {
-		if (target.classList.contains('cardElement') && toElement.classList.contains('main')) {
+		// if (target.classList.contains('cardElement') && toElement.classList.contains('main')) {
+		// 	rotateCard(target);
+		// }
+		const cardId = target.classList[0];
+		if (target.classList.contains('cardElement') && !toElement.classList.contains(cardId)) {
 			rotateCard(target);
 		}
 	}
