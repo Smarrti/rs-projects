@@ -10,10 +10,10 @@
     @media (min-width: 415px) and (max-width: 768px) { @content; }
 }
 
-@mixin media-phone-big {
-    @media (min-width: 321px) and (max-width: 414px) { @content; }
+@mixin media-phone {
+    @media (min-width: 320px) and (max-width: 360px) { @content; }
 }
 
-@mixin media-phone {
-    @media (max-width: 320px) { @content; }
+@mixin media-mobile {
+    @media (min-width: 320px) and (max-width: 768px) { @content; }
 }
