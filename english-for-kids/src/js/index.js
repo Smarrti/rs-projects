@@ -175,7 +175,7 @@ document.querySelector('body').addEventListener('click', (event) => {
 				const tag = path[i];
 				if (tag.classList.contains('category-card')) {
 					deleteContent();
-					generateTrainMode(dictionary[0].indexOf(tag.dataset.category) + 1);
+					generateTrainMode(dictionary[0].indexOf(tag.dataset.category) + 1, switcher.checked);
 					changeSidebarLinkActive(tag.dataset.category);
 					break;
 				}	
@@ -186,7 +186,7 @@ document.querySelector('body').addEventListener('click', (event) => {
 			if (textEvent === 'Main Page') {
 				generateStartContent();
 			} else {
-				generateTrainMode(dictionary[0].indexOf(textEvent) + 1);
+				generateTrainMode(dictionary[0].indexOf(textEvent) + 1, switcher.checked);
 			}
 			changeSidebarLinkActive(textEvent);
 			break;
@@ -206,10 +206,12 @@ document.querySelector('body').addEventListener('click', (event) => {
 			})
 			break;
 		case target.classList.contains('switch-input'): {
-			if (document.querySelector('.main__title').innerText) {
-				const categoryName = document.querySelector('.main__title').innerText;
-				deleteContent();
-				generateTrainMode(dictionary[0].indexOf(categoryName) + 1, switcher.checked);
+			if (document.querySelector('.main__title') !== null) {
+				if (document.querySelector('.main__title').innerText) {
+					const categoryName = document.querySelector('.main__title').innerText;
+					deleteContent();
+					generateTrainMode(dictionary[0].indexOf(categoryName) + 1, switcher.checked);
+				}	
 			}
 		}
 		default:
