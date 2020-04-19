@@ -74,7 +74,7 @@ function generateTrainMode(categoryId) {
 
 	const title = document.createElement('div');
 	title.classList.add('main__title');
-	title.innerText = dictionary[0][categoryId];
+	title.innerText = dictionary[0][categoryId - 1];
 	mainContent.append(title);
 
 	openCategoryId = categoryId;
@@ -128,6 +128,18 @@ function rotateCard(card) {
 	}
 }
 
+function changeSidebarLinkActive(text) {
+	const sidebarLinks = document.querySelectorAll('.sidebar__link');
+	sidebarLinks.forEach((link) => {
+		if (link.classList.contains('sidebar__link_active')) {
+			link.classList.remove('sidebar__link_active');
+		}
+		if (link.innerText === text) {
+			link.classList.add('sidebar__link_active');
+		}
+	});
+}
+
 deleteContent();
 generateStartContent();
 generateSidebar();
@@ -151,6 +163,7 @@ document.querySelector('body').addEventListener('click', (event) => {
 				if (tag.classList.contains('category-card')) {
 					deleteContent();
 					generateTrainMode(dictionary[0].indexOf(tag.dataset.category) + 1);
+					changeSidebarLinkActive(tag.dataset.category);
 					break;
 				}	
 			}
@@ -162,6 +175,7 @@ document.querySelector('body').addEventListener('click', (event) => {
 			} else {
 				generateTrainMode(dictionary[0].indexOf(textEvent) + 1);
 			}
+			changeSidebarLinkActive(textEvent);
 			break;
 		case target.classList.contains('cardElement'):
 			for (let i = 0; i < path.length; i += 1) {
