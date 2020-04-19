@@ -136,7 +136,7 @@ function rotateCard(card) {
 	if (cardFront !== null && cardBack !== null) {
 		cardFront.classList.toggle('rotated-front');
 		cardBack.classList.toggle('rotated-back');
-	} else {
+	} else if (document.querySelector('.rotated-back')) {
 		document.querySelector('.rotated-back').classList.remove('rotated-back');
 		document.querySelector('.rotated-front').classList.remove('rotated-front');
 	}
