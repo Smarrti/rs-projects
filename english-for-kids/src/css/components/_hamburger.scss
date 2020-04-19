@@ -2,6 +2,7 @@
     transition: all 0.3s ease;
     z-index: 1;
     &_active {
+        position: fixed;
         transform: rotate(90deg);
     }
 }
