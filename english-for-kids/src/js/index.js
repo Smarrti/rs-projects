@@ -166,15 +166,15 @@ function playSound(src) {
 	audio.play();
 }
 
-function soundWord(wordTurn, index) {
-	playSound(wordTurn[index].audioSrc);
+function soundWord(turn, index) {
+	playSound(turn[index].audioSrc);
 }
 
 function startGame(categoryId) {
 	const turn = [];
 	const categoryWords = dictionary[categoryId + 1];
 	const categoryWordsLength = categoryWords.length
-	for (let i = 0; i < categoryWordsLength; i++) {
+	for (let i = 0; i < categoryWordsLength; i += 1) {
 		let number = generateRandomNumber(categoryWordsLength, 0);
 		while (turn.includes(number)) {
 			number = generateRandomNumber(categoryWordsLength, 0);
