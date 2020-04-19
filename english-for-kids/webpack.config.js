@@ -155,6 +155,10 @@ const config = {
       {
         from: './src/assets',
         to: './assets'
+      }, 
+      {
+        from: './src/favicon.ico',
+        to: './'
       }
     ]),
   ],
