@@ -29,10 +29,15 @@
 		margin-bottom: 0px;
 		margin-block-start: 10px;
 		font-size: 2.4rem;
-		color: $color-text;
+		color: lighten($color-text, 20%);
 		text-decoration: none;
 		cursor: pointer;
+		&_active {
+			color: $color-text;
+			text-decoration: underline;
+		}
 		&:hover {
+			color: $color-text;
 			text-decoration: underline;
 		}
 	}

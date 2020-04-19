@@ -54,14 +54,14 @@ function generateStartContent() {
 function createSidebarElement(tag, href, className, nameLink) {
 	const link = document.createElement(tag);
 	link.setAttribute('href', href);
-	link.classList.add(className);
+	link.className = className;
 	link.innerHTML = nameLink;
 	return link;
 }
 
 function generateSidebar() {
 	const sidebar = document.querySelector('.sidebar');
-	sidebar.append(createSidebarElement('a', '#', 'sidebar__link', 'Main Page'))
+	sidebar.append(createSidebarElement('a', '#', 'sidebar__link sidebar__link_active', 'Main Page'))
 	dictionary[0].forEach((category) => {
 		sidebar.append(createSidebarElement('a', '#', 'sidebar__link', category));
 	});
