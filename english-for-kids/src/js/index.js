@@ -73,12 +73,18 @@ let openCategoryId;
 function generateTrainMode(categoryId, playMode) {
 	const mainContent = document.querySelector('.main');
 
+	openCategoryId = categoryId;
+
 	const title = document.createElement('div');
 	title.classList.add('main__title');
 	title.innerText = dictionary[0][categoryId - 1];
 	mainContent.append(title);
 
-	openCategoryId = categoryId;
+	if (playMode) {
+		const starsWrapper = document.createElement('div');
+		starsWrapper.classList.add('stars-block');
+		mainContent.append(starsWrapper);
+	}
 
 	dictionary[categoryId].forEach((wordObject, index) => {
 		const card = document.createElement('a');
@@ -106,6 +112,8 @@ function generateTrainMode(categoryId, playMode) {
 		if (playMode) {
 			card.append(cardWrapper);
 			card.classList.add('word-card_play');
+			cardImage.classList.add('card_play');
+			cardImage.dataset.word = wordObject.word;
 		} else {
 			cardFront.append(cardWrapper);
 			cardFront.append(cardTextEn);
@@ -195,6 +203,18 @@ function startGame(categoryId) {
 	buttonPlay.innerHTML = '';
 }
 
+function checkOnClickedCard(word) {
+	const starsWrapper = document.querySelector('.stars-block');
+	const numberQuestion = starsWrapper.querySelectorAll('.star_win').length;
+	const star = document.createElement('div');
+	if (wordTurn[numberQuestion].word === word) {
+		star.classList.add('star', 'star_win');
+	} else {
+		star.classList.add('star', 'star_lose');
+	}
+	starsWrapper.append(star);
+}
+
 deleteContent();
 generateStartContent();
 generateSidebar();
@@ -205,8 +225,14 @@ document.querySelector('body').addEventListener('click', (event) => {
 		event.preventDefault();
 	}
 	const textEvent = target.innerText;
+	const playModeOn = document.querySelector('.button__repeat');
 	let cardText;
 	switch (true) {
+		case target.classList.contains('card_play'):
+			if (playModeOn) {
+				checkOnClickedCard(target.dataset.word);	
+			}
+			break;
 		case target.classList.contains('word-card__rotate'):
 			rotateCard(path[2]);
 			break;
