@@ -203,7 +203,12 @@ function startGame(categoryId) {
 	buttonPlay.innerHTML = '';
 }
 
-function checkOnClickedCard(word) {
+function makeCardNonActive(card) {
+	card.classList.remove('card_play', 'cardElement');
+	card.classList.add('card_non-active');
+}
+
+function checkOnClickedCard(word, card) {
 	const starsWrapper = document.querySelector('.stars-block');
 	const numberQuestion = document.querySelectorAll('.star_win').length;
 	const numberStars = document.querySelectorAll('.star').length;
@@ -211,6 +216,7 @@ function checkOnClickedCard(word) {
 	if (wordTurn[numberQuestion].word === word) {
 		star.classList.add('star', 'star_win');
 		playSound(wordTurn[numberQuestion + 1].audioSrc);
+		makeCardNonActive(card);
 	} else {
 		star.classList.add('star', 'star_lose');
 		playSound("../assets/audio/error.mp3");
@@ -238,7 +244,7 @@ document.querySelector('body').addEventListener('click', (event) => {
 	switch (true) {
 		case target.classList.contains('card_play'):
 			if (playModeOn) {
-				checkOnClickedCard(target.dataset.word);	
+				checkOnClickedCard(target.dataset.word, target);	
 			}
 			break;
 		case target.classList.contains('word-card__rotate'):

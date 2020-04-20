@@ -10,7 +10,9 @@
 		text-align: center;
 		font-size: 2.5rem;
 	}
-
+	&_non-active {
+		filter: grayscale(1);
+	}
 	@include media-mobile {
 		height: 330px;
 	}
