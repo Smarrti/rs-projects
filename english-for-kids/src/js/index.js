@@ -123,6 +123,10 @@ function generateTrainMode(categoryId, playMode) {
 		mainContent.append(card);
 	});
 	if (playMode) {
+		const hiddenLine = document.createElement('hr');
+		hiddenLine.classList.add('line-before-button');
+		mainContent.append(hiddenLine);
+
 		const gameButton = document.createElement('button');
 		gameButton.classList.add('button', 'button__start');
 		gameButton.innerText = 'Start game';
@@ -185,6 +189,10 @@ function startGame(categoryId) {
 		wordTurn.push(categoryWords[element]);
 	});
 	soundWord(wordTurn, 0);
+	const buttonPlay = document.querySelector('.button__start');
+	buttonPlay.classList.remove('button__start');
+	buttonPlay.classList.add('button__repeat');
+	buttonPlay.innerHTML = '';
 }
 
 deleteContent();
