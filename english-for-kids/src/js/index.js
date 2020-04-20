@@ -210,8 +210,10 @@ function checkOnClickedCard(word) {
 	const star = document.createElement('div');
 	if (wordTurn[numberQuestion].word === word) {
 		star.classList.add('star', 'star_win');
+		playSound(wordTurn[numberQuestion + 1].audioSrc);
 	} else {
 		star.classList.add('star', 'star_lose');
+		playSound("../assets/audio/error.mp3");
 	}
 	starsWrapper.append(star);
 
