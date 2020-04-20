@@ -290,6 +290,9 @@ document.querySelector('body').addEventListener('click', (event) => {
 		case target.classList.contains('button__start'):
 			startGame(dictionary[0].indexOf(document.querySelector('.main__title').innerText));
 			break;
+		case target.classList.contains('button__repeat'):
+			soundWord(wordTurn, document.querySelectorAll('.star_win').length);
+			break;
 		default:
 			break;
 	}
