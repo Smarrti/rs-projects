@@ -205,7 +205,8 @@ function startGame(categoryId) {
 
 function checkOnClickedCard(word) {
 	const starsWrapper = document.querySelector('.stars-block');
-	const numberQuestion = starsWrapper.querySelectorAll('.star_win').length;
+	const numberQuestion = document.querySelectorAll('.star_win').length;
+	const numberStars = document.querySelectorAll('.star').length;
 	const star = document.createElement('div');
 	if (wordTurn[numberQuestion].word === word) {
 		star.classList.add('star', 'star_win');
@@ -213,6 +214,11 @@ function checkOnClickedCard(word) {
 		star.classList.add('star', 'star_lose');
 	}
 	starsWrapper.append(star);
+
+	const lengthStarsWrapper = starsWrapper.clientWidth;
+	if ((numberStars + 1) * 50 > lengthStarsWrapper) {
+		starsWrapper.removeChild(starsWrapper.firstChild);
+	}
 }
 
 deleteContent();
