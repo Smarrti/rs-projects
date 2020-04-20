@@ -221,12 +221,7 @@ function checkOnClickedCard(word, card) {
 		star.classList.add('star', 'star_lose');
 		playSound("../assets/audio/error.mp3");
 	}
-	starsWrapper.append(star);
-
-	const lengthStarsWrapper = starsWrapper.clientWidth;
-	if ((numberStars + 1) * 50 > lengthStarsWrapper) {
-		starsWrapper.removeChild(starsWrapper.firstChild);
-	}
+	starsWrapper.innerHTML = star.outerHTML + starsWrapper.innerHTML;
 }
 
 deleteContent();
