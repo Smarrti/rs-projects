@@ -211,7 +211,6 @@ function makeCardNonActive(card) {
 function checkOnClickedCard(word, card) {
 	const starsWrapper = document.querySelector('.stars-block');
 	const numberQuestion = document.querySelectorAll('.star_win').length;
-	const numberStars = document.querySelectorAll('.star').length;
 	const star = document.createElement('div');
 	if (wordTurn[numberQuestion].word === word) {
 		star.classList.add('star', 'star_win');
