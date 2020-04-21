@@ -166,7 +166,7 @@ function changeSidebarLinkActive(text) {
 	});
 }
 
-const wordTurn = [];
+let wordTurn = [];
 
 function generateRandomNumber(min, max) {
 	return Math.floor(Math.random() * (max - min) + min);
@@ -208,14 +208,46 @@ function makeCardNonActive(card) {
 	card.classList.add('card_non-active');
 }
 
+function gameEnd(numberErrors) {
+	deleteContent();
+
+	const mainContent = document.querySelector('.main');
+
+	const gameEndWrapper = document.createElement('div');
+	const gameEndImage = document.createElement('img');
+	const gameEndText = document.createElement('p');
+
+	gameEndWrapper.classList.add('game-end');
+	gameEndImage.classList.add('game-end__img');
+	gameEndText.classList.add('game-end__text');
+
+	if (numberErrors !== 0) {
+		gameEndImage.setAttribute('src', '../assets/img/failure.jpg');
+		gameEndText.innerText = `Game over! ${numberErrors} mistakes!`;
+	} else {
+		gameEndImage.setAttribute('src', '../assets/img/success.jpg');
+		gameEndText.innerText = 'Success';
+	}
+
+	gameEndWrapper.append(gameEndImage, gameEndText);
+	mainContent.append(gameEndWrapper);
+
+	wordTurn = [];
+}
+
 function checkOnClickedCard(word, card) {
 	const starsWrapper = document.querySelector('.stars-block');
 	const numberQuestion = document.querySelectorAll('.star_win').length;
 	const star = document.createElement('div');
 	if (wordTurn[numberQuestion].word === word) {
 		star.classList.add('star', 'star_win');
-		playSound(wordTurn[numberQuestion + 1].audioSrc);
-		makeCardNonActive(card);
+		if (wordTurn.length <= numberQuestion + 1) {
+			const numberErrors = document.querySelectorAll('.star').length - numberQuestion;
+			gameEnd(numberErrors);
+		} else {
+			playSound(wordTurn[numberQuestion + 1].audioSrc);
+			makeCardNonActive(card);
+		}
 	} else {
 		star.classList.add('star', 'star_lose');
 		playSound("../assets/audio/error.mp3");
