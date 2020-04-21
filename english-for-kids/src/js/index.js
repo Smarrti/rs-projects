@@ -208,6 +208,10 @@ function makeCardNonActive(card) {
 	card.classList.add('card_non-active');
 }
 
+function locationToMainPage() {
+	document.location.href = './index.html';
+}
+
 function gameEnd(numberErrors) {
 	deleteContent();
 
@@ -233,6 +237,7 @@ function gameEnd(numberErrors) {
 	mainContent.append(gameEndWrapper);
 
 	wordTurn = [];
+	setTimeout(locationToMainPage, 5000);
 }
 
 function checkOnClickedCard(word, card) {
