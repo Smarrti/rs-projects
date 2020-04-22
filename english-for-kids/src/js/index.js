@@ -313,19 +313,27 @@ function createTdElement(text) {
 	return element
 }
 
+function createPanelButtons(className, text) {
+	const button = document.createElement('div');
+	button.classList.add(className, 'panel__button');
+	button.innerText = text;
+	return button;
+}
+
 function generateStatsPage() {
 	const mainContent = document.querySelector('.main');
 
-	const mainContentTitle = document.createElement('div');
-	const mainContentPanel = document.createElement('div');
+	const mainTitle = document.createElement('div');
+	const mainPanel = document.createElement('div');
 
-	mainContentTitle.classList.add('stats__title');
-	mainContentPanel.classList.add('stats__panel');
+	mainTitle.classList.add('stats__title');
+	mainPanel.classList.add('stats__panel');
 
-	mainContentTitle.innerText = 'Stats';
-	mainContentPanel.innerHTML = 'ddd';
+	mainTitle.innerText = 'Stats';
 
-	mainContent.append(mainContentTitle, mainContentPanel);
+	mainPanel.append(createPanelButtons('panel__delete', 'Reset'));
+	mainPanel.append(createPanelButtons('panel__difficult-words', 'Repeat difficult words'));
+	mainContent.append(mainTitle, mainPanel);
 
 	const stats = JSON.parse(localStorage.getItem('stats'));
 	
