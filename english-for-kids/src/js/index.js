@@ -478,6 +478,11 @@ document.querySelector('body').addEventListener('click', (event) => {
 			deleteContent();
 			generateTrainMode('custom');
 			break;
+		case target.classList.contains('panel__delete'):
+			localStorage.setItem('stats', '{}');
+			deleteContent();
+			generateStatsPage();
+			break;
 		default:
 			break;
 	}
