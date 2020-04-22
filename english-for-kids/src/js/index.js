@@ -103,8 +103,7 @@ function generateTrainMode(categoryId, playMode) {
 		cardFront.classList.add(`card${index}`, 'word-card_front', 'cardElement');
 		cardWrapper.classList.add(`card${index}`, 'word-card__wrapper', 'cardElement');
 		cardImage.classList.add(`card${index}`, 'word-card__image', 'cardElement');
-		cardTextRu.classList.add(`card${index}`, 'card__text', 'word-card__text', 'cardElement');
-		cardTextEn.classList.add(`card${index}`, 'card__text', 'word-card__text', 'word-card__translation', 'cardElement');
+		cardTextEn.classList.add(`card${index}`, 'card__text', 'word-card__text', 'cardElement');
 		cardRotate.classList.add(`card${index}`, 'word-card__rotate', 'cardElement');
 
 		cardTextEn.innerHTML = wordObject.word;
@@ -124,7 +123,8 @@ function generateTrainMode(categoryId, playMode) {
 			cardBack.classList.remove('word-card_front');
 			cardBack.classList.add('word-card_back');
 			card.append(cardBack);
-			cardBack.querySelector('.word-card__translation').innerHTML = wordObject.translation;
+			cardBack.querySelector('.word-card__text').innerHTML = wordObject.translation;
+			cardBack.querySelector('.word-card__text').classList.add('word-card__translation');
 
 			cardFront.append(cardRotate);
 			card.append(cardFront);
@@ -261,6 +261,31 @@ function checkOnClickedCard(word, card) {
 	starsWrapper.innerHTML = star.outerHTML + starsWrapper.innerHTML;
 }
 
+function calcStats(type, card) {
+	let stats = JSON.parse(localStorage.getItem('stats'));
+	if (stats === null) {
+		stats = {};
+	}
+	switch (type) {
+		case 'clickOnCard':
+			if (stats.clickOnCard === undefined) {
+				stats.clickOnCard = {};
+				stats.clickOnCard[card] = 1;
+			} else {
+				if (stats.clickOnCard[card] === undefined) {
+					stats.clickOnCard[card] = 1;
+				} else {
+					stats.clickOnCard[card] += 1;
+				}
+			}
+			break;
+	
+		default:
+			break;
+	}
+	localStorage.setItem('stats', JSON.stringify(stats));
+}
+
 deleteContent();
 generateStartContent();
 generateSidebar();
@@ -307,6 +332,9 @@ document.querySelector('body').addEventListener('click', (event) => {
 				const element = path[i];
 				if (element.classList.contains('word-card')) {
 					cardText = event.path[i].querySelector('.word-card__text').innerText;
+					
+					const word = element.querySelector('.word-card__text:not(.word-card__translation)');
+					calcStats('clickOnCard', word.innerText);
 					break;
 				}
 			}
