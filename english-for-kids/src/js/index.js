@@ -106,7 +106,18 @@ function generateTrainMode(categoryId, playMode) {
 		mainContent.append(starsWrapper);
 	}
 
-	dictionary[categoryId].forEach((wordObject, index) => {
+	let words = [];
+	if (categoryId === 'custom') {
+		title.innerText = 'Difficult words';
+		difficultWords = difficultWords.sort().reverse();
+		for (let i = 0; i < 8; i++) {
+			words.push(difficultWords[i][1]);
+		}
+	} else {
+		words = dictionary[categoryId];
+	}
+
+	words.forEach((wordObject, index) => {
 		const card = document.createElement('a');
 		const cardFront = document.createElement('div');
 		const cardWrapper = document.createElement('div');
@@ -301,13 +312,21 @@ function createTdElement(text) {
 	return element
 }
 
+let difficultWords = [];
+
 function generateStatsPage() {
 	const mainContent = document.querySelector('.main');
 
 	const mainContentTitle = document.createElement('div');
+	const mainContentPanel = document.createElement('div');
+
 	mainContentTitle.classList.add('stats__title');
+	mainContentPanel.classList.add('stats__panel');
+
 	mainContentTitle.innerText = 'Stats';
-	mainContent.append(mainContentTitle);
+	mainContentPanel.innerHTML = 'ddd';
+
+	mainContent.append(mainContentTitle, mainContentPanel);
 
 	const stats = JSON.parse(localStorage.getItem('stats'));
 	
@@ -320,6 +339,7 @@ function generateStatsPage() {
 	statsTitle.append(createTdElement('% wrong attempts'));
 	statsContent.append(statsTitle);
 
+	difficultWords = [];
 	dictionary.forEach((category, index) => {
 		if (index !== 0) {
 			const categoryNameRow = document.createElement('tr');
@@ -343,9 +363,15 @@ function generateStatsPage() {
 				let percentWrongAttempts = 100 / (stats.choosenRightWord[word.word] / stats.choosenWrongWord[word.word]);
 				if (Number.isNaN(percentWrongAttempts)) {
 					percentWrongAttempts = '-';
+				} else {
+					const objWord = word.word;
+					const translation = word.translation;
+					const image = word.image;
+					const audioSrc = word.audioSrc;
+					difficultWords.push([percentWrongAttempts, {'word': objWord, translation, image, audioSrc}]);
 				}
 				categoryBlockRow.append(createTdElement(percentWrongAttempts));
-				
+
 				statsContent.append(categoryBlockRow);	
 			})
 		}
@@ -405,9 +431,19 @@ document.querySelector('body').addEventListener('click', (event) => {
 					break;
 				}
 			}
-			dictionary[openCategoryId].forEach((element) => {
-				if (element.translation === cardText) {
-					playSound(element.audioSrc);
+			let words = [];
+			if (openCategoryId !== -1) {
+				words = difficultWords;
+			} else {
+				words = dictionary[openCategoryId];
+			}
+			words.forEach((element) => {
+				if ((element.translation === cardText) || ((element[1].translation === cardText))) {
+					if (element.audioSrc !== undefined) {
+						playSound(element.audioSrc);
+					} else {
+						playSound(element[1].audioSrc);
+					}
 				}
 			})
 			break;
@@ -430,6 +466,9 @@ document.querySelector('body').addEventListener('click', (event) => {
 			deleteContent();
 			generateStatsPage();
 			break;
+		case target.classList.contains('stats__panel'):
+			deleteContent();
+			generateTrainMode('custom');
 		default:
 			break;
 	}
