@@ -15,6 +15,7 @@ function moveSidebar() {
 }
 
 function deleteContent() {
+	wordTurn = [];
 	document.querySelector('.main').innerHTML = '';
 }
 
