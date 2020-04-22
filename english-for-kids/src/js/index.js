@@ -89,6 +89,7 @@ function generateSidebar() {
 }
 
 let openCategoryId;
+let difficultWords = [];
 
 function generateTrainMode(categoryId, playMode) {
 	const mainContent = document.querySelector('.main');
@@ -110,7 +111,7 @@ function generateTrainMode(categoryId, playMode) {
 	if (categoryId === 'custom') {
 		title.innerText = 'Difficult words';
 		difficultWords = difficultWords.sort().reverse();
-		for (let i = 0; i < 8; i++) {
+		for (let i = 0; i < 8; i += 1) {
 			words.push(difficultWords[i][1]);
 		}
 	} else {
@@ -312,8 +313,6 @@ function createTdElement(text) {
 	return element
 }
 
-let difficultWords = [];
-
 function generateStatsPage() {
 	const mainContent = document.querySelector('.main');
 
@@ -365,9 +364,9 @@ function generateStatsPage() {
 					percentWrongAttempts = '-';
 				} else {
 					const objWord = word.word;
-					const translation = word.translation;
-					const image = word.image;
-					const audioSrc = word.audioSrc;
+					const {translation} = word;
+					const {image} = word;
+					const {audioSrc} = word;
 					difficultWords.push([percentWrongAttempts, {'word': objWord, translation, image, audioSrc}]);
 				}
 				categoryBlockRow.append(createTdElement(percentWrongAttempts));
@@ -420,7 +419,7 @@ document.querySelector('body').addEventListener('click', (event) => {
 			}
 			changeSidebarLinkActive(textEvent);
 			break;
-		case target.classList.contains('cardElement'):
+		case target.classList.contains('cardElement'): {
 			for (let i = 0; i < path.length; i += 1) {
 				const element = path[i];
 				if (element.classList.contains('word-card')) {
@@ -447,6 +446,7 @@ document.querySelector('body').addEventListener('click', (event) => {
 				}
 			})
 			break;
+		}
 		case target.classList.contains('switch-input'):
 			if (document.querySelector('.main__title') !== null) {
 				if (document.querySelector('.main__title').innerText) {
@@ -469,6 +469,7 @@ document.querySelector('body').addEventListener('click', (event) => {
 		case target.classList.contains('stats__panel'):
 			deleteContent();
 			generateTrainMode('custom');
+			break;
 		default:
 			break;
 	}
