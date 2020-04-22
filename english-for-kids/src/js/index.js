@@ -65,7 +65,8 @@ function createSidebarElement(tag, href, className, nameLink) {
 
 function generateSidebar() {
 	const sidebar = document.querySelector('.sidebar');
-	sidebar.append(createSidebarElement('a', '#', 'sidebar__link sidebar__link_active', 'Main Page'))
+	sidebar.append(createSidebarElement('a', '#', 'sidebar__link sidebar__link_active', 'Main Page'));
+	sidebar.append(createSidebarElement('a', '#', 'sidebar__link sidebar__link_stats', 'Stats'));
 	dictionary[0].forEach((category) => {
 		sidebar.append(createSidebarElement('a', '#', 'sidebar__link', category));
 	});
@@ -385,6 +386,10 @@ document.querySelector('body').addEventListener('click', (event) => {
 	const playModeOn = document.querySelector('.button__repeat');
 	let cardText;
 	switch (true) {
+		case target.classList.contains('stats-button') || target.classList.contains('sidebar__link_stats'):
+			deleteContent();
+			generateStatsPage();
+			break;
 		case target.classList.contains('card_play'):
 			if (playModeOn) {
 				checkOnClickedCard(target.dataset.word, target);	
@@ -455,10 +460,6 @@ document.querySelector('body').addEventListener('click', (event) => {
 			break;
 		case target.classList.contains('button__repeat'):
 			soundWord(wordTurn, document.querySelectorAll('.star_win').length);
-			break;
-		case target.classList.contains('stats-button'):
-			deleteContent();
-			generateStatsPage();
 			break;
 		case target.classList.contains('panel__difficult-words'):
 			deleteContent();
