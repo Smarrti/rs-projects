@@ -27,6 +27,22 @@ sidebarWrapper.addEventListener('click', () => {
 });
 
 function generateStartContent() {
+	const controlPanel = document.querySelector('.control-panel');
+	const buttonToStatsPage = document.createElement('div');
+	const buttonToStatsPageImage = document.createElement('img');
+	const buttonToStatsPageText = document.createElement('p');
+
+	controlPanel.classList.add('control-panel');
+	buttonToStatsPage.classList.add('control-panel__item');
+	buttonToStatsPageImage.classList.add('control-panel__image');
+
+	buttonToStatsPageImage.setAttribute('src', '../assets/img/stats.png');
+
+	buttonToStatsPageText.innerText = 'Stats';
+
+	buttonToStatsPage.append(buttonToStatsPageImage, buttonToStatsPageText);
+	controlPanel.append(buttonToStatsPage);
+
 	const mainContent = document.querySelector('.main');
 	dictionary[0].forEach((category, index) => {
 		const card = document.createElement('a');
