@@ -32,9 +32,10 @@ function generateStartContent() {
 	const buttonToStatsPageImage = document.createElement('img');
 	const buttonToStatsPageText = document.createElement('p');
 
-	controlPanel.classList.add('control-panel');
-	buttonToStatsPage.classList.add('control-panel__item');
-	buttonToStatsPageImage.classList.add('control-panel__image');
+	controlPanel.classList.add('control-panel', 'stats-button');
+	buttonToStatsPage.classList.add('control-panel__item', 'stats-button');
+	buttonToStatsPageImage.classList.add('control-panel__image', 'stats-button');
+	buttonToStatsPageText.classList.add('stats-button');
 
 	buttonToStatsPageImage.setAttribute('src', '../assets/img/stats.png');
 
@@ -298,8 +299,41 @@ function calcStats(type, card) {
 	
 		default:
 			break;
-	}
+	}	
 	localStorage.setItem('stats', JSON.stringify(stats));
+}
+
+function generateStatsPage() {
+	const mainContent = document.querySelector('.main');
+
+	const mainContentTitle = document.createElement('div');
+	mainContentTitle.classList.add('stats__title');
+	mainContentTitle.innerText = 'Stats';
+	mainContent.append(mainContentTitle);
+
+	const stats = JSON.parse(localStorage.getItem('stats'));
+
+	const statsContent = document.createElement('div');
+	statsContent.classList.add('stats__content');
+	dictionary.forEach((category, index) => {
+		if (index !== 0) {
+			const categoryBlock = document.createElement('div');
+			const categoryBlockText = document.createElement('p');
+			const categoryBlockList = document.createElement('ul');
+
+			categoryBlockText.innerText = `Category ${dictionary[0][index]}`;
+
+			category.forEach((word) => {
+				const categoryBlockItem = document.createElement('li');
+				categoryBlockItem.innerText = `${word.word} (${word.translation})`;
+				categoryBlockList.append(categoryBlockItem);	
+			})
+			
+			categoryBlock.append(categoryBlockText, categoryBlockList);
+			statsContent.append(categoryBlock);
+		}
+	});
+	mainContent.append(statsContent);
 }
 
 deleteContent();
@@ -374,6 +408,10 @@ document.querySelector('body').addEventListener('click', (event) => {
 			break;
 		case target.classList.contains('button__repeat'):
 			soundWord(wordTurn, document.querySelectorAll('.star_win').length);
+			break;
+		case target.classList.contains('stats-button'):
+			deleteContent();
+			generateStatsPage();
 			break;
 		default:
 			break;

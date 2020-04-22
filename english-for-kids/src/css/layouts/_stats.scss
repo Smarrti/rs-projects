@@ -1,0 +1,15 @@
+.stats__title {
+    width: 100%;
+    font-size: 3rem;
+    text-align: center;
+}
+
+.stats__content {
+    width: 100%;
+    font-size: 2.2rem;
+
+    & p, ul {
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+    }
+}
