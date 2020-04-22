@@ -271,9 +271,11 @@ function checkOnClickedCard(word, card) {
 			playSound(wordTurn[numberQuestion + 1].audioSrc);
 			makeCardNonActive(card);
 		}
+		calcStats('choosenRightWord', word);
 	} else {
 		star.classList.add('star', 'star_lose');
 		playSound("../assets/audio/error.mp3");
+		calcStats('choosenWrongWord', word);
 	}
 	starsWrapper.innerHTML = star.outerHTML + starsWrapper.innerHTML;
 }
@@ -283,23 +285,16 @@ function calcStats(type, card) {
 	if (stats === null) {
 		stats = {};
 	}
-	switch (type) {
-		case 'clickOnCard':
-			if (stats.clickOnCard === undefined) {
-				stats.clickOnCard = {};
-				stats.clickOnCard[card] = 1;
-			} else {
-				if (stats.clickOnCard[card] === undefined) {
-					stats.clickOnCard[card] = 1;
-				} else {
-					stats.clickOnCard[card] += 1;
-				}
-			}
-			break;
-	
-		default:
-			break;
-	}	
+	if (stats[type] === undefined) {
+		stats[type] = {};
+		stats[type][card] = 1;
+	} else {
+		if (stats[type][card] === undefined) {
+			stats[type][card] = 1;
+		} else {
+			stats[type][card] += 1;
+		}
+	}
 	localStorage.setItem('stats', JSON.stringify(stats));
 }
 
@@ -324,6 +319,7 @@ function generateStatsPage() {
 
 	const statsTitle = document.createElement('tr');
 	statsTitle.append(createTdElement(' '), createTdElement('Number of clicks on card'));
+	statsTitle.append(createTdElement('Choosen right word'), createTdElement('Choosen wrong word'));
 	statsContent.append(statsTitle);
 
 	dictionary.forEach((category, index) => {
@@ -339,11 +335,15 @@ function generateStatsPage() {
 			category.forEach((word) => {
 				const categoryBlockRow = document.createElement('tr');
 				categoryBlockRow.append(createTdElement(`${word.word} (${word.translation})`));
-				if (stats.clickOnCard[word.word] !== undefined) {
-					categoryBlockRow.append(createTdElement(stats.clickOnCard[word.word]));
-				} else {
-					categoryBlockRow.append(createTdElement('0'));
+				for (let key in stats) {
+					if (stats[key][word.word] !== undefined) {
+						categoryBlockRow.append(createTdElement(stats[key][word.word]));
+					} else {
+						categoryBlockRow.append(createTdElement('0'));
+					}
 				}
+
+				
 				statsContent.append(categoryBlockRow);	
 			})
 		}
