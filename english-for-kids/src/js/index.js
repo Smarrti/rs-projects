@@ -29,22 +29,19 @@ sidebarWrapper.addEventListener('click', () => {
 });
 
 function generateStartContent() {
-	const controlPanel = document.querySelector('.control-panel');
-	const buttonToStatsPage = document.createElement('div');
-	const buttonToStatsPageImage = document.createElement('img');
-	const buttonToStatsPageText = document.createElement('p');
+	// const controlPanel = document.querySelector('.control-panel');
 
-	controlPanel.classList.add('control-panel', 'stats-button');
-	buttonToStatsPage.classList.add('control-panel__item', 'stats-button');
-	buttonToStatsPageImage.classList.add('control-panel__image', 'stats-button');
-	buttonToStatsPageText.classList.add('stats-button');
+	// controlPanel.classList.add('control-panel', 'stats-button');
+	// buttonToStatsPage.classList.add('control-panel__item', 'stats-button');
+	// buttonToStatsPageImage.classList.add('control-panel__image', 'stats-button');
+	// buttonToStatsPageText.classList.add('stats-button');
 
-	buttonToStatsPageImage.setAttribute('src', '../assets/img/stats.png');
+	// buttonToStatsPageImage.setAttribute('src', '../assets/img/stats.png');
 
-	buttonToStatsPageText.innerText = 'Stats';
+	// buttonToStatsPageText.innerText = 'Stats';
 
-	buttonToStatsPage.append(buttonToStatsPageImage, buttonToStatsPageText);
-	controlPanel.append(buttonToStatsPage);
+	// buttonToStatsPage.append(buttonToStatsPageImage, buttonToStatsPageText);
+	// controlPanel.append(buttonToStatsPage);
 
 	const mainContent = document.querySelector('.main');
 	dictionary[0].forEach((category, index) => {
