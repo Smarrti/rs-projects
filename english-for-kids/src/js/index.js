@@ -29,20 +29,6 @@ sidebarWrapper.addEventListener('click', () => {
 });
 
 function generateStartContent() {
-	// const controlPanel = document.querySelector('.control-panel');
-
-	// controlPanel.classList.add('control-panel', 'stats-button');
-	// buttonToStatsPage.classList.add('control-panel__item', 'stats-button');
-	// buttonToStatsPageImage.classList.add('control-panel__image', 'stats-button');
-	// buttonToStatsPageText.classList.add('stats-button');
-
-	// buttonToStatsPageImage.setAttribute('src', '../assets/img/stats.png');
-
-	// buttonToStatsPageText.innerText = 'Stats';
-
-	// buttonToStatsPage.append(buttonToStatsPageImage, buttonToStatsPageText);
-	// controlPanel.append(buttonToStatsPage);
-
 	const mainContent = document.querySelector('.main');
 	dictionary[0].forEach((category, index) => {
 		const card = document.createElement('a');
@@ -364,7 +350,10 @@ function generateStatsPage() {
 						categoryBlockRow.append(createTdElement('0'));
 					}
 				})
-				let percentWrongAttempts = 100 / (stats.choosenRightWord[word.word] / stats.choosenWrongWord[word.word]);
+				let percentWrongAttempts;
+				if (stats.choosenRightWord && stats.choosenWrongWord) {
+					percentWrongAttempts = 100 / (stats.choosenRightWord[word.word] / stats.choosenWrongWord[word.word]);
+				}
 				if (Number.isNaN(percentWrongAttempts)) {
 					percentWrongAttempts = '-';
 				} else {
