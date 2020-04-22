@@ -320,6 +320,7 @@ function generateStatsPage() {
 	const statsTitle = document.createElement('tr');
 	statsTitle.append(createTdElement(' '), createTdElement('Number of clicks on card'));
 	statsTitle.append(createTdElement('Choosen right word'), createTdElement('Choosen wrong word'));
+	statsTitle.append(createTdElement('% wrong attempts'));
 	statsContent.append(statsTitle);
 
 	dictionary.forEach((category, index) => {
@@ -342,7 +343,11 @@ function generateStatsPage() {
 						categoryBlockRow.append(createTdElement('0'));
 					}
 				}
-
+				let percentWrongAttempts = 100 / (stats.choosenRightWord[word.word] / stats.choosenWrongWord[word.word]);
+				if (Number.isNaN(percentWrongAttempts)) {
+					percentWrongAttempts = '-';
+				}
+				categoryBlockRow.append(createTdElement(percentWrongAttempts));
 				
 				statsContent.append(categoryBlockRow);	
 			})
