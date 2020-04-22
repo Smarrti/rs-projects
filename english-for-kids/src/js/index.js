@@ -474,7 +474,7 @@ document.querySelector('body').addEventListener('click', (event) => {
 			deleteContent();
 			generateStatsPage();
 			break;
-		case target.classList.contains('stats__panel'):
+		case target.classList.contains('panel__difficult-words'):
 			deleteContent();
 			generateTrainMode('custom');
 			break;
