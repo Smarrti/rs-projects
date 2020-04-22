@@ -303,6 +303,12 @@ function calcStats(type, card) {
 	localStorage.setItem('stats', JSON.stringify(stats));
 }
 
+function createTdElement(text) {
+	const element = document.createElement('td');
+	element.innerText = text;
+	return element
+}
+
 function generateStatsPage() {
 	const mainContent = document.querySelector('.main');
 
@@ -312,9 +318,14 @@ function generateStatsPage() {
 	mainContent.append(mainContentTitle);
 
 	const stats = JSON.parse(localStorage.getItem('stats'));
-
+	console.log(stats);
 	const statsContent = document.createElement('table');
 	statsContent.classList.add('stats__content');
+
+	const statsTitle = document.createElement('tr');
+	statsTitle.append(createTdElement(' '), createTdElement('Number of clicks on card'));
+	statsContent.append(statsTitle);
+
 	dictionary.forEach((category, index) => {
 		if (index !== 0) {
 			const categoryNameRow = document.createElement('tr');
@@ -327,9 +338,12 @@ function generateStatsPage() {
 
 			category.forEach((word) => {
 				const categoryBlockRow = document.createElement('tr');
-				const categoryBlockName = document.createElement('td');
-				categoryBlockName.innerText = `${word.word} (${word.translation})`;
-				categoryBlockRow.append(categoryBlockName);
+				categoryBlockRow.append(createTdElement(`${word.word} (${word.translation})`));
+				if (stats.clickOnCard[word.word] !== undefined) {
+					categoryBlockRow.append(createTdElement(stats.clickOnCard[word.word]));
+				} else {
+					categoryBlockRow.append(createTdElement('0'));
+				}
 				statsContent.append(categoryBlockRow);	
 			})
 		}

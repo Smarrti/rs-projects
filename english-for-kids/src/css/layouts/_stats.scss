@@ -12,4 +12,8 @@
     & td {
         border: 1px solid black;
     }
+
+    & td:not(:first-child) {
+        text-align: center;
+    }
 }
