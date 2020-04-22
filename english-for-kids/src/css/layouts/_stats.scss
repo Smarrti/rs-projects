@@ -7,9 +7,9 @@
 .stats__content {
     width: 100%;
     font-size: 2.2rem;
+    border-collapse: collapse;
 
-    & p, ul {
-        margin-block-start: 0em;
-        margin-block-end: 0em;
+    & td {
+        border: 1px solid black;
     }
 }

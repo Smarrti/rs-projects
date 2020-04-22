@@ -313,24 +313,25 @@ function generateStatsPage() {
 
 	const stats = JSON.parse(localStorage.getItem('stats'));
 
-	const statsContent = document.createElement('div');
+	const statsContent = document.createElement('table');
 	statsContent.classList.add('stats__content');
 	dictionary.forEach((category, index) => {
 		if (index !== 0) {
-			const categoryBlock = document.createElement('div');
-			const categoryBlockText = document.createElement('p');
-			const categoryBlockList = document.createElement('ul');
+			const categoryNameRow = document.createElement('tr');
+			const categoryBlockText = document.createElement('td');
 
 			categoryBlockText.innerText = `Category ${dictionary[0][index]}`;
 
+			categoryNameRow.append(categoryBlockText);
+			statsContent.append(categoryNameRow);
+
 			category.forEach((word) => {
-				const categoryBlockItem = document.createElement('li');
-				categoryBlockItem.innerText = `${word.word} (${word.translation})`;
-				categoryBlockList.append(categoryBlockItem);	
+				const categoryBlockRow = document.createElement('tr');
+				const categoryBlockName = document.createElement('td');
+				categoryBlockName.innerText = `${word.word} (${word.translation})`;
+				categoryBlockRow.append(categoryBlockName);
+				statsContent.append(categoryBlockRow);	
 			})
-			
-			categoryBlock.append(categoryBlockText, categoryBlockList);
-			statsContent.append(categoryBlock);
 		}
 	});
 	mainContent.append(statsContent);
