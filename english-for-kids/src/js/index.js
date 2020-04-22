@@ -14,6 +14,8 @@ function moveSidebar() {
 	sidebar.classList.toggle('sidebar_active');
 }
 
+let wordTurn = [];
+
 function deleteContent() {
 	wordTurn = [];
 	document.querySelector('.main').innerHTML = '';
@@ -109,7 +111,6 @@ function generateTrainMode(categoryId, playMode) {
 		const cardFront = document.createElement('div');
 		const cardWrapper = document.createElement('div');
 		const cardImage = document.createElement('img');
-		const cardTextRu = document.createElement('p');
 		const cardTextEn = document.createElement('p');
 		const cardRotate = document.createElement('div');
 
@@ -184,8 +185,6 @@ function changeSidebarLinkActive(text) {
 	});
 }
 
-let wordTurn = [];
-
 function generateRandomNumber(min, max) {
 	return Math.floor(Math.random() * (max - min) + min);
 }
@@ -258,6 +257,22 @@ function gameEnd(numberErrors) {
 	setTimeout(locationToMainPage, 5000);
 }
 
+function calcStats(type, card) {
+	let stats = JSON.parse(localStorage.getItem('stats'));
+	if (stats === null) {
+		stats = {};
+	}
+	if (stats[type] === undefined) {
+		stats[type] = {};
+		stats[type][card] = 1;
+	} else if (stats[type][card] === undefined) {
+			stats[type][card] = 1;
+		} else {
+			stats[type][card] += 1;
+		}
+	localStorage.setItem('stats', JSON.stringify(stats));
+}
+
 function checkOnClickedCard(word, card) {
 	const starsWrapper = document.querySelector('.stars-block');
 	const numberQuestion = document.querySelectorAll('.star_win').length;
@@ -280,24 +295,6 @@ function checkOnClickedCard(word, card) {
 	starsWrapper.innerHTML = star.outerHTML + starsWrapper.innerHTML;
 }
 
-function calcStats(type, card) {
-	let stats = JSON.parse(localStorage.getItem('stats'));
-	if (stats === null) {
-		stats = {};
-	}
-	if (stats[type] === undefined) {
-		stats[type] = {};
-		stats[type][card] = 1;
-	} else {
-		if (stats[type][card] === undefined) {
-			stats[type][card] = 1;
-		} else {
-			stats[type][card] += 1;
-		}
-	}
-	localStorage.setItem('stats', JSON.stringify(stats));
-}
-
 function createTdElement(text) {
 	const element = document.createElement('td');
 	element.innerText = text;
@@ -313,7 +310,7 @@ function generateStatsPage() {
 	mainContent.append(mainContentTitle);
 
 	const stats = JSON.parse(localStorage.getItem('stats'));
-	console.log(stats);
+	
 	const statsContent = document.createElement('table');
 	statsContent.classList.add('stats__content');
 
@@ -336,13 +333,13 @@ function generateStatsPage() {
 			category.forEach((word) => {
 				const categoryBlockRow = document.createElement('tr');
 				categoryBlockRow.append(createTdElement(`${word.word} (${word.translation})`));
-				for (let key in stats) {
-					if (stats[key][word.word] !== undefined) {
-						categoryBlockRow.append(createTdElement(stats[key][word.word]));
+				Object.keys(stats).forEach((statsElement) => {
+					if (stats[statsElement][word.word] !== undefined) {
+						categoryBlockRow.append(createTdElement(stats[statsElement][word.word]));
 					} else {
 						categoryBlockRow.append(createTdElement('0'));
 					}
-				}
+				})
 				let percentWrongAttempts = 100 / (stats.choosenRightWord[word.word] / stats.choosenWrongWord[word.word]);
 				if (Number.isNaN(percentWrongAttempts)) {
 					percentWrongAttempts = '-';
