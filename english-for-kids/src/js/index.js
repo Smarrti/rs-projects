@@ -386,7 +386,7 @@ document.querySelector('body').addEventListener('click', (event) => {
 	const playModeOn = document.querySelector('.button__repeat');
 	let cardText;
 	switch (true) {
-		case target.classList.contains('stats-button') || target.classList.contains('sidebar__link_stats'):
+		case target.classList.contains('stats-button'):
 			deleteContent();
 			generateStatsPage();
 			break;
@@ -413,7 +413,9 @@ document.querySelector('body').addEventListener('click', (event) => {
 			deleteContent();
 			if (textEvent === 'Main Page') {
 				generateStartContent();
-			} else {
+			} else if (textEvent === 'Stats') {
+				generateStatsPage();
+			} else  {
 				generateTrainMode(dictionary[0].indexOf(textEvent) + 1, switcher.checked);
 			}
 			changeSidebarLinkActive(textEvent);
