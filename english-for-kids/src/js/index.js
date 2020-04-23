@@ -433,19 +433,22 @@ document.querySelector('body').addEventListener('click', (event) => {
 			}
 			let words = [];
 			if (openCategoryId !== -1) {
-				words = difficultWords;
-			} else {
 				words = dictionary[openCategoryId];
+			} else {
+				words = difficultWords;
 			}
-			words.forEach((element) => {
-				if ((element.translation === cardText) || ((element[1].translation === cardText))) {
-					if (element.audioSrc !== undefined) {
-						playSound(element.audioSrc);
-					} else {
-						playSound(element[1].audioSrc);
+			for (let j = 0; j < words.length; j += 1) {
+				const wordObject = words[j];
+				if (wordObject.translation === cardText) {
+					playSound(wordObject.audioSrc);
+					break;
+				} else if (wordObject[1] !== undefined) {
+					if (wordObject[1].translation === cardText) {
+						playSound(wordObject[1].audioSrc);
 					}
+					break;
 				}
-			})
+			}
 			break;
 		}
 		case target.classList.contains('switch-input'):
