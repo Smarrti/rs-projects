@@ -321,7 +321,11 @@ function generateStatsPage() {
 	mainTitle.innerText = 'Stats';
 
 	mainPanel.append(createPanelButtons('panel__delete', 'Reset'));
-	mainPanel.append(createPanelButtons('panel__difficult-words', 'Repeat difficult words'));
+
+	if (localStorage.getItem('stats') !== '{}') {
+		mainPanel.append(createPanelButtons('panel__difficult-words', 'Repeat difficult words'));
+	}
+	
 	mainContent.append(mainTitle, mainPanel);
 
 	const stats = JSON.parse(localStorage.getItem('stats'));
