@@ -279,7 +279,10 @@ function checkOnClickedCard(word, card) {
 			const numberErrors = document.querySelectorAll('.star').length - numberQuestion;
 			gameEnd(numberErrors);
 		} else {
-			playSound(wordTurn[numberQuestion + 1].audioSrc);
+			playSound('../assets/audio/correct.mp3');
+			setTimeout(() => {
+				playSound(wordTurn[numberQuestion + 1].audioSrc);
+			}, 400);
 			makeCardNonActive(card);
 		}
 		calcStats('choosenRightWord', word);
