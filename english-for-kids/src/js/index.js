@@ -95,7 +95,7 @@ function generateTrainMode(categoryId, playMode) {
 	if (categoryId === 'custom') {
 		title.innerText = 'Difficult words';
 		difficultWords = difficultWords.sort().reverse();
-		for (let i = 0; i < 8; i += 1) {
+		for (let i = 0; i < 8 && i < difficultWords.length; i += 1) {
 			words.push(difficultWords[i][1]);
 		}
 	} else {
@@ -325,7 +325,7 @@ function generateStatsPage() {
 	if (localStorage.getItem('stats') !== '{}') {
 		mainPanel.append(createPanelButtons('panel__difficult-words', 'Repeat difficult words'));
 	}
-	
+
 	mainContent.append(mainTitle, mainPanel);
 
 	const stats = JSON.parse(localStorage.getItem('stats'));
