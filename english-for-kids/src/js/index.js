@@ -241,9 +241,11 @@ function gameEnd(numberErrors) {
 	if (numberErrors !== 0) {
 		gameEndImage.setAttribute('src', '../assets/img/failure.jpg');
 		gameEndText.innerText = `Game over! ${numberErrors} mistakes!`;
+		playSound('../assets/audio/failure.mp3');
 	} else {
 		gameEndImage.setAttribute('src', '../assets/img/success.jpg');
 		gameEndText.innerText = 'Success';
+		playSound('../assets/audio/success.mp3');
 	}
 
 	gameEndWrapper.append(gameEndImage, gameEndText);
