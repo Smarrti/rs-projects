@@ -66,7 +66,7 @@ function createSidebarElement(tag, href, className, nameLink) {
 function generateSidebar() {
 	const sidebar = document.querySelector('.sidebar');
 	sidebar.append(createSidebarElement('a', '#', 'sidebar__link sidebar__link_active', 'Main Page'));
-	sidebar.append(createSidebarElement('a', '#', 'sidebar__link sidebar__link_stats', 'Stats'));
+	sidebar.append(createSidebarElement('a', '#', 'sidebar__link', 'Stats'));
 	dictionary[0].forEach((category) => {
 		sidebar.append(createSidebarElement('a', '#', 'sidebar__link', category));
 	});
