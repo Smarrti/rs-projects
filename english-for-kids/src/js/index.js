@@ -1,5 +1,6 @@
 import '../css/style.scss';
 import { cards as dictionary} from './Dictionary';
+import { placeMainHtmlFile, failureImg, successImg, timeMessageOnGameEnd } from './Constatnt';
 
 const categories = dictionary[0];
 const burgerButton = document.querySelector('.hamburger-menu');
@@ -196,7 +197,7 @@ function soundWord(turn, index) {
 function startGame(categoryId) {
   const turn = [];
   const categoryWords = dictionary[categoryId + 1];
-  const categoryWordsLength = categoryWords.length
+  const categoryWordsLength = categoryWords.length;
   for (let i = 0; i < categoryWordsLength; i += 1) {
     let number = generateRandomNumber(categoryWordsLength, 0);
     while (turn.includes(number)) {
@@ -220,7 +221,7 @@ function makeCardNonActive(card) {
 }
 
 function locationToMainPage() {
-  document.location.href = './index.html';
+  document.location.href = placeMainHtmlFile;
 }
 
 function gameEnd(numberErrors) {
@@ -237,11 +238,11 @@ function gameEnd(numberErrors) {
   gameEndText.classList.add('game-end__text');
 
   if (numberErrors !== 0) {
-    gameEndImage.setAttribute('src', '../assets/img/failure.jpg');
+    gameEndImage.setAttribute('src', failureImg);
     gameEndText.textContent = `Game over! ${numberErrors} mistakes!`;
     playSound('../assets/audio/failure.mp3');
   } else {
-    gameEndImage.setAttribute('src', '../assets/img/success.jpg');
+    gameEndImage.setAttribute('src', successImg);
     gameEndText.textContent = 'Success';
     playSound('../assets/audio/success.mp3');
   }
@@ -250,7 +251,7 @@ function gameEnd(numberErrors) {
   mainContent.append(gameEndWrapper);
 
   wordTurn = [];
-  setTimeout(locationToMainPage, 5000);
+  setTimeout(locationToMainPage, timeMessageOnGameEnd);
 }
 
 function calcStats(type, card) {
@@ -309,7 +310,6 @@ function createPanelButtons(className, text) {
 
 function generateStatsPage() {
   const mainContent = document.querySelector('.main');
-
   const mainTitle = document.createElement('div');
   const mainPanel = document.createElement('div');
 
