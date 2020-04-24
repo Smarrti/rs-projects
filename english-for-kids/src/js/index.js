@@ -1,7 +1,6 @@
 import '../css/style.scss';
-import { cards } from './Dictionary';
+import { cards as dictionary} from './Dictionary';
 
-const dictionary = cards;
 const categories = dictionary[0];
 const burgerButton = document.querySelector('.hamburger-menu');
 const sidebarWrapper = document.querySelector('.sidebar-wrapper');
