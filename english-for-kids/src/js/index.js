@@ -46,7 +46,7 @@ function generateStartContent() {
     cardImage.classList.add('category-card__image', 'category');
     cardText.classList.add('card__text', 'category');
 
-    cardText.innerHTML = category;
+    cardText.textContent  = category;
 
     cardWrapper.append(cardImage);
     card.append(cardWrapper);
@@ -59,7 +59,7 @@ function createSidebarElement(tag, href, className, nameLink) {
   const link = document.createElement(tag);
   link.setAttribute('href', href);
   link.className = className;
-  link.innerHTML = nameLink;
+  link.textContent = nameLink;
   return link;
 }
 
@@ -82,7 +82,7 @@ function generateTrainMode(categoryId, playMode) {
 
   const title = document.createElement('div');
   title.classList.add('main__title');
-  title.innerText = dictionary[0][categoryId - 1];
+  title.textContent = dictionary[0][categoryId - 1];
   mainContent.append(title);
 
   if (playMode) {
@@ -93,7 +93,7 @@ function generateTrainMode(categoryId, playMode) {
 
   let words = [];
   if (categoryId === 'custom') {
-    title.innerText = 'Difficult words';
+    title.textContent = 'Difficult words';
     difficultWords = difficultWords.sort().reverse();
     for (let i = 0; i < 8 && i < difficultWords.length; i += 1) {
       words.push(difficultWords[i][1]);
@@ -120,7 +120,7 @@ function generateTrainMode(categoryId, playMode) {
     cardTextEn.classList.add(`card${index}`, 'card__text', 'word-card__text', 'cardElement');
     cardRotate.classList.add(`card${index}`, 'word-card__rotate', 'cardElement');
 
-    cardTextEn.innerHTML = wordObject.word;
+    cardTextEn.textContent = wordObject.word;
 
     cardWrapper.append(cardImage);
     if (playMode) {
@@ -137,7 +137,7 @@ function generateTrainMode(categoryId, playMode) {
       cardBack.classList.remove('word-card_front');
       cardBack.classList.add('word-card_back');
       card.append(cardBack);
-      cardBack.querySelector('.word-card__text').innerHTML = wordObject.translation;
+      cardBack.querySelector('.word-card__text').textContent = wordObject.translation;
       cardBack.querySelector('.word-card__text').classList.add('word-card__translation');
 
       cardFront.append(cardRotate);
@@ -152,7 +152,7 @@ function generateTrainMode(categoryId, playMode) {
 
     const gameButton = document.createElement('button');
     gameButton.classList.add('button', 'button__start');
-    gameButton.innerText = 'Start game';
+    gameButton.textContent = 'Start game';
     mainContent.append(gameButton);
   }
 } 
@@ -175,7 +175,7 @@ function changeSidebarLinkActive(text) {
     if (link.classList.contains('sidebar__link_active')) {
       link.classList.remove('sidebar__link_active');
     }
-    if (link.innerText === text) {
+    if (link.textContent === text) {
       link.classList.add('sidebar__link_active');
     }
   });
@@ -213,7 +213,7 @@ function startGame(categoryId) {
   const buttonPlay = document.querySelector('.button__start');
   buttonPlay.classList.remove('button__start');
   buttonPlay.classList.add('button__repeat');
-  buttonPlay.innerHTML = '';
+  buttonPlay.textContent = '';
 }
 
 function makeCardNonActive(card) {
@@ -240,11 +240,11 @@ function gameEnd(numberErrors) {
 
   if (numberErrors !== 0) {
     gameEndImage.setAttribute('src', '../assets/img/failure.jpg');
-    gameEndText.innerText = `Game over! ${numberErrors} mistakes!`;
+    gameEndText.textContent = `Game over! ${numberErrors} mistakes!`;
     playSound('../assets/audio/failure.mp3');
   } else {
     gameEndImage.setAttribute('src', '../assets/img/success.jpg');
-    gameEndText.innerText = 'Success';
+    gameEndText.textContent = 'Success';
     playSound('../assets/audio/success.mp3');
   }
 
@@ -298,14 +298,14 @@ function checkOnClickedCard(word, card) {
 
 function createTdElement(text) {
   const element = document.createElement('td');
-  element.innerText = text;
+  element.textContent = text;
   return element
 }
 
 function createPanelButtons(className, text) {
   const button = document.createElement('div');
   button.classList.add(className, 'panel__button');
-  button.innerText = text;
+  button.textContent = text;
   return button;
 }
 
@@ -318,7 +318,7 @@ function generateStatsPage() {
   mainTitle.classList.add('stats__title');
   mainPanel.classList.add('stats__panel');
 
-  mainTitle.innerText = 'Stats';
+  mainTitle.textContent = 'Stats';
 
   mainPanel.append(createPanelButtons('panel__delete', 'Reset'));
 
@@ -345,7 +345,7 @@ function generateStatsPage() {
       const categoryNameRow = document.createElement('tr');
       const categoryBlockText = document.createElement('td');
 
-      categoryBlockText.innerText = `Category ${dictionary[0][index]}`;
+      categoryBlockText.textContent = `Category ${dictionary[0][index]}`;
 
       categoryNameRow.append(categoryBlockText);
       statsContent.append(categoryNameRow);
@@ -391,7 +391,7 @@ document.querySelector('body').addEventListener('click', (event) => {
   if (!target.classList.contains('switch') && !target.classList.contains('switch-input')) {
     event.preventDefault();
   }
-  const textEvent = target.innerText;
+  const textEvent = target.textContent;
   const playModeOn = document.querySelector('.button__repeat');
   let cardText;
   switch (true) {
@@ -433,10 +433,10 @@ document.querySelector('body').addEventListener('click', (event) => {
       for (let i = 0; i < path.length; i += 1) {
         const element = path[i];
         if (element.classList.contains('word-card')) {
-          cardText = event.path[i].querySelector('.word-card__text').innerText;
+          cardText = event.path[i].querySelector('.word-card__text').textContent;
           
           const word = element.querySelector('.word-card__text:not(.word-card__translation)');
-          calcStats('clickOnCard', word.innerText);
+          calcStats('clickOnCard', word.textContent);
           break;
         }
       }
@@ -462,15 +462,15 @@ document.querySelector('body').addEventListener('click', (event) => {
     }
     case target.classList.contains('switch-input'):
       if (document.querySelector('.main__title') !== null) {
-        if (document.querySelector('.main__title').innerText) {
-          const categoryName = document.querySelector('.main__title').innerText;
+        if (document.querySelector('.main__title').textContent) {
+          const categoryName = document.querySelector('.main__title').textContent;
           deleteContent();
           generateTrainMode(dictionary[0].indexOf(categoryName) + 1, switcher.checked);
         }	
       }
       break;
     case target.classList.contains('button__start'):
-      startGame(dictionary[0].indexOf(document.querySelector('.main__title').innerText));
+      startGame(dictionary[0].indexOf(document.querySelector('.main__title').textContent));
       break;
     case target.classList.contains('button__repeat'):
       soundWord(wordTurn, document.querySelectorAll('.star_win').length);
