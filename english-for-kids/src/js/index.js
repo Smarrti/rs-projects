@@ -400,7 +400,7 @@ document.querySelector('body').addEventListener('click', (event) => {
     case target.classList.contains('stats-button'):
       deleteContent();
       generateStatsPage();
-      changeSidebarLinkActive(textEvent);
+      changeSidebarLinkActive('Stats');
       break;
     case target.classList.contains('card_play'):
       if (playModeOn) {
