@@ -5,6 +5,9 @@ const categories = dictionary[0];
 const burgerButton = document.querySelector('.hamburger-menu');
 const sidebarWrapper = document.querySelector('.sidebar-wrapper');
 const switcher = document.querySelector('.switch-input');
+let wordTurn = [];
+let openCategoryId;
+let difficultWords = [];
 
 function moveSidebar() {
   const hamburgerButton = document.querySelector('.hamburger');
@@ -13,8 +16,6 @@ function moveSidebar() {
   sidebarWrapper.classList.toggle('sidebar-wrapper_active');
   sidebar.classList.toggle('sidebar_active');
 }
-
-let wordTurn = [];
 
 function deleteContent() {
   wordTurn = [];
@@ -71,9 +72,6 @@ function generateSidebar() {
     sidebar.append(createSidebarElement('a', '#', 'sidebar__link', category));
   });
 }
-
-let openCategoryId;
-let difficultWords = [];
 
 function generateTrainMode(categoryId, playMode) {
   const mainContent = document.querySelector('.main');
