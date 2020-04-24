@@ -2,6 +2,7 @@ import '../css/style.scss';
 import { cards } from './Dictionary';
 
 const dictionary = cards;
+const categories = dictionary[0];
 const burgerButton = document.querySelector('.hamburger-menu');
 const sidebarWrapper = document.querySelector('.sidebar-wrapper');
 const switcher = document.querySelector('.switch-input');
@@ -30,7 +31,7 @@ sidebarWrapper.addEventListener('click', () => {
 
 function generateStartContent() {
   const mainContent = document.querySelector('.main');
-  dictionary[0].forEach((category, index) => {
+  categories.forEach((category, index) => {
     const card = document.createElement('a');
     const cardWrapper = document.createElement('div');
     const cardImage = document.createElement('img');
@@ -67,7 +68,7 @@ function generateSidebar() {
   const sidebar = document.querySelector('.sidebar');
   sidebar.append(createSidebarElement('a', '#', 'sidebar__link sidebar__link_active', 'Main Page'));
   sidebar.append(createSidebarElement('a', '#', 'sidebar__link', 'Stats'));
-  dictionary[0].forEach((category) => {
+  categories.forEach((category) => {
     sidebar.append(createSidebarElement('a', '#', 'sidebar__link', category));
   });
 }
@@ -82,7 +83,7 @@ function generateTrainMode(categoryId, playMode) {
 
   const title = document.createElement('div');
   title.classList.add('main__title');
-  title.textContent = dictionary[0][categoryId - 1];
+  title.textContent = categories[categoryId - 1];
   mainContent.append(title);
 
   if (playMode) {
@@ -345,7 +346,7 @@ function generateStatsPage() {
       const categoryNameRow = document.createElement('tr');
       const categoryBlockText = document.createElement('td');
 
-      categoryBlockText.textContent = `Category ${dictionary[0][index]}`;
+      categoryBlockText.textContent = `Category ${categories[index]}`;
 
       categoryNameRow.append(categoryBlockText);
       statsContent.append(categoryNameRow);
@@ -412,7 +413,7 @@ document.querySelector('body').addEventListener('click', (event) => {
         const tag = path[i];
         if (tag.classList.contains('category-card')) {
           deleteContent();
-          generateTrainMode(dictionary[0].indexOf(tag.dataset.category) + 1, switcher.checked);
+          generateTrainMode(categories.indexOf(tag.dataset.category) + 1, switcher.checked);
           changeSidebarLinkActive(tag.dataset.category);
           break;
         }	
@@ -425,7 +426,7 @@ document.querySelector('body').addEventListener('click', (event) => {
       } else if (textEvent === 'Stats') {
         generateStatsPage();
       } else  {
-        generateTrainMode(dictionary[0].indexOf(textEvent) + 1, switcher.checked);
+        generateTrainMode(categories.indexOf(textEvent) + 1, switcher.checked);
       }
       changeSidebarLinkActive(textEvent);
       break;
@@ -465,12 +466,12 @@ document.querySelector('body').addEventListener('click', (event) => {
         if (document.querySelector('.main__title').textContent) {
           const categoryName = document.querySelector('.main__title').textContent;
           deleteContent();
-          generateTrainMode(dictionary[0].indexOf(categoryName) + 1, switcher.checked);
+          generateTrainMode(categories.indexOf(categoryName) + 1, switcher.checked);
         }	
       }
       break;
     case target.classList.contains('button__start'):
-      startGame(dictionary[0].indexOf(document.querySelector('.main__title').textContent));
+      startGame(categories.indexOf(document.querySelector('.main__title').textContent));
       break;
     case target.classList.contains('button__repeat'):
       soundWord(wordTurn, document.querySelectorAll('.star_win').length);
