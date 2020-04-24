@@ -158,7 +158,7 @@ function generateTrainMode(categoryId, playMode) {
 function rotateCard(card) {
   const cardFront = card.querySelector('.word-card_front');
   const cardBack = card.querySelector('.word-card_back');
-  if (cardFront !== null && cardBack !== null) {
+  if (cardFront && cardBack) {
     cardFront.classList.toggle('rotated-front');
     cardBack.classList.toggle('rotated-back');
   } else if (document.querySelector('.rotated-back')) {
