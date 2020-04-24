@@ -237,7 +237,7 @@ function gameEnd(numberErrors) {
   gameEndImage.classList.add('game-end__img');
   gameEndText.classList.add('game-end__text');
 
-  if (numberErrors !== 0) {
+  if (numberErrors) {
     gameEndImage.setAttribute('src', failureImg);
     gameEndText.textContent = `Game over! ${numberErrors} mistakes!`;
     playSound('../assets/audio/failure.mp3');
@@ -311,7 +311,7 @@ function createPanelButtons(className, text) {
 function createTableForStats(stats, statsContent) {
   difficultWords = [];
   dictionary.forEach((category, index) => {
-    if (index !== 0) {
+    if (index) {
       const categoryNameRow = document.createElement('tr');
       const categoryBlockText = document.createElement('td');
 
@@ -324,7 +324,7 @@ function createTableForStats(stats, statsContent) {
         const categoryBlockRow = document.createElement('tr');
         categoryBlockRow.append(createTdElement(`${word.word} (${word.translation})`));
         Object.keys(stats).forEach((statsElement) => {
-          if (stats[statsElement][word.word] !== undefined) {
+          if (stats[statsElement][word.word]) {
             categoryBlockRow.append(createTdElement(stats[statsElement][word.word]));
           } else {
             categoryBlockRow.append(createTdElement('0'));
@@ -443,7 +443,7 @@ document.querySelector('body').addEventListener('click', (event) => {
         }
       }
       let words = [];
-      if (openCategoryId !== -1) {
+      if (openCategoryId !== 'trainDifficultWordsMode') {
         words = dictionary[openCategoryId];
       } else {
         words = difficultWords;
@@ -453,11 +453,11 @@ document.querySelector('body').addEventListener('click', (event) => {
         if (wordObject.translation === cardText) {
           playSound(wordObject.audioSrc);
           break;
-        } else if (wordObject[1] !== undefined) {
+        } else if (wordObject[1]) {
           if (wordObject[1].translation === cardText) {
             playSound(wordObject[1].audioSrc);
+            break;
           }
-          break;
         }
       }
       break;
@@ -493,7 +493,7 @@ document.querySelector('body').addEventListener('click', (event) => {
 
 document.querySelector('body').addEventListener('mouseout', (event) => {
   const { target, toElement } = event;
-  if (toElement !== null) {
+  if (toElement) {
     const cardId = target.classList[0];
     if (target.classList.contains('cardElement') && !toElement.classList.contains(cardId)) {
       rotateCard(target);
