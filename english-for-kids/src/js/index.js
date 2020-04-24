@@ -90,7 +90,7 @@ function generateTrainMode(categoryId, playMode) {
   }
 
   let words = [];
-  if (categoryId === 'custom') {
+  if (categoryId === 'trainDifficultWordsMode') {
     title.textContent = 'Difficult words';
     difficultWords = difficultWords.sort().reverse();
     for (let i = 0; i < 8 && i < difficultWords.length; i += 1) {
@@ -475,7 +475,7 @@ document.querySelector('body').addEventListener('click', (event) => {
       break;
     case target.classList.contains('panel__difficult-words'):
       deleteContent();
-      generateTrainMode('custom');
+      generateTrainMode('trainDifficultWordsMode');
       break;
     case target.classList.contains('panel__delete'):
       localStorage.setItem('stats', '{}');
