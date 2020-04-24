@@ -308,35 +308,7 @@ function createPanelButtons(className, text) {
   return button;
 }
 
-function generateStatsPage() {
-  const mainContent = document.querySelector('.main');
-  const mainTitle = document.createElement('div');
-  const mainPanel = document.createElement('div');
-
-  mainTitle.classList.add('stats__title');
-  mainPanel.classList.add('stats__panel');
-
-  mainTitle.textContent = 'Stats';
-
-  mainPanel.append(createPanelButtons('panel__delete', 'Reset'));
-
-  if (localStorage.getItem('stats') !== '{}') {
-    mainPanel.append(createPanelButtons('panel__difficult-words', 'Repeat difficult words'));
-  }
-
-  mainContent.append(mainTitle, mainPanel);
-
-  const stats = JSON.parse(localStorage.getItem('stats'));
-  
-  const statsContent = document.createElement('table');
-  statsContent.classList.add('stats__content');
-
-  const statsTitle = document.createElement('tr');
-  statsTitle.append(createTdElement(' '), createTdElement('Number of clicks on card'));
-  statsTitle.append(createTdElement('Choosen right word'), createTdElement('Choosen wrong word'));
-  statsTitle.append(createTdElement('% wrong attempts'));
-  statsContent.append(statsTitle);
-
+function createTableForStats(stats, statsContent) {
   difficultWords = [];
   dictionary.forEach((category, index) => {
     if (index !== 0) {
@@ -377,7 +349,39 @@ function generateStatsPage() {
       })
     }
   });
-  mainContent.append(statsContent);
+  return statsContent;
+}
+
+function generateStatsPage() {
+  const mainContent = document.querySelector('.main');
+  const mainTitle = document.createElement('div');
+  const mainPanel = document.createElement('div');
+
+  mainTitle.classList.add('stats__title');
+  mainPanel.classList.add('stats__panel');
+
+  mainTitle.textContent = 'Stats';
+
+  mainPanel.append(createPanelButtons('panel__delete', 'Reset'));
+
+  if (localStorage.getItem('stats') !== '{}') {
+    mainPanel.append(createPanelButtons('panel__difficult-words', 'Repeat difficult words'));
+  }
+
+  mainContent.append(mainTitle, mainPanel);
+
+  const stats = JSON.parse(localStorage.getItem('stats'));
+  
+  const statsContent = document.createElement('table');
+  statsContent.classList.add('stats__content');
+
+  const statsTitle = document.createElement('tr');
+  statsTitle.append(createTdElement(' '), createTdElement('Number of clicks on card'));
+  statsTitle.append(createTdElement('Choosen right word'), createTdElement('Choosen wrong word'));
+  statsTitle.append(createTdElement('% wrong attempts'));
+  statsContent.append(statsTitle);
+
+  mainContent.append(createTableForStats(stats, statsContent));
 }
 
 deleteContent();
