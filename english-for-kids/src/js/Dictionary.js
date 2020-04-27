@@ -1,6 +1,9 @@
 // eslint-disable-next-line import/prefer-default-export
 export const cards = [ 
-  ['Action (set A)', 'Action (set B)', 'Animal (set A)', 'Animal (set B)', 'Clothes', 'Emotions', 'Rooms in a house', 'Transports'],
+  ['Action (set A)', 'Action (set B)', 'Animal (set A)',
+   'Animal (set B)', 'Clothes', 'Emotions',
+    'Rooms in a house', 'Transports'
+  ],
   [
     {
       word: 'cry',
