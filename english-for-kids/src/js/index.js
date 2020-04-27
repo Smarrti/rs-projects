@@ -1,6 +1,6 @@
 import '../css/style.scss';
 import { cards as dictionary} from './Dictionary';
-import { placeMainHtmlFile, failureImg, successImg, timeMessageOnGameEnd , failureSound, successSound, correctSound, errorSound } from './Constatnt';
+import { placeMainHtmlFile, failureImg, successImg, timeMessageOnGameEnd , failureSound, successSound, correctSound, errorSound, timeOfSuccessSoundAndVoice } from './Constatnt';
 
 const categories = dictionary[0];
 const burgerButton = document.querySelector('.hamburger-menu');
@@ -283,7 +283,7 @@ function checkOnClickedCard(word, card) {
       playSound(correctSound);
       setTimeout(() => {
         playSound(wordTurn[numberQuestion + 1].audioSrc);
-      }, 400);
+      }, timeOfSuccessSoundAndVoice);
       makeCardNonActive(card);
     }
     calcStats('choosenRightWord', word);
