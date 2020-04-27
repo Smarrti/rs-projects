@@ -1,6 +1,6 @@
 import '../css/style.scss';
 import { cards as dictionary} from './Dictionary';
-import { placeMainHtmlFile, failureImg, successImg, timeMessageOnGameEnd } from './Constatnt';
+import { placeMainHtmlFile, failureImg, successImg, timeMessageOnGameEnd , failureSound, successSound, correctSound, errorSound } from './Constatnt';
 
 const categories = dictionary[0];
 const burgerButton = document.querySelector('.hamburger-menu');
@@ -240,11 +240,11 @@ function gameEnd(numberErrors) {
   if (numberErrors) {
     gameEndImage.setAttribute('src', failureImg);
     gameEndText.textContent = `Game over! ${numberErrors} mistakes!`;
-    playSound('../assets/audio/failure.mp3');
+    playSound(failureSound);
   } else {
     gameEndImage.setAttribute('src', successImg);
     gameEndText.textContent = 'Success';
-    playSound('../assets/audio/success.mp3');
+    playSound(successSound);
   }
 
   gameEndWrapper.append(gameEndImage, gameEndText);
@@ -280,7 +280,7 @@ function checkOnClickedCard(word, card) {
       const numberErrors = document.querySelectorAll('.star').length - numberQuestion;
       gameEnd(numberErrors);
     } else {
-      playSound('../assets/audio/correct.mp3');
+      playSound(correctSound);
       setTimeout(() => {
         playSound(wordTurn[numberQuestion + 1].audioSrc);
       }, 400);
@@ -289,7 +289,7 @@ function checkOnClickedCard(word, card) {
     calcStats('choosenRightWord', word);
   } else {
     star.classList.add('star', 'star_lose');
-    playSound("../assets/audio/error.mp3");
+    playSound(errorSound);
     calcStats('choosenWrongWord', word);
   }
   starsWrapper.innerHTML = star.outerHTML + starsWrapper.innerHTML;
