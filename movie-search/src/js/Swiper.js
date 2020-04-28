@@ -1,4 +1,6 @@
-var mySwiper = new Swiper ('.cards', {
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+const mySwiper = new Swiper ('.cards', {
     direction: 'horizontal',
     loop: true,
     slidesPerView: 4,
