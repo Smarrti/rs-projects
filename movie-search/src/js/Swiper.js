@@ -23,7 +23,7 @@ const mySwiper = new Swiper ('.cards', {
         },
         415: {
             slidesPerView: 2,
-            spaceBetween: 5
+            spaceBetween: 3
         },
         768: {
             slidesPerView: 3,
