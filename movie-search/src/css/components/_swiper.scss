@@ -1,0 +1,33 @@
+.cards {
+    margin: auto;
+    width: 1300px;
+    overflow: hidden;
+    margin: 30px auto;
+}
+
+.swiper-pagination {
+    position: static;
+}
+
+.swiper-pagination {
+    margin: 10px 0;
+     &-bullet {
+        width: 13px;
+        height: 13px;
+     }
+}
+
+.swiper-button-next, 
+.swiper-button-prev,
+.swiper-pagination-active {
+    color: $color-additional;
+}
+
+.film {
+    font-size: 2rem;
+    &__image {
+        width: 310px;
+        height: 425px;
+        padding: 10px 0;
+    }
+}

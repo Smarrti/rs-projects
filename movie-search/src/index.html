@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
   <title>Movie searcher</title>
 </head>
 <body>
@@ -11,11 +12,43 @@
     <h1>Movie Searcher</h1>
   </header>
   <main class="main">
-
+    <div class="search"></div>
+    <div class="cards">
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-wrapper film">
+        <div class="swiper-slide">
+          <p class="film__name">Film Name</p>
+          <img class="film__image" src="./assets/img.png" alt="">
+          <p class="film__year">2000</p>
+          <p class="film__rate">4.4</p>
+        </div>
+        <div class="swiper-slide">
+          <p class="film__name">Film Name2</p>
+          <img class="film__image" src="./assets/img.png" alt="">
+          <p class="film__year">2000</p>
+          <p class="film__rate">4.4</p>
+        </div>
+        <div class="swiper-slide">
+          <p class="film__name">Film Name3</p>
+          <img class="film__image" src="./assets/img.png" alt="">
+          <p class="film__year">2000</p>
+          <p class="film__rate">4.4</p>
+        </div>
+        <div class="swiper-slide">
+          <p class="film__name">Film Name4</p>
+          <img class="film__image" src="./assets/img.png" alt="">
+          <p class="film__year">2000</p>
+          <p class="film__rate">4.4</p>
+        </div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-pagination"></div>
+    </div>
   </main>
   <footer class="footer">
 
   </footer>
+  <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
 </body>
 
 </html>
