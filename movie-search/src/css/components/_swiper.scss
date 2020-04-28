@@ -35,9 +35,12 @@
 }
 
 .swiper-button-next,
-.swiper-button-prev,
-.swiper-pagination-active {
+.swiper-button-prev {
   color: $color-additional;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: $color-additional;
 }
 
 .swiper-button-next,
