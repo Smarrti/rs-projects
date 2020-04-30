@@ -1,4 +1,4 @@
-import { keyboardRows, dictionary } from './KeyboardDictionary.js';
+import { keyboardRows, dictionary } from './KeyboardDictionary';
 
 let isCapsLock = false;
 
@@ -63,6 +63,7 @@ const generateKeyboard = (toUpper, language) => {
         case false:
         case undefined:
           keyboardButton.innerText = dictionary[button][`${language}`];
+          break
         default:
           break;
       }

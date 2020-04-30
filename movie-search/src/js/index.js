@@ -2,7 +2,7 @@ import '../css/style.scss';
 import './swiper.min';
 import './Swiper';
 import './KeyboardDictionary';
-import { createKeyboard } from "./Keyboard";
+import './Keyboard';
 
 document.querySelector('body').addEventListener('click', (event) => {
   event.preventDefault();
