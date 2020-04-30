@@ -1,4 +1,5 @@
 .keyboard__wrapper {
+    display: none;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -6,6 +7,9 @@
     height: 255px;
     z-index: 1;
     background-color: rgba($color: #FFFFFF, $alpha: 0.8);
+    &_active {
+        display: block;
+    }
 }
 
 .keyboard {
@@ -35,6 +39,7 @@
         background: url("../assets/close.png");
         background-repeat: no-repeat;
         background-size: 30px;
+        cursor: pointer;
     }
 }
 
