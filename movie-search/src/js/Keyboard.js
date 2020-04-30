@@ -149,8 +149,10 @@ function makeButtonActive(key) {
   const selectedButton = isKeyServiceRightButton(key)
     ? document.querySelector(`.k${key.which}:not(.left)`)
     : document.querySelector(`.k${key.which}`);
-  selectedButton.classList.add('button_active');
-  selectedButton.click();
+  if (selectedButton) {
+    selectedButton.classList.add('button_active');
+    selectedButton.click();
+  }
 }
 
 function makeButtonInactive(key) {
