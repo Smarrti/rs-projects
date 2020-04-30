@@ -25,9 +25,17 @@
     cursor: pointer;
   }
   &__keyboard {
-    background: linear-gradient(90deg, #FCBF49, #F77F00);
+    background: 
+      url("../assets/keyboard.png"),
+      linear-gradient(90deg, #FCBF49, #F77F00);
+    background-position: center;
+    background-repeat: no-repeat;
   }
   &__submit {
-    background: linear-gradient(90deg, #F77F00, #D62828);
+    background: 
+      url("../assets/search.png"),
+      linear-gradient(90deg, #F77F00, #D62828);
+    background-position: center;
+    background-repeat: no-repeat;
   }
 }
