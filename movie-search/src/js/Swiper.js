@@ -7,6 +7,13 @@ export const mySwiper = new Swiper ('.cards', {
     observer: true,
     observeParents: true,
     observeSlideChildren: true,
+    IOSEdgeSwipeDetection: true,
+    onTouchStart: function() {
+        return false;
+    },
+    scrollbarDraggable: true,
+    scrollbar: '.swiper-scrollbar',
+    scrollbarHide: true,
 
     pagination: {
       el: '.swiper-pagination',
