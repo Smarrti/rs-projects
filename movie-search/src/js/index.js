@@ -6,6 +6,8 @@ import './Keyboard';
 import { apiKey } from './ApiKey';
 
 const textInput = document.querySelector('.search__input');
+let lastSearchRequest;
+let preloadPages = 1;
 
 function showSpinner(show) {
   const spinnerWrapper = document.querySelector('.spinner');
@@ -64,10 +66,13 @@ function deleteFilmsOfSlider() {
   swiper.removeAllSlides();
 }
 
-async function searchFilm(nameFilm) {
+async function searchFilm(nameFilm, page) {
   showSpinner(true);
-  deleteFilmsOfSlider();
-  let filmList = await getData(nameFilm);
+  lastSearchRequest = nameFilm;
+  if (!page) {
+    deleteFilmsOfSlider();
+  }
+  let filmList = await getData(nameFilm, page);
   filmList = filmList.Search;
   /* eslint-disable no-await-in-loop */
   for (let i = 0; i < filmList.length; i += 1) {
@@ -76,7 +81,9 @@ async function searchFilm(nameFilm) {
     star = star.imdbRating;
     createFilmCard(film.Title, film.Poster, film.Year, star);
   }
-  swiper.slideTo(0);
+  if (!page) {
+    swiper.slideTo(0);
+  }
   showSpinner(false);
 }
 
@@ -88,11 +95,21 @@ document.querySelector('body').addEventListener('click', (event) => {
     const keyboardWrapper = document.querySelector('.keyboard__wrapper');
     keyboardWrapper.classList.toggle('keyboard__wrapper_active');
   } else if (hasClassList.contains('search__submit')) {
+    preloadPages = 1;
     searchFilm(textInput.value);
+  }
+})
+
+swiper.on('slideChange', () => {
+  const slideButtons = document.querySelectorAll('.swiper-pagination-bullet');
+  const lastButtonClass = slideButtons[slideButtons.length - 2].classList;
+  const activeSpinner = document.querySelector('.spinner_active');
+  if (lastButtonClass.contains('swiper-pagination-bullet-active') && !activeSpinner) {
+    preloadPages += 1;
+    searchFilm(lastSearchRequest, preloadPages);
   }
 })
 
 // http://www.omdbapi.com/?s=harry&plot=full&apikey=90596ce5
 
 searchFilm('Harry');
-// deleteFilmsOfSlider();
