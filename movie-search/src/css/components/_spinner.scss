@@ -73,7 +73,7 @@
 .ldio-plfaafvf38 div { box-sizing: content-box; }
 .spinner {
   opacity: 0;
-  transition: all ease 0.5s;
+  transition: all ease 1.0s;
   z-index: -1;
   &_active {
     opacity: 1;

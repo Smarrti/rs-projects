@@ -246,17 +246,17 @@ function delegationEvent(key, event) {
       if (activeKeyboard) {
         onKeyUp(key);
       }
+      break;
     case 'keydown':
       if (activeKeyboard) {
-        onKeyUp(key);
+        onKeyDown(key);
       }
+      break;
     default:
       break;
   }
 }
 
-// document.addEventListener('keyup', (e) => { onKeyUp(e); });
-// document.addEventListener('keydown', (e) => { onKeyDown(e); });
 document.addEventListener('keyup', (e) => { delegationEvent(e, 'keyup'); });
 document.addEventListener('keydown', (e) => { delegationEvent(e, 'keydown'); });
 document.addEventListener('mousedown', (e) => { delegationEvent(e, 'mousedown'); });

@@ -48,16 +48,16 @@ async function sendRequest(url) {
   return data;
 }
 
-function getData(textInput, page) {
+function getData(search, page) {
   if (page) {
-    return sendRequest(`http://www.omdbapi.com/?s=${textInput}&apikey=${apiKey}&page=${page}`);
-  } else {
-    return sendRequest(`http://www.omdbapi.com/?s=${textInput}&apikey=${apiKey}`);
-  }
+    return sendRequest(`http://www.omdbapi.com/?s=${search}&apikey=${apiKey}&page=${page}`);
+  } 
+  return sendRequest(`http://www.omdbapi.com/?s=${search}&apikey=${apiKey}`);
 }
 
 async function getStars(idFilm) {
-  return await sendRequest(`https://www.omdbapi.com/?i=${idFilm}&apikey=${apiKey}`);
+  const response = await sendRequest(`https://www.omdbapi.com/?i=${idFilm}&apikey=${apiKey}`)
+  return response;
 }
 
 function deleteFilmsOfSlider() {
@@ -69,7 +69,9 @@ async function searchFilm(nameFilm) {
   deleteFilmsOfSlider();
   let filmList = await getData(nameFilm);
   filmList = filmList.Search;
-  for (const film of filmList) {
+  /* eslint-disable no-await-in-loop */
+  for (let i = 0; i < filmList.length; i += 1) {
+    const film = filmList[i];
     let star = await getStars(film.imdbID);
     star = star.imdbRating;
     createFilmCard(film.Title, film.Poster, film.Year, star);
@@ -90,7 +92,7 @@ document.querySelector('body').addEventListener('click', (event) => {
   }
 })
 
-//http://www.omdbapi.com/?s=harry&plot=full&apikey=90596ce5
+// http://www.omdbapi.com/?s=harry&plot=full&apikey=90596ce5
 
 searchFilm('Harry');
 // deleteFilmsOfSlider();
