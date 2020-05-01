@@ -7,6 +7,15 @@ import { apiKey } from './ApiKey';
 
 const textInput = document.querySelector('.search__input');
 
+function showSpinner(show) {
+  const spinnerWrapper = document.querySelector('.spinner');
+  if (show) {
+    spinnerWrapper.classList.add('spinner_active');
+  } else {
+    spinnerWrapper.classList.remove('spinner_active');
+  }
+}
+
 function createFilmCard(nameFilm, image, year, stars) {
   const slide = document.createElement('div');
   const card = document.createElement('div');
@@ -54,7 +63,9 @@ async function getStars(idFilm) {
 function deleteFilmsOfSlider() {
   swiper.removeAllSlides();
 }
+
 async function searchFilm(nameFilm) {
+  showSpinner(true);
   deleteFilmsOfSlider();
   let filmList = await getData(nameFilm);
   filmList = filmList.Search;
@@ -64,6 +75,7 @@ async function searchFilm(nameFilm) {
     createFilmCard(film.Title, film.Poster, film.Year, star);
   }
   swiper.slideTo(0);
+  showSpinner(false);
 }
 
 document.querySelector('body').addEventListener('click', (event) => {
