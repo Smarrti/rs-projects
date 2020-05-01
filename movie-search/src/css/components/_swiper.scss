@@ -34,6 +34,10 @@
   }
 }
 
+.swiper-scrollbar {
+  opacity: 0;
+}
+
 .swiper-button-next,
 .swiper-button-prev {
   color: $color-additional;
@@ -57,12 +61,14 @@
 }
 
 .card__wrapper {
-  margin: 10px;
-  box-shadow: 0px 0px 7px -2px;
-  border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
+  margin: 10px;
+  min-height: 480px;
+  box-shadow: 0px 0px 7px -2px;
+  border-radius: 20px;
 
   &:hover {
     box-shadow: 0px 0px 13px -2px;
@@ -76,7 +82,7 @@
   font-size: 2rem;
 
   &__name {
-    padding: 5px;
+    padding: 10px 5px;
   }
 
   &__image {
@@ -95,12 +101,23 @@
     }
 
     @include media-tablet {
-      width: 140px;
-      height: 255px;
+      width: 95%;
+      height: 95%;
     }
   }
   
   &__year {
     padding: 5px;
+  }
+
+  &__rate::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    vertical-align: middle;
+    background: url("../assets/star.png");
+    background-position: top right;
+    background-repeat: no-repeat;
   }
 }
