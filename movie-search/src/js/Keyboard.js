@@ -224,8 +224,12 @@ function onMouseUp(buttonEvent) {
 }
 
 function delegationEvent(key, event) {
+  const activeKeyboard = document.querySelector('.keyboard__wrapper_active');
   const { target } = key;
-  if (!target.classList.contains('button')) {
+  if (!target.classList.contains('button') &&
+   (event === 'mousedown' || 
+   event === 'mouseup' || 
+   event === 'click')) {
     return;
   }
   switch (event) {
@@ -238,13 +242,23 @@ function delegationEvent(key, event) {
     case 'click':
       onButtonClick(key);
       break;
+    case 'keyup':
+      if (activeKeyboard) {
+        onKeyUp(key);
+      }
+    case 'keydown':
+      if (activeKeyboard) {
+        onKeyUp(key);
+      }
     default:
       break;
   }
 }
 
-document.addEventListener('keyup', (e) => { onKeyUp(e); });
-document.addEventListener('keydown', (e) => { onKeyDown(e); });
+// document.addEventListener('keyup', (e) => { onKeyUp(e); });
+// document.addEventListener('keydown', (e) => { onKeyDown(e); });
+document.addEventListener('keyup', (e) => { delegationEvent(e, 'keyup'); });
+document.addEventListener('keydown', (e) => { delegationEvent(e, 'keydown'); });
 document.addEventListener('mousedown', (e) => { delegationEvent(e, 'mousedown'); });
 document.addEventListener('mouseup', (e) => { delegationEvent(e, 'mouseup'); });
 document.addEventListener('click', (e) => { delegationEvent(e, 'click'); });
