@@ -55,7 +55,6 @@ function deleteFilmsOfSlider() {
   swiper.removeAllSlides();
 }
 async function searchFilm(nameFilm) {
-  swiper.slideTo(0);
   deleteFilmsOfSlider();
   let filmList = await getData(nameFilm);
   filmList = filmList.Search;
@@ -64,6 +63,7 @@ async function searchFilm(nameFilm) {
     star = star.imdbRating;
     createFilmCard(film.Title, film.Poster, film.Year, star);
   }
+  swiper.slideTo(0);
 }
 
 document.querySelector('body').addEventListener('click', (event) => {
@@ -80,5 +80,5 @@ document.querySelector('body').addEventListener('click', (event) => {
 
 //http://www.omdbapi.com/?s=harry&plot=full&apikey=90596ce5
 
-// getData('Harry Potter');
+searchFilm('Harry');
 // deleteFilmsOfSlider();
