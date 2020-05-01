@@ -1,10 +1,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-const mySwiper = new Swiper ('.cards', {
+export const mySwiper = new Swiper ('.cards', {
     direction: 'horizontal',
-    loop: true,
     slidesPerView: 4,
     spaceBetween: 20,
+    observer: true,
+    observeParents: true,
+    observeSlideChildren: true,
 
     pagination: {
       el: '.swiper-pagination',
