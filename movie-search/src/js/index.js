@@ -158,3 +158,4 @@ swiper.on('slideChange', () => {
 })
 
 searchFilm('Harry');
+textInput.focus();
