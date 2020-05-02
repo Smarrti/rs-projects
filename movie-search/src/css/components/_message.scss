@@ -12,7 +12,11 @@
 
   &__icon {
     width: 100px;
-    background: red;
+    background: 
+      url("../assets/error.png"),
+      $color-primary;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 
   &__head {
