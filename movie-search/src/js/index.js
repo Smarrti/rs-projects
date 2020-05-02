@@ -45,8 +45,20 @@ function createFilmCard(nameFilm, image, year, stars) {
 }
 
 async function sendRequest(url) {
-  const res = await fetch(url);
-  const data = await res.json();
+  let response;
+  let data;
+  await fetch(url)
+    .then((res) => {
+      if (res.status !== 200) {
+        return Promise.reject(new Error(res.statusText))
+      }
+      return Promise.resolve(response);
+    })
+    .then((res) => res.json())
+    .then(res => {data = res})
+    .catch((e) => {
+      console.log(e);
+    });
   return data;
 }
 
