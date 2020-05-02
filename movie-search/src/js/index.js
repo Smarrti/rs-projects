@@ -111,6 +111,7 @@ function deleteFilmsOfSlider() {
 
 async function searchFilm(nameFilm, page) {
   showSpinner(true);
+  preloadPages = 1;
   lastSearchRequest = nameFilm;
   if (!page) {
     deleteFilmsOfSlider();
@@ -140,10 +141,15 @@ document.querySelector('body').addEventListener('click', (event) => {
     const keyboardWrapper = document.querySelector('.keyboard__wrapper');
     keyboardWrapper.classList.toggle('keyboard__wrapper_active');
   } else if (hasClassList.contains('search__submit')) {
-    preloadPages = 1;
     searchFilm(textInput.value);
   } else if (hasClassList.contains('message__close')) {
     deleteMessage();
+  }
+})
+
+document.querySelector('body').addEventListener('keypress', (key) => {
+  if (key.code === 'Enter') {
+    searchFilm(textInput.value);
   }
 })
 
