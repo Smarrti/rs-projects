@@ -138,7 +138,7 @@ async function searchFilm(nameFilm, page) {
   let filmList = await getData(nameFilm, page);
   if (filmList) {
     if (filmList.Error === 'Movie not found!') {
-      showMessage('Not found!', 'Movie not found! Please change your request', 'notify');
+      showMessage('Not found!', `No results were found for "${nameFilm}". Please change your request`, 'notify');
     } else {
       filmList = filmList.Search;
       /* eslint-disable no-await-in-loop */
