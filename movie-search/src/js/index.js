@@ -52,7 +52,7 @@ async function sendRequest(url) {
       if (res.status !== 200) {
         return Promise.reject(new Error(res.statusText))
       }
-      return Promise.resolve(response);
+      return Promise.resolve(res);
     })
     .then((res) => res.json())
     .then(res => {data = res})
