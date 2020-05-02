@@ -69,10 +69,10 @@ function showClearButton(show) {
   }
 }
 
-function createFilmCard(nameFilm, image, year, stars) {
+function createFilmCard(idFilm, nameFilm, image, year, stars) {
   const slide = document.createElement('div');
   const card = document.createElement('div');
-  const filmName = document.createElement('p');
+  const filmName = document.createElement('a');
   const filmImage = document.createElement('img');
   const filmYear = document.createElement('p');
   const filmRate = document.createElement('p');
@@ -84,6 +84,8 @@ function createFilmCard(nameFilm, image, year, stars) {
   filmYear.classList.add('film__year');
   filmRate.classList.add('film__rate');
 
+  filmName.setAttribute('href', `https://www.imdb.com/title/${idFilm}`);
+  filmName.setAttribute('target', '_blank');
   filmImage.setAttribute('src', image);
 
   filmName.textContent = nameFilm;
@@ -163,7 +165,8 @@ async function searchFilm(nameFilm, page) {
         const film = filmList[i];
         let star = await getStars(film.imdbID);
         star = star.imdbRating;
-        createFilmCard(film.Title, film.Poster, film.Year, star);
+        console.log(film);
+        createFilmCard(film.imdbID, film.Title, film.Poster, film.Year, star);
       }
       if (!page) {
         swiper.slideTo(0);
@@ -174,13 +177,13 @@ async function searchFilm(nameFilm, page) {
 }
 
 document.querySelector('body').addEventListener('click', (event) => {
-  event.preventDefault();
   const { target } = event;
   const hasClassList = target.classList;
   if (hasClassList.contains('search__keyboard') || hasClassList.contains('keyboard__close')) {
     const keyboardWrapper = document.querySelector('.keyboard__wrapper');
     keyboardWrapper.classList.toggle('keyboard__wrapper_active');
   } else if (hasClassList.contains('search__submit')) {
+    event.preventDefault();
     searchFilm(textInput.value);
   } else if (hasClassList.contains('message__close')) {
     deleteMessage();
