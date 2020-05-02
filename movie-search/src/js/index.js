@@ -52,9 +52,9 @@ async function sendRequest(url) {
 
 function getData(search, page) {
   if (page) {
-    return sendRequest(`http://www.omdbapi.com/?s=${search}&apikey=${apiKey}&page=${page}`);
+    return sendRequest(`https://www.omdbapi.com/?s=${search}&apikey=${apiKey}&page=${page}`);
   } 
-  return sendRequest(`http://www.omdbapi.com/?s=${search}&apikey=${apiKey}`);
+  return sendRequest(`https://www.omdbapi.com/?s=${search}&apikey=${apiKey}`);
 }
 
 async function getStars(idFilm) {
