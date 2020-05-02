@@ -3,7 +3,7 @@ import './swiper.min';
 import { mySwiper as swiper } from './Swiper';
 import './KeyboardDictionary';
 import './Keyboard';
-import { apiKey } from './ApiKey';
+import { apiKeyOMDB, apiKeyTranslate } from './ApiKey';
 
 const textInput = document.querySelector('.search__input');
 let lastSearchRequest;
@@ -105,7 +105,7 @@ async function sendRequest(url) {
       return Promise.resolve(res);
     })
     .then((res) => res.json())
-    .then(res => {data = res})
+    .then((res) => {data = res})
     .catch(() => {
       showMessage('Oops', 'An error has occurred. Please retry request later', 'error');
     });
@@ -114,13 +114,13 @@ async function sendRequest(url) {
 
 function getData(search, page) {
   if (page) {
-    return sendRequest(`https://www.omdbapi.com/?s=${search}&apikey=${apiKey}&page=${page}`);
+    return sendRequest(`https://www.omdbapi.com/?s=${search}&apikey=${apiKeyOMDB}&page=${page}`);
   } 
-  return sendRequest(`https://www.omdbapi.com/?s=${search}&apikey=${apiKey}`);
+  return sendRequest(`https://www.omdbapi.com/?s=${search}&apikey=${apiKeyOMDB}`);
 }
 
 async function getStars(idFilm) {
-  const response = await sendRequest(`https://www.omdbapi.com/?i=${idFilm}&apikey=${apiKey}`)
+  const response = await sendRequest(`https://www.omdbapi.com/?i=${idFilm}&apikey=${apiKeyOMDB}`)
   return response;
 }
 
