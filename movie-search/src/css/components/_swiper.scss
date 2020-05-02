@@ -59,6 +59,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all ease 0.5s;
+  &:hover {
+    transform: scale(1.02);
+  }
 }
 
 .card__wrapper {
