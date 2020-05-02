@@ -87,8 +87,8 @@ async function sendRequest(url) {
     })
     .then((res) => res.json())
     .then(res => {data = res})
-    .catch((e) => {
-      console.log(e);
+    .catch(() => {
+      showMessage('Oops', 'An error has occurred. Please retry request later');
     });
   return data;
 }
@@ -116,16 +116,18 @@ async function searchFilm(nameFilm, page) {
     deleteFilmsOfSlider();
   }
   let filmList = await getData(nameFilm, page);
-  filmList = filmList.Search;
-  /* eslint-disable no-await-in-loop */
-  for (let i = 0; i < filmList.length; i += 1) {
-    const film = filmList[i];
-    let star = await getStars(film.imdbID);
-    star = star.imdbRating;
-    createFilmCard(film.Title, film.Poster, film.Year, star);
-  }
-  if (!page) {
-    swiper.slideTo(0);
+  if (filmList) {
+    filmList = filmList.Search;
+    /* eslint-disable no-await-in-loop */
+    for (let i = 0; i < filmList.length; i += 1) {
+      const film = filmList[i];
+      let star = await getStars(film.imdbID);
+      star = star.imdbRating;
+      createFilmCard(film.Title, film.Poster, film.Year, star);
+    }
+    if (!page) {
+      swiper.slideTo(0);
+    }
   }
   showSpinner(false);
 }
@@ -154,7 +156,5 @@ swiper.on('slideChange', () => {
     searchFilm(lastSearchRequest, preloadPages);
   }
 })
-
-// http://www.omdbapi.com/?s=harry&plot=full&apikey=90596ce5
 
 searchFilm('Harry');
