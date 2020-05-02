@@ -12,11 +12,20 @@
 
   &__icon {
     width: 100px;
-    background: 
-      url("../assets/error.png"),
-      $color-primary;
-    background-position: center;
-    background-repeat: no-repeat;
+    &_notify {
+      background: 
+        url("../assets/notify.png"),
+        $color-light;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    &_error {
+      background: 
+        url("../assets/error.png"),
+        $color-primary;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
   }
 
   &__head {

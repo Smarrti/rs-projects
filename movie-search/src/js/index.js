@@ -18,7 +18,7 @@ function showSpinner(show) {
   }
 }
 
-function showMessage(headMessage, textMessage) {
+function showMessage(headMessage, textMessage, type) {
   const body = document.querySelector('body');
   const messageWrapper = document.createElement('div');
   const messageIcon = document.createElement('div');
@@ -33,6 +33,16 @@ function showMessage(headMessage, textMessage) {
   messageClose.classList.add('message__close');
   messageHead.classList.add('message__head');
   messageText.classList.add('message__text');
+  switch (type) {
+    case 'notify':
+      messageIcon.classList.add('message__icon_notify');
+      break;
+    case 'error':
+      messageIcon.classList.add('message__icon_error');
+      break;
+    default:
+      break;
+  }
 
   messageHead.textContent = headMessage;
   messageText.textContent = textMessage;
@@ -88,7 +98,7 @@ async function sendRequest(url) {
     .then((res) => res.json())
     .then(res => {data = res})
     .catch(() => {
-      showMessage('Oops', 'An error has occurred. Please retry request later');
+      showMessage('Oops', 'An error has occurred. Please retry request later', 'error');
     });
   return data;
 }
@@ -119,7 +129,7 @@ async function searchFilm(nameFilm, page) {
   let filmList = await getData(nameFilm, page);
   if (filmList) {
     if (filmList.Error === 'Movie not found!') {
-      showMessage('Not found!', 'Movie not found! Please change your request');
+      showMessage('Not found!', 'Movie not found! Please change your request', 'notify');
     } else {
       filmList = filmList.Search;
       /* eslint-disable no-await-in-loop */
