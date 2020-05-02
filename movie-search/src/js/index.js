@@ -121,7 +121,7 @@ async function detectLanguage(text) {
 async function translateText(text, language) {
   const url = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${apiKeyTranslate}&text=${encodeURI(text)}&lang=${encodeURI(language)}-en`;
   const request = await sendRequest(url);
-  return request;
+  return request.text[0];
 }
 
 function getData(search, page) {
@@ -147,15 +147,14 @@ async function searchFilm(nameFilm, page) {
   if (!page) {
     deleteFilmsOfSlider();
   }
-  const languageRequest = await detectLanguage(nameFilm);
+  const languageRequest = await detectLanguage(lastSearchRequest);
   if (languageRequest !== 'en') {
-    nameFilm = await translateText(nameFilm, languageRequest);
-    nameFilm = nameFilm.text[0];
+    lastSearchRequest = await translateText(lastSearchRequest, languageRequest);
   }
-  let filmList = await getData(nameFilm, page);
+  let filmList = await getData(lastSearchRequest, page);
   if (filmList) {
     if (filmList.Error === 'Movie not found!') {
-      showMessage('Not found!', `No results were found for "${nameFilm}". Please change your request`, 'notify');
+      showMessage('Not found!', `No results were found for "${lastSearchRequest}". Please change your request`, 'notify');
     } else {
       filmList = filmList.Search;
       /* eslint-disable no-await-in-loop */
