@@ -105,11 +105,23 @@ async function sendRequest(url) {
       return Promise.resolve(res);
     })
     .then((res) => res.json())
-    .then((res) => {data = res})
+    .then(json => {data = json})
     .catch(() => {
       showMessage('Oops', 'An error has occurred. Please retry request later', 'error');
     });
   return data;
+}
+
+async function detectLanguage(text) {
+  const url = `https://translate.yandex.net/api/v1.5/tr.json/detect?key=${apiKeyTranslate}&text=${encodeURI(text)}`;
+  const request = await sendRequest(url);
+  return request.lang;
+}
+
+async function translateText(text, language) {
+  const url = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${apiKeyTranslate}&text=${encodeURI(text)}&lang=${encodeURI(language)}-en`;
+  const request = await sendRequest(url);
+  return request;
 }
 
 function getData(search, page) {
@@ -134,6 +146,11 @@ async function searchFilm(nameFilm, page) {
   lastSearchRequest = nameFilm;
   if (!page) {
     deleteFilmsOfSlider();
+  }
+  const languageRequest = await detectLanguage(nameFilm);
+  if (languageRequest !== 'en') {
+    nameFilm = await translateText(nameFilm, languageRequest);
+    nameFilm = nameFilm.text[0];
   }
   let filmList = await getData(nameFilm, page);
   if (filmList) {
