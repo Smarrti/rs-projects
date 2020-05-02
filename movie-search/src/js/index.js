@@ -167,6 +167,9 @@ document.querySelector('body').addEventListener('click', (event) => {
     searchFilm(textInput.value);
   } else if (hasClassList.contains('message__close')) {
     deleteMessage();
+  } else if (hasClassList.contains('search__clear')) {
+    textInput.value = '';
+    showClearButton(false);
   }
 })
 
