@@ -150,6 +150,7 @@ async function searchFilm(nameFilm, page) {
   const languageRequest = await detectLanguage(lastSearchRequest);
   if (languageRequest !== 'en') {
     lastSearchRequest = await translateText(lastSearchRequest, languageRequest);
+    showMessage('Search request changed', `Showing results for ${lastSearchRequest}`, 'notify');
   }
   let filmList = await getData(lastSearchRequest, page);
   if (filmList) {
