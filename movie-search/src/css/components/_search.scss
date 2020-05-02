@@ -27,13 +27,23 @@
   }
   &__button {
     width: 50px;
-
     cursor: pointer;
+  }
+  &__clear {
+    display: none;
+    background: 
+      url("../assets/clear.png"),
+      linear-gradient(90deg, $color-super-light, $color-light);
+    background-position: center;
+    background-repeat: no-repeat;
+    &_active {
+      display: block;
+    }
   }
   &__keyboard {
     background: 
       url("../assets/keyboard.png"),
-      linear-gradient(90deg, #FCBF49, #F77F00);
+      linear-gradient(90deg, $color-light, $color-additional);
     background-position: center;
     background-repeat: no-repeat;
     @include media-tablet {
@@ -46,7 +56,7 @@
   &__submit {
     background: 
       url("../assets/search.png"),
-      linear-gradient(90deg, #F77F00, #D62828);
+      linear-gradient(90deg, $color-additional, $color-primary);
     background-position: center;
     background-repeat: no-repeat;
   }

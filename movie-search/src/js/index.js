@@ -60,6 +60,15 @@ function deleteMessage() {
   })
 }
 
+function showClearButton(show) {
+  const clearButton = document.querySelector('.search__clear');
+  if (show) {
+    clearButton.classList.add('search__clear_active');
+  } else {
+    clearButton.classList.remove('search__clear_active');
+  }
+}
+
 function createFilmCard(nameFilm, image, year, stars) {
   const slide = document.createElement('div');
   const card = document.createElement('div');
@@ -161,9 +170,13 @@ document.querySelector('body').addEventListener('click', (event) => {
   }
 })
 
-document.querySelector('body').addEventListener('keypress', (key) => {
+document.querySelector('body').addEventListener('keyup', (key) => {
   if (key.code === 'Enter') {
     searchFilm(textInput.value);
+  } else if (textInput.value.length === 0 && key.code === 'Backspace') {
+    showClearButton(false);
+  } else {
+    showClearButton(true);
   }
 })
 
