@@ -176,7 +176,7 @@ document.querySelector('body').addEventListener('click', (event) => {
 document.querySelector('body').addEventListener('keyup', (key) => {
  if (textInput.value.length === 0 && key.code === 'Backspace') {
     showClearButton(false);
-  } else {
+  } else if (textInput.value.length !== 0) {
     showClearButton(true);
   }
 })
