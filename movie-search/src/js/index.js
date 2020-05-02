@@ -174,9 +174,7 @@ document.querySelector('body').addEventListener('click', (event) => {
 })
 
 document.querySelector('body').addEventListener('keyup', (key) => {
-  if (key.code === 'Enter') {
-    searchFilm(textInput.value);
-  } else if (textInput.value.length === 0 && key.code === 'Backspace') {
+ if (textInput.value.length === 0 && key.code === 'Backspace') {
     showClearButton(false);
   } else {
     showClearButton(true);
