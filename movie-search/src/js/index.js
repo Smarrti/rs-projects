@@ -118,16 +118,20 @@ async function searchFilm(nameFilm, page) {
   }
   let filmList = await getData(nameFilm, page);
   if (filmList) {
-    filmList = filmList.Search;
-    /* eslint-disable no-await-in-loop */
-    for (let i = 0; i < filmList.length; i += 1) {
-      const film = filmList[i];
-      let star = await getStars(film.imdbID);
-      star = star.imdbRating;
-      createFilmCard(film.Title, film.Poster, film.Year, star);
-    }
-    if (!page) {
-      swiper.slideTo(0);
+    if (filmList.Error === 'Movie not found!') {
+      showMessage('Not found!', 'Movie not found! Please change your request');
+    } else {
+      filmList = filmList.Search;
+      /* eslint-disable no-await-in-loop */
+      for (let i = 0; i < filmList.length; i += 1) {
+        const film = filmList[i];
+        let star = await getStars(film.imdbID);
+        star = star.imdbRating;
+        createFilmCard(film.Title, film.Poster, film.Year, star);
+      }
+      if (!page) {
+        swiper.slideTo(0);
+      }
     }
   }
   showSpinner(false);
