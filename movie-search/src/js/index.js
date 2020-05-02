@@ -18,6 +18,38 @@ function showSpinner(show) {
   }
 }
 
+function showMessage(headMessage, textMessage) {
+  const body = document.querySelector('body');
+  const messageWrapper = document.createElement('div');
+  const messageIcon = document.createElement('div');
+  const messageLetter = document.createElement('div');
+  const messageClose = document.createElement('div');
+  const messageHead = document.createElement('p');
+  const messageText = document.createElement('p');
+
+  messageWrapper.classList.add('message__wrapper');
+  messageIcon.classList.add('message__icon');
+  messageLetter.classList.add('message__letter');
+  messageClose.classList.add('message__close');
+  messageHead.classList.add('message__head');
+  messageText.classList.add('message__text');
+
+  messageHead.textContent = headMessage;
+  messageText.textContent = textMessage;
+
+  messageLetter.append(messageClose, messageHead, messageText);
+  messageWrapper.append(messageIcon, messageLetter);
+  body.append(messageWrapper);
+}
+
+function deleteMessage() {
+  const body = document.querySelector('body');
+  const messages = document.querySelectorAll('.message__wrapper');
+  messages.forEach((message) => {
+    body.removeChild(message);
+  })
+}
+
 function createFilmCard(nameFilm, image, year, stars) {
   const slide = document.createElement('div');
   const card = document.createElement('div');
@@ -45,7 +77,6 @@ function createFilmCard(nameFilm, image, year, stars) {
 }
 
 async function sendRequest(url) {
-  let response;
   let data;
   await fetch(url)
     .then((res) => {
@@ -109,6 +140,8 @@ document.querySelector('body').addEventListener('click', (event) => {
   } else if (hasClassList.contains('search__submit')) {
     preloadPages = 1;
     searchFilm(textInput.value);
+  } else if (hasClassList.contains('message__close')) {
+    deleteMessage();
   }
 })
 
