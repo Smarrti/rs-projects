@@ -84,7 +84,7 @@ function createFilmCard(idFilm, nameFilm, image, year, stars) {
   filmYear.classList.add('film__year');
   filmRate.classList.add('film__rate');
 
-  filmName.setAttribute('href', `https://www.imdb.com/title/${idFilm}`);
+  filmName.setAttribute('href', `https://www.imdb.com/title/${idFilm}/mediaindex?ref_=tt_pv_mi_sm`);
   filmName.setAttribute('target', '_blank');
   filmImage.setAttribute('src', image);
 
