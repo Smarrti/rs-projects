@@ -176,6 +176,17 @@ async function searchFilm(nameFilm, page) {
   showSpinner(false);
 }
 
+function showMessageForCrossCheck() {
+  let countMessage = sessionStorage.getItem('crossCheckMessage');
+  if (!countMessage) {
+    countMessage = 0;
+  }
+  if (countMessage < 2) {
+    showMessage('Cross Check', 'Во время проверки сайта на адаптиноcть (не респонсив), перезагружайте страницу', 'notify');
+  }
+  sessionStorage.setItem('crossCheckMessage', countMessage + 1);
+}
+
 document.querySelector('body').addEventListener('click', (event) => {
   const { target } = event;
   const hasClassList = target.classList;
@@ -213,3 +224,4 @@ swiper.on('slideChange', () => {
 
 searchFilm('Harry');
 textInput.focus();
+showMessageForCrossCheck();
