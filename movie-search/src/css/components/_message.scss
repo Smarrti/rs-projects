@@ -11,7 +11,7 @@
   }
 
   &__icon {
-    width: 100px;
+    width: 70px;
     &_notify {
       background: 
         url("../assets/notify.png"),
@@ -26,6 +26,10 @@
       background-position: center;
       background-repeat: no-repeat;
     }
+  }
+
+  &__letter {
+    width: 230px;
   }
 
   &__head {
