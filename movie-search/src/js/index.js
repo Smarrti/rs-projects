@@ -144,10 +144,10 @@ function deleteFilmsOfSlider() {
 
 async function searchFilm(nameFilm, page) {
   showSpinner(true);
-  preloadPages = 1;
   lastSearchRequest = nameFilm;
   if (!page) {
     deleteFilmsOfSlider();
+    preloadPages = 1;
   }
   const languageRequest = await detectLanguage(lastSearchRequest);
   if (languageRequest !== 'en') {
