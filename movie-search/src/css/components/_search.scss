@@ -24,6 +24,10 @@
     width: 100%;
     padding: 10px 15px;
     font-size: 1.8rem;
+    &_dark {
+      background-color: $color-card-dark;
+      color: $color-text-dark;
+    }
   }
   &__button {
     width: 50px;
@@ -39,6 +43,11 @@
     &_active {
       display: block;
     }
+    &_dark {
+      background: 
+        url("../assets/clear.png"),
+        linear-gradient(90deg, $color-super-light-dark, $color-light-dark);
+    }
   }
   &__keyboard {
     background: 
@@ -52,6 +61,11 @@
     @include media-phone {
       display: none;
     }
+    &_dark {
+      background: 
+        url("../assets/keyboard.png"),
+        linear-gradient(90deg, $color-light-dark, $color-additional-dark);
+    }
   }
   &__submit {
     background: 
@@ -59,5 +73,10 @@
       linear-gradient(90deg, $color-additional, $color-primary);
     background-position: center;
     background-repeat: no-repeat;
+    &_dark {
+      background: 
+        url("../assets/search.png"),
+        linear-gradient(90deg, $color-additional-dark, $color-primary-dark);
+    }
   }
 }

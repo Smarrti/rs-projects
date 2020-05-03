@@ -188,7 +188,32 @@ function showMessageForCrossCheck() {
 }
 
 function nightTheme() {
-  
+  const body = document.querySelector('body');
+  const buttonSwitchTheme = document.querySelector('.switch__theme');
+  const header = document.querySelector('.header');
+  const inputSearch = document.querySelector('.search__input');
+  const searchSubmit = document.querySelector('.search__submit');
+  const searchKeyboard = document.querySelector('.search__keyboard');
+  const searchClear = document.querySelector('.search__clear');
+  const cardWrapper = document.querySelector('.cards');
+  const footer = document.querySelector('.footer')
+
+  body.classList.toggle('body_dark');
+  header.classList.toggle('header_dark');
+  inputSearch.classList.toggle('search__input_dark');
+  searchSubmit.classList.toggle('search__submit_dark');
+  searchKeyboard.classList.toggle('search__keyboard_dark');
+  searchClear.classList.toggle('search__clear_dark');
+  cardWrapper.classList.toggle('cards_dark');
+  footer.classList.toggle('footer_dark');
+
+  if (buttonSwitchTheme.classList.contains('switch_moon')) {
+    buttonSwitchTheme.classList.remove('switch_moon');
+    buttonSwitchTheme.classList.add('switch_sun');
+  } else {
+    buttonSwitchTheme.classList.add('switch_moon');
+    buttonSwitchTheme.classList.remove('switch_sun');
+  }
 }
 
 document.querySelector('body').addEventListener('click', (event) => {
@@ -207,7 +232,7 @@ document.querySelector('body').addEventListener('click', (event) => {
   } else if (hasClassList.contains('search__clear')) {
     textInput.value = '';
     showClearButton(false);
-  } else if (hasClassList.contains('switch_moon')) {
+  } else if (hasClassList.contains('switch__theme')) {
     nightTheme();
   }
 })
@@ -233,3 +258,4 @@ swiper.on('slideChange', () => {
 searchFilm('Harry');
 textInput.focus();
 showMessageForCrossCheck();
+nightTheme();

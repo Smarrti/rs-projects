@@ -19,6 +19,9 @@
   @include media-phone {
     width: 100%;
   }
+  &_dark .card__wrapper {
+    background-color: $color-card-dark;
+  }
 }
 
 .swiper-pagination {

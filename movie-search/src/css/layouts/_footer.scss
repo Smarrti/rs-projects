@@ -4,7 +4,7 @@
   justify-content: center;
   width: 100%;
   height: 100px;
-  background: linear-gradient(45deg, #F77F00, #FCBF49);
+  background: linear-gradient(45deg, $color-additional, $color-light);
   &__wrapper {
     display: flex;
     justify-content: space-between;
@@ -25,5 +25,7 @@
       background-repeat: no-repeat;
     }
   }
-  
+  &_dark {
+    background: linear-gradient(45deg, $color-additional-dark, $color-light-dark);    
+  }
 }

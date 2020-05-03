@@ -106,3 +106,13 @@
     border-radius: 50%;
   }
 }
+
+.body_dark .keyboard__wrapper {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.body_dark .keyboard__close {
+  background: url("../assets/close_dark.png");
+  background-repeat: no-repeat;
+  background-size: 30px;
+}

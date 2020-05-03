@@ -51,3 +51,13 @@
     cursor: pointer;
   }
 }
+
+.body_dark .message__wrapper {
+  background: $color-card-dark;
+}
+
+.body_dark .message__close {
+  background: url("../assets/close_dark.png");
+  background-repeat: no-repeat;
+  background-position: right;
+}
