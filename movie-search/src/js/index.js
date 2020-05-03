@@ -196,6 +196,8 @@ document.querySelector('body').addEventListener('click', (event) => {
   } else if (hasClassList.contains('search__submit')) {
     event.preventDefault();
     searchFilm(textInput.value);
+  } else if (hasClassList.contains('k13')) {
+    searchFilm(textInput.value);
   } else if (hasClassList.contains('message__close')) {
     deleteMessage();
   } else if (hasClassList.contains('search__clear')) {
