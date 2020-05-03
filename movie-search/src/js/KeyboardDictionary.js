@@ -3,7 +3,7 @@ export const keyboardRows = [
   ['Tab', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT', 'KeyY', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'BracketLeft', 'BracketRight', 'Backslash', 'Delete'],
   ['CapsLock', 'KeyA', 'KeyS', 'KeyD', 'KeyF', 'KeyG', 'KeyH', 'KeyJ', 'KeyK', 'KeyL', 'Semicolon', 'Quote', 'Enter'],
   ['ShiftLeft', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash', 'ArrowUp', 'ShiftRight'],
-  ['ControlLeft', 'OSLeft', 'AltLeft', 'Space', 'AltRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlRight'],
+  ['ControlLeft', 'Language', 'OSLeft', 'AltLeft', 'Space', 'AltRight', 'ArrowLeft', 'ArrowDown', 'ArrowRight', 'ControlRight'],
 ];
 export const dictionary = {
   Backquote: {
@@ -198,4 +198,7 @@ export const dictionary = {
   ControlRight: {
     rus: 'Ctrl', rusOnShift: 'Ctrl', eng: 'Ctrl', engOnShift: 'Ctrl', code: 17, type: 'notService',
   },
+  Language: {
+    type: 'notService', func: 'language', rus: '', rusOnShift: '', eng: '', engOnShift: ''
+  }
 };

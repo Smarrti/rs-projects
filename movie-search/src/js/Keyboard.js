@@ -42,6 +42,9 @@ const generateKeyboard = (toUpper, language) => {
       if (button === 'ShiftLeft' || button === 'ControlLeft' || button === 'AltLeft') {
         keyboardButton.classList.add('left');
       }
+      if (button === 'Language') {
+        keyboardButton.classList.add('button__switch-language');
+      }
       switch (toUpper) {
         case 'Shift':
           keyboardButton.innerText = dictionary[button][`${language}OnShift`];
@@ -207,6 +210,11 @@ function onKeyDown(key) {
 function onButtonClick(buttonEvent) {
   const targetButton = buttonEvent.target;
   const buttonText = targetButton.innerText;
+  if (targetButton.classList.contains('button__switch-language')) {
+    changeLanguage();
+    createKeyboard(isCapsLock);
+    return;
+  }
   if (isValueShouldBeAddToText(buttonText)) {
     searchInput.value += buttonText;
   } else {
