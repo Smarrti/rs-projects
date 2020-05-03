@@ -165,7 +165,6 @@ async function searchFilm(nameFilm, page) {
         const film = filmList[i];
         let star = await getStars(film.imdbID);
         star = star.imdbRating;
-        console.log(film);
         createFilmCard(film.imdbID, film.Title, film.Poster, film.Year, star);
       }
       if (!page) {
@@ -258,4 +257,3 @@ swiper.on('slideChange', () => {
 searchFilm('Harry');
 textInput.focus();
 showMessageForCrossCheck();
-nightTheme();
