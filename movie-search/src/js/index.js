@@ -187,6 +187,10 @@ function showMessageForCrossCheck() {
   sessionStorage.setItem('crossCheckMessage', countMessage + 1);
 }
 
+function nightTheme() {
+  
+}
+
 document.querySelector('body').addEventListener('click', (event) => {
   const { target } = event;
   const hasClassList = target.classList;
@@ -203,6 +207,8 @@ document.querySelector('body').addEventListener('click', (event) => {
   } else if (hasClassList.contains('search__clear')) {
     textInput.value = '';
     showClearButton(false);
+  } else if (hasClassList.contains('switch_moon')) {
+    nightTheme();
   }
 })
 

@@ -1,0 +1,23 @@
+.night-theme {
+    display: flex;
+}
+
+.switch__theme {
+    margin: 0 auto;
+    width: 35px;
+    height: 35px;
+    border: none;
+    cursor: pointer;
+}
+
+.switch {
+    &_sun {
+        background: url("../assets/sun.png");
+        background-size: 35px;
+    }
+
+    &_moon {
+        background: url("../assets/moon.png");
+        background-size: 35px;
+    }
+}
