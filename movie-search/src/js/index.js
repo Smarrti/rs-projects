@@ -6,6 +6,9 @@ import './Keyboard';
 import { apiKeyOMDB, apiKeyTranslate } from './ApiKey';
 
 const textInput = document.querySelector('.search__input');
+const urlApiOMDB = 'https://www.omdbapi.com/';
+const urlApiYandex = 'https://translate.yandex.net/api/v1.5/tr.json/';
+const urlIMDB = 'https://www.imdb.com/';
 let lastSearchRequest;
 let preloadPages = 1;
 
@@ -84,7 +87,7 @@ function createFilmCard(idFilm, nameFilm, image, year, stars) {
   filmYear.classList.add('film__year');
   filmRate.classList.add('film__rate');
 
-  filmName.setAttribute('href', `https://www.imdb.com/title/${idFilm}/mediaindex?ref_=tt_pv_mi_sm`);
+  filmName.setAttribute('href', `${urlIMDB}title/${idFilm}/mediaindex?ref_=tt_pv_mi_sm`);
   filmName.setAttribute('target', '_blank');
   filmImage.setAttribute('src', image);
 
@@ -115,26 +118,26 @@ async function sendRequest(url) {
 }
 
 async function detectLanguage(text) {
-  const url = `https://translate.yandex.net/api/v1.5/tr.json/detect?key=${apiKeyTranslate}&text=${encodeURI(text)}`;
+  const url = `${urlApiYandex}detect?key=${apiKeyTranslate}&text=${encodeURI(text)}`;
   const request = await sendRequest(url);
   return request.lang;
 }
 
 async function translateText(text, language) {
-  const url = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${apiKeyTranslate}&text=${encodeURI(text)}&lang=${encodeURI(language)}-en`;
+  const url = `${urlApiYandex}translate?key=${apiKeyTranslate}&text=${encodeURI(text)}&lang=${encodeURI(language)}-en`;
   const request = await sendRequest(url);
   return request.text[0];
 }
 
 function getData(search, page) {
   if (page) {
-    return sendRequest(`https://www.omdbapi.com/?s=${search}&apikey=${apiKeyOMDB}&page=${page}`);
+    return sendRequest(`${urlApiOMDB}?s=${search}&apikey=${apiKeyOMDB}&page=${page}`);
   } 
-  return sendRequest(`https://www.omdbapi.com/?s=${search}&apikey=${apiKeyOMDB}`);
+  return sendRequest(`${urlApiOMDB}?s=${search}&apikey=${apiKeyOMDB}`);
 }
 
 async function getStars(idFilm) {
-  const response = await sendRequest(`https://www.omdbapi.com/?i=${idFilm}&apikey=${apiKeyOMDB}`)
+  const response = await sendRequest(`${urlApiOMDB}?i=${idFilm}&apikey=${apiKeyOMDB}`);
   return response;
 }
 
