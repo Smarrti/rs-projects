@@ -4,4 +4,4 @@
 
 [Link to Presentation](https://smarrti.github.io/rs-presentation/index.html#/)
 
-[Link to transcript](#) (in progress)
+[Link to transcript](https://github.com/Smarrti/rs-presentation/blob/master/Text.txt)
