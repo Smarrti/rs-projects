@@ -1,0 +1,82 @@
+.search {
+  display: flex;
+  justify-content: center;
+  width: 600px;
+  height: 50px;
+  margin: 20px auto;
+  border: 1px solid $color-darkens;
+  border-radius: 30px;
+  box-shadow: 0px 0px 7px -2px;
+  overflow: hidden;
+  @include media-tablet {
+    width: 350px;
+  }
+  @include media-phone {
+    width: 300px;
+  }
+  &:hover {
+    box-shadow: 0px 0px 13px -2px;
+  }
+  & > * {
+    border: none;
+  }
+  &__input {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 1.8rem;
+    &_dark {
+      background-color: $color-card-dark;
+      color: $color-text-dark;
+    }
+  }
+  &__button {
+    width: 50px;
+    cursor: pointer;
+  }
+  &__clear {
+    display: none;
+    background: 
+      url("../assets/clear.png"),
+      linear-gradient(90deg, $color-super-light, $color-light);
+    background-position: center;
+    background-repeat: no-repeat;
+    &_active {
+      display: block;
+    }
+    &_dark {
+      background: 
+        url("../assets/clear.png"),
+        linear-gradient(90deg, $color-super-light-dark, $color-light-dark);
+    }
+  }
+  &__keyboard {
+    background: 
+      url("../assets/keyboard.png"),
+      linear-gradient(90deg, $color-light, $color-additional);
+    background-position: center;
+    background-repeat: no-repeat;
+    @include media-tablet {
+      display: none;
+    }
+    @include media-phone {
+      display: none;
+    }
+    &_dark {
+      background: 
+        url("../assets/keyboard.png"),
+        linear-gradient(90deg, $color-light-dark, $color-additional-dark);
+    }
+  }
+  &__submit {
+    background: 
+      url("../assets/search.png"),
+      linear-gradient(90deg, $color-additional, $color-primary);
+    background-position: center;
+    background-repeat: no-repeat;
+    &_dark {
+      background: 
+        url("../assets/search.png"),
+        linear-gradient(90deg, $color-additional-dark, $color-primary-dark);
+    }
+  }
+}

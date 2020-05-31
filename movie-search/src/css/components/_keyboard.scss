@@ -1,0 +1,118 @@
+.keyboard__wrapper {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 255px;
+  z-index: 1;
+  background-color: rgba($color: #FFFFFF, $alpha: 0.8);
+
+  &_active {
+    display: block;
+  }
+}
+
+.keyboard {
+  box-sizing: border-box;
+  margin: auto;
+  width: 680px;
+  margin-top: 10px;
+  padding: 5px;
+  background-color: $color-keyboard;
+  border: 3px solid black;
+  border-radius: 10px;
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__row:not(:first-child) {
+    margin-top: 5px;
+  }
+
+  &__row:first-child {
+    .button {
+      width: 40px;
+    }
+  }
+
+  &__close {
+    width: 30px;
+    height: 30px;
+    background: url("../assets/close.png");
+    background-repeat: no-repeat;
+    background-size: 30px;
+    cursor: pointer;
+  }
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  font-size: 1.5rem;
+  border-radius: 10px;
+  color: $color-text-key-button;
+  background-color: $color-key-button;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &__switch-language {
+    background:
+      url("../assets/language.png"),
+      $color-key-button-dark;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  &_big {
+    width: 90px !important;
+  }
+
+  &_darken {
+    background-color: $color-key-button-dark;
+  }
+
+  &_up {
+    position: relative;
+    top: -7px;
+    left: -5px;
+    font-size: 1.2rem;
+  }
+
+  &_up_hidden {
+    display: none;
+  }
+
+  &_space {
+    width: 215px;
+  }
+
+  &:hover {
+    background-color: $color-key-on-hover;
+  }
+
+  &_active {
+    background-color: $color-key-on-active;
+    border-radius: 50%;
+  }
+
+  &_active:hover {
+    background-color: $color-key-on-active;
+    border-radius: 50%;
+  }
+}
+
+.body_dark .keyboard__wrapper {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.body_dark .keyboard__close {
+  background: url("../assets/close_dark.png");
+  background-repeat: no-repeat;
+  background-size: 30px;
+}

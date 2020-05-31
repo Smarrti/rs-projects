@@ -1,0 +1,64 @@
+.message {
+  &__wrapper {
+    display: flex;
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    width: 300px;
+    height: 150px;
+    background: white;
+    box-shadow: 0px 0px 10px black;
+    z-index: 13;
+  }
+
+  &__icon {
+    width: 70px;
+    &_notify {
+      background: 
+        url("../assets/notify.png"),
+        $color-light;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    &_error {
+      background: 
+        url("../assets/error.png"),
+        $color-primary;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
+
+  &__letter {
+    width: 230px;
+  }
+
+  &__head {
+    margin: 10px;
+    font-size: 1.8rem;
+  }
+
+  &__text {
+    margin: 10px;
+    font-size: 1.4rem;
+  }
+
+  &__close {
+    height: 20px;
+    margin-top: 5px;
+    background: url("../assets/close.png");
+    background-repeat: no-repeat;
+    background-position: right;
+    cursor: pointer;
+  }
+}
+
+.body_dark .message__wrapper {
+  background: $color-card-dark;
+}
+
+.body_dark .message__close {
+  background: url("../assets/close_dark.png");
+  background-repeat: no-repeat;
+  background-position: right;
+}
