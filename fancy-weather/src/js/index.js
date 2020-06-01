@@ -1,4 +1,5 @@
 import './../css/style.scss';
+import { UnsplashKey } from './ApiKeys';
 
 async function sendRequest(url) {
   let data;
