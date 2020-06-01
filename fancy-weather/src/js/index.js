@@ -28,15 +28,17 @@ function combineParametersForRequest(...parameters) {
 }
 
 async function findBackgroundImage(query) {
-  const sourceApi = Unsplash.source;
-  const method = Unsplash.methods('findPhotos');
-  const find = `${Unsplash.parameters('searchPhoto')}=${query}`;
-  const orientation = `${Unsplash.parameters('orientation')}=landscape`;
-  const apiKey = `${Unsplash.parameters('apiKey')}=${UnsplashKey}`;
-  const parameters = combineParametersForRequest(find, orientation, apiKey);
-  const url = sourceApi + method + parameters;
-  const response = await sendRequest(url);
-  body.style = `background-image: url("${response.results[0].urls.regular}")`;
+  // const sourceApi = Unsplash.source;
+  // const method = Unsplash.methods('findPhotos');
+  // const find = `${Unsplash.parameters('searchPhoto')}=${query}`;
+  // const orientation = `${Unsplash.parameters('orientation')}=landscape`;
+  // const apiKey = `${Unsplash.parameters('apiKey')}=${UnsplashKey}`;
+  // const parameters = combineParametersForRequest(find, orientation, apiKey);
+  // const url = sourceApi + method + parameters;
+  // const response = await sendRequest(url);
+  // body.style = `background-image: url("${response.results[0].urls.regular}")`;
+  body.style = `background-image: url("https://images.unsplash.com/photo-1465577512280-1c2d41a79862?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEzOTAwNH0")`;
+  
 }
 
 findBackgroundImage('sunny');
