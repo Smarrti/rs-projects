@@ -1,24 +1,48 @@
-.weather__icon {
+.weather__icon,
+.day__icon {
   width: 150px;
   height: 150px;
   &_rain {
     background-image: url("../assets/svg/rain.svg");
-    @extend %centered-icons;
   }
   &_cloud {
     background-image: url("../assets/svg/cloud.svg");
-    @extend %centered-icons;
   }
   &_snow {
     background-image: url("../assets/svg/snow.svg");
-    @extend %centered-icons;
   }
   &_sun-cloud {
     background-image: url("../assets/svg/sun-cloud.svg");
-    @extend %centered-icons;
   }
   &_sun {
     background-image: url("../assets/svg/sun.svg");
-    @extend %centered-icons;
+  }
+}
+
+.weather__icon {
+  @extend %centered-icons;
+}
+
+.day {
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 140px;
+    margin-right: 20px;
+    font-weight: bold;
+  }
+  &__name {
+    width: 100%;
+    font-size: 2rem;
+  }
+  &__temperature {
+    font-size: 7rem;
+  }
+  &__icon {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    background-repeat: no-repeat;
+    transform: translateX(100px) translateY(-10px);
   }
 }
