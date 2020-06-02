@@ -1,0 +1,13 @@
+.search__input {
+  min-width: 150px;
+  height: 50px;
+  padding: 0 10px;
+  font-size: 1.4rem;
+  color: $color-text;
+  background-color: $color-select;
+  border: none;
+  border-radius: 5px 0px 0px 5px;
+  &::placeholder {
+    color: $color-dark-text;
+  }
+}
