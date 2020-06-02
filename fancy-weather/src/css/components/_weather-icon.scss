@@ -21,6 +21,12 @@
 
 .weather__icon {
   @extend %centered-icons;
+  @include media-tablet {
+    transform: translateX(150px) translateY(-20px) scale(0.7);
+  }
+  @include media-phone {
+    transform: translateX(130px) translateY(-30px) scale(0.5);
+  }
 }
 
 .day {

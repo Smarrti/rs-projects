@@ -1,6 +1,10 @@
 .map {
   & > * {
     min-width: 500px;
+    @include media-mobile {
+      min-width: 0;
+      width: 100%;
+    }
   }
   &__coordinates {
     display: flex;
