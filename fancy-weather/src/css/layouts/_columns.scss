@@ -1,6 +1,8 @@
 .layout-2-columns {
   display: flex;
   flex-wrap: wrap;
+  width: 85%;
+  margin: auto;
   & > * {
     width: 50%;
   }
