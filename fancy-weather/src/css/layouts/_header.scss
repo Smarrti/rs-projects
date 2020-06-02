@@ -1,0 +1,9 @@
+.head {
+  display: flex;
+  justify-content: space-between;
+  width: 85%;
+  margin: 20px auto;
+  &__settings {
+    display: flex;
+  }
+}

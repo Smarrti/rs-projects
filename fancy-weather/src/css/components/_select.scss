@@ -1,0 +1,9 @@
+.language__select {
+    display: flex;
+    width: 70px;
+    padding-left: 15px;
+    & > * {
+        padding-left: 25px;
+        background-color: $color-select;
+    }
+}
