@@ -1,0 +1,7 @@
+.layout-2-columns {
+  display: flex;
+  flex-wrap: wrap;
+  & > * {
+    width: 50%;
+  }
+}
