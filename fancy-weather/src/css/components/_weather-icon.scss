@@ -3,32 +3,22 @@
   height: 150px;
   &_rain {
     background-image: url("../assets/svg/rain.svg");
-    background-size: 100%;
-    position: absolute;
-    transform: translateX(300px);
+    @extend %centered-icons;
   }
   &_cloud {
     background-image: url("../assets/svg/cloud.svg");
-    background-size: 100%;
-    position: absolute;
-    transform: translateX(300px);
+    @extend %centered-icons;
   }
   &_snow {
     background-image: url("../assets/svg/snow.svg");
-    background-size: 100%;
-    position: absolute;
-    transform: translateX(300px);
+    @extend %centered-icons;
   }
   &_sun-cloud {
     background-image: url("../assets/svg/sun-cloud.svg");
-    background-size: 100%;
-    position: absolute;
-    transform: translateX(300px);
+    @extend %centered-icons;
   }
   &_sun {
     background-image: url("../assets/svg/sun.svg");
-    background-size: 100%;
-    position: absolute;
-    transform: translateX(300px);
+    @extend %centered-icons;
   }
 }
