@@ -1,5 +1,6 @@
 import './../css/style.scss';
-import { UnsplashKey, IpInfoKey, IpInfoUrl } from './ApiKeys';
+import { UnsplashKey, IpInfoKey } from './ApiKeys';
+import { IpInfoUrl, getFullNameOfCountry } from './IpInfoRoute';
 import * as Unsplash from './UnsplashRoute';
 
 const body = document.querySelector('body');
@@ -51,6 +52,7 @@ async function getLocationOfUser() {
   const token = `token=${IpInfoKey}`;
   const url = `${IpInfoUrl}${combineParametersForRequest(token)}`;
   const response = await sendRequest(url);
+  response.fullNameOfCountry = getFullNameOfCountry(response.country);
   return response;
 }
 
@@ -85,5 +87,13 @@ function updateDate() {
   timeOnPage.textContent = timeString;
 }
 
+async function generateWeatherData(query) {
+  let locationOfUser = await getLocationOfUser();
+
+  const locationTitleOnPage = document.querySelector('.weather__location');
+  locationTitleOnPage.textContent = `${locationOfUser.city}, ${locationOfUser.fullNameOfCountry}`;
+}
+
 findBackgroundImage('sunny');
 setInterval(updateDate, 1000);
+generateWeatherData();
