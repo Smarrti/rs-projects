@@ -230,6 +230,15 @@ async function generateWeatherData(query) {
   updateDaysWeather(daysWeather);
 }
 
+function changBacklightOnButtons(activeButtonClass) {
+  const buttons = document.querySelectorAll('.button');
+  const willActiveButton = document.querySelector(`.${activeButtonClass}`);
+  buttons.forEach(button => {
+    button.classList.remove('button_active');
+  });
+  willActiveButton.classList.add('button_active');
+}
+
 findBackgroundImage('sunny');
 setInterval(updateDate, 1000);
 generateWeatherData();
@@ -241,10 +250,12 @@ body.addEventListener('click', (e) => {
     case target.classList.contains('type-temperature__button_f'):
       temperatureType = 'fahrenheit';
       generateWeatherData();
+      changBacklightOnButtons('type-temperature__button_f');
       break;
     case target.classList.contains('type-temperature__button_c'):
       temperatureType = 'celsius';
       generateWeatherData();
+      changBacklightOnButtons('type-temperature__button_c');
       break;
   
     default:
