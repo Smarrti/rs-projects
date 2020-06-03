@@ -147,13 +147,20 @@ function updateWeatherIcon(weatherType) {
 function updateCurrentWeather(currentWeather, city, country) {
   const locationTitleOnPage = document.querySelector('.weather__location');
   const temperatureOnPage = document.querySelector('.temperature span');
+  const feelsTemperature = document.querySelector('.temperature__feels');
+  const windTemperature = document.querySelector('.temperature__wind');
+  const humidityTemperature = document.querySelector('.temperature__humidity');
 
   updateWeatherIcon(currentWeather.current.condition.text);
   locationTitleOnPage.textContent = `${city}, ${country}`;
+  windTemperature.textContent = `Wind: ${Math.round(currentWeather.current.wind_kph)} km/h`;
+  humidityTemperature.textContent = `Humidity: ${Math.round(currentWeather.current.humidity)}%`;
   if (temperatureType === 'celsius') {
     temperatureOnPage.textContent = `${Math.round(currentWeather.current.temp_c)}°`;
+    feelsTemperature.textContent = `Feels like ${Math.round(currentWeather.current.feelslike_c)}°`;
   } else {
     temperatureOnPage.textContent = `${Math.round(currentWeather.current.temp_f)}°`;
+    feelsTemperature.textContent = `Feels like ${Math.round(currentWeather.current.feelslike_f)}°`;
   }
 }
 
