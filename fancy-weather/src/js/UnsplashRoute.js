@@ -26,6 +26,7 @@ export function parameters(type) {
       break;
     case 'apiKey':
       parameter = 'client_id';
+      break;
     default:
       break;
   }

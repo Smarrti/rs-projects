@@ -1,4 +1,4 @@
-import './../css/style.scss';
+import "../css/style.scss";
 import { UnsplashKey, IpInfoKey, WeatherApiKey } from './ApiKeys';
 import { IpInfoUrl } from './IpInfoRoute';
 import * as Unsplash from './UnsplashRoute';
@@ -20,14 +20,14 @@ async function sendRequest(url) {
     .then((res) => res.json())
     .then(json => {data = json})
     .catch(() => {
-      //Oops...
+      // Oops...
     })
   return data;
 }
 
 function combineParametersForRequest(...parameters) {
   return parameters.reduce((acc, parameter) => {
-    return acc += `${parameter}&`;
+    return `${acc}${parameter}&`;
   }, '?')
 }
 
@@ -149,9 +149,9 @@ function detectWeatherIcon(weatherType) {
   const filtered = weatherIcons.filter(type => weatherType.includes(type) || weatherType.includes(type.toLocaleLowerCase()));
   let filteredType;
   if (filtered.length) {
-    filteredType = filtered[0];
+    [ filteredType ] = filtered;
   } else {
-    filteredType = weatherIcons[0];
+    [ filteredType ] = weatherIcons;
   }
   return detectWeatherIconClass(filteredType);
 }
@@ -214,7 +214,7 @@ function updateDaysWeather(daysWeather) {
 }
 
 async function generateWeatherData(query) {
-  let locationOfUser = await getLocationOfUser();
+  const locationOfUser = await getLocationOfUser();
   let city;
   if (query) {
     city = query;
@@ -224,7 +224,7 @@ async function generateWeatherData(query) {
 
   const currentWeather = await getCurrentWeather(city);
   const daysWeather = await getDaysWeather(city);
-  let country = currentWeather.location.country;
+  const {country} = currentWeather.location;
 
   updateCurrentWeather(currentWeather, city, country);
   updateDaysWeather(daysWeather);
