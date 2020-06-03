@@ -5,6 +5,7 @@ import * as Unsplash from './UnsplashRoute';
 import * as WeatherApi from './WeatherApiRoute';
 
 const body = document.querySelector('body');
+const temperatureType = 'celsius';
 
 async function sendRequest(url) {
   let data;
@@ -98,6 +99,64 @@ function updateDate() {
   timeOnPage.textContent = timeString;
 }
 
+function detectWeatherIconClass(type) {
+  let className = 'weather__icon_';
+  switch (type) {
+    case 'Cloudy':
+      className += 'cloud';
+      break;
+    case 'Rain':
+      className += 'rain';
+      break;
+    case 'Snow':
+      className += 'snow';
+      break;
+    case 'Sunny':
+      className += 'sun';
+      break;
+    case 'Partly':
+      className += 'sun-cloud';
+      break;
+    case 'Thunder':
+      className += 'thunder';
+      break;
+    default:
+      break;
+  }
+  return className;
+}
+
+function detectWeatherIcon(weatherType) {
+  const weatherIcons = ['Cloudy', 'Rain', 'Snow', 'Sunny', 'Partly', 'Thunder'];
+  const filtered = weatherIcons.filter(type => weatherType.includes(type) || weatherType.includes(type.toLocaleLowerCase()));
+  let filteredType;
+  if (filtered.length) {
+    filteredType = filtered[0];
+  } else {
+    filteredType = weatherIcons[0];
+  }
+  return detectWeatherIconClass(filteredType);
+}
+
+function updateWeatherIcon(weatherType) {
+  const weatherIcon = document.querySelector('.weather__icon');
+  weatherIcon.className = 'weather__icon';
+  weatherIcon.classList.add(detectWeatherIcon(weatherType));
+}
+
+function updateCurrentWeather(currentWeather, city, country) {
+  const locationTitleOnPage = document.querySelector('.weather__location');
+  const temperatureOnPage = document.querySelector('.temperature span');
+
+  updateWeatherIcon(currentWeather.current.condition.text);
+  locationTitleOnPage.textContent = `${city}, ${country}`;
+  if (temperatureType === 'celsius') {
+    temperatureOnPage.textContent = `${Math.round(currentWeather.current.temp_c)}°`;
+  } else {
+    temperatureOnPage.textContent = `${Math.round(currentWeather.current.temp_f)}°`;
+  }
+}
+
 async function generateWeatherData(query) {
   let locationOfUser = await getLocationOfUser();
   let city;
@@ -110,8 +169,7 @@ async function generateWeatherData(query) {
   const currentWeather = await getCurrentWeather(city);
   let country = currentWeather.location.country;
 
-  const locationTitleOnPage = document.querySelector('.weather__location');
-  locationTitleOnPage.textContent = `${city}, ${country}`;
+  updateCurrentWeather(currentWeather, city, country);
 }
 
 findBackgroundImage('sunny');
