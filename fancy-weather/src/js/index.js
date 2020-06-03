@@ -1,5 +1,5 @@
 import './../css/style.scss';
-import { UnsplashKey } from './ApiKeys';
+import { UnsplashKey, IpInfoKey, IpInfoUrl } from './ApiKeys';
 import * as Unsplash from './UnsplashRoute';
 
 const body = document.querySelector('body');
@@ -45,6 +45,13 @@ async function findBackgroundImage(query) {
   // body.style = `background-image: linear-gradient(rgba(8, 15, 26, 0.59), rgba(17, 17, 46, 0.46)),
   //   url("${response.results[randomPhoto].urls.regular}")`;
   body.style = `background-image: linear-gradient(rgba(8, 15, 26, 0.59), rgba(17, 17, 46, 0.46)), url("https://images.unsplash.com/photo-1465577512280-1c2d41a79862?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEzOTAwNH0")`;
+}
+
+async function getLocationOfUser() {
+  const token = `token=${IpInfoKey}`;
+  const url = `${IpInfoUrl}${combineParametersForRequest(token)}`;
+  const response = await sendRequest(url);
+  return response;
 }
 
 function getWeekDayOnString(dayNumber) {
