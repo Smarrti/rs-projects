@@ -5,7 +5,7 @@ import * as Unsplash from './UnsplashRoute';
 import * as WeatherApi from './WeatherApiRoute';
 
 const body = document.querySelector('body');
-const temperatureType = 'celsius';
+let temperatureType = 'celsius';
 const numberDaysToGetAdditionalWeather = 3;
 
 async function sendRequest(url) {
@@ -233,3 +233,21 @@ async function generateWeatherData(query) {
 findBackgroundImage('sunny');
 setInterval(updateDate, 1000);
 generateWeatherData();
+
+body.addEventListener('click', (e) => {
+  const {target} = e;
+  e.preventDefault();
+  switch (true) {
+    case target.classList.contains('type-temperature__button_f'):
+      temperatureType = 'fahrenheit';
+      generateWeatherData();
+      break;
+    case target.classList.contains('type-temperature__button_c'):
+      temperatureType = 'celsius';
+      generateWeatherData();
+      break;
+  
+    default:
+      break;
+  }
+})
