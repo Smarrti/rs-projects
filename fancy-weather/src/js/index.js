@@ -6,6 +6,7 @@ import * as WeatherApi from './WeatherApiRoute';
 
 const body = document.querySelector('body');
 const temperatureType = 'celsius';
+const numberDaysToGetAdditionalWeather = 3;
 
 async function sendRequest(url) {
   let data;
@@ -68,8 +69,25 @@ async function getCurrentWeather(query) {
   return response;
 }
 
-function getWeekDayOnString(dayNumber) {
-  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+async function getDaysWeather(query) {
+  const sourceApi = WeatherApi.source;
+  const method = WeatherApi.methods('days');
+  const apiKey = `${WeatherApi.parameters('key')}=${WeatherApiKey}`;
+  const request = `${WeatherApi.parameters('query')}=${query}`;
+  const days = `${WeatherApi.parameters('days')}=${numberDaysToGetAdditionalWeather}`;
+  const parameters = combineParametersForRequest(apiKey, request, days);
+  const url = sourceApi + method + parameters;
+  const response = await sendRequest(url);
+  return response;
+}
+
+function getWeekDayOnString(dayNumber, isFull) {
+  let days;
+  if (isFull) {
+    days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  } else {
+    days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  }
   return days[dayNumber];
 }
 
@@ -164,6 +182,37 @@ function updateCurrentWeather(currentWeather, city, country) {
   }
 }
 
+function createDayWeatherCard(weather) {
+  const dayWeather = document.createElement('div');
+  const dayName = document.createElement('div');
+  const dayTemperature = document.createElement('div');
+  const dayIcon = document.createElement('div');
+
+  dayWeather.classList.add('day__wrapper');
+  dayName.classList.add('day__name');
+  dayTemperature.classList.add('day__temperature');
+  dayIcon.classList.add('day__icon', detectWeatherIcon(weather.day.condition.text));
+
+  const dayDate = new Date(weather.date);
+  dayName.textContent = getWeekDayOnString(dayDate.getDay(), true);
+  if (temperatureType === 'celsius') {
+    dayTemperature.textContent = `${Math.floor(weather.day.avgtemp_c)}°`;
+  } else {
+    dayTemperature.textContent = `${Math.floor(weather.day.avgtemp_f)}°`;
+  }
+
+  dayWeather.append(dayName, dayTemperature, dayIcon);
+  return dayWeather;
+}
+
+function updateDaysWeather(daysWeather) {
+  const dayWrapper = document.querySelector('.weather__days');
+  dayWrapper.innerHTML = '';
+  for (let i = 0; i < numberDaysToGetAdditionalWeather; i += 1) {
+    dayWrapper.append(createDayWeatherCard(daysWeather.forecast.forecastday[i]));
+  }
+}
+
 async function generateWeatherData(query) {
   let locationOfUser = await getLocationOfUser();
   let city;
@@ -174,9 +223,11 @@ async function generateWeatherData(query) {
   }
 
   const currentWeather = await getCurrentWeather(city);
+  const daysWeather = await getDaysWeather(city);
   let country = currentWeather.location.country;
 
   updateCurrentWeather(currentWeather, city, country);
+  updateDaysWeather(daysWeather);
 }
 
 findBackgroundImage('sunny');
