@@ -1,7 +1,8 @@
 import './../css/style.scss';
-import { UnsplashKey, IpInfoKey } from './ApiKeys';
-import { IpInfoUrl, getFullNameOfCountry } from './IpInfoRoute';
+import { UnsplashKey, IpInfoKey, WeatherApiKey } from './ApiKeys';
+import { IpInfoUrl } from './IpInfoRoute';
 import * as Unsplash from './UnsplashRoute';
+import * as WeatherApi from './WeatherApiRoute';
 
 const body = document.querySelector('body');
 
@@ -52,7 +53,17 @@ async function getLocationOfUser() {
   const token = `token=${IpInfoKey}`;
   const url = `${IpInfoUrl}${combineParametersForRequest(token)}`;
   const response = await sendRequest(url);
-  response.fullNameOfCountry = getFullNameOfCountry(response.country);
+  return response;
+}
+
+async function getCurrentWeather(query) {
+  const sourceApi = WeatherApi.source;
+  const method = WeatherApi.methods('current');
+  const apiKey = `${WeatherApi.parameters('key')}=${WeatherApiKey}`;
+  const request = `${WeatherApi.parameters('query')}=${query}`;
+  const parameters = combineParametersForRequest(apiKey, request);
+  const url = sourceApi + method + parameters;
+  const response = await sendRequest(url);
   return response;
 }
 
@@ -89,9 +100,18 @@ function updateDate() {
 
 async function generateWeatherData(query) {
   let locationOfUser = await getLocationOfUser();
+  let city;
+  if (query) {
+    city = query;
+  } else {
+    city = locationOfUser.city;
+  }
+
+  const currentWeather = await getCurrentWeather(city);
+  let country = currentWeather.location.country;
 
   const locationTitleOnPage = document.querySelector('.weather__location');
-  locationTitleOnPage.textContent = `${locationOfUser.city}, ${locationOfUser.fullNameOfCountry}`;
+  locationTitleOnPage.textContent = `${city}, ${country}`;
 }
 
 findBackgroundImage('sunny');
