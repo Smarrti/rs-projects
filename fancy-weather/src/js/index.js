@@ -45,7 +45,38 @@ async function findBackgroundImage(query) {
   // body.style = `background-image: linear-gradient(rgba(8, 15, 26, 0.59), rgba(17, 17, 46, 0.46)),
   //   url("${response.results[randomPhoto].urls.regular}")`;
   body.style = `background-image: linear-gradient(rgba(8, 15, 26, 0.59), rgba(17, 17, 46, 0.46)), url("https://images.unsplash.com/photo-1465577512280-1c2d41a79862?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEzOTAwNH0")`;
-  
+}
+
+function getWeekDayOnString(dayNumber) {
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  return days[dayNumber];
+}
+
+function getMonthOnString(monthNumber) {
+  const months = ['January', 'February', 'March', 'April',
+    'May', 'June', 'July', 'August', 'September',
+    'October', 'November', 'December'];
+  return months[monthNumber];
+}
+
+function updateDate() {
+  const date = new Date();
+  const dayOfTheWeek = getWeekDayOnString(date.getDay());
+  const day = date.getDate();
+  const month = getMonthOnString(date.getMonth());
+  const dateString = `${dayOfTheWeek} ${day} ${month}`;
+
+  const hour = date.getHours();
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
+  const timeString = `${hour}:${minutes}:${seconds}`;
+
+  const dateOnPage = document.querySelector('.date');
+  const timeOnPage = document.querySelector('.time');
+
+  dateOnPage.textContent = dateString;
+  timeOnPage.textContent = timeString;
 }
 
 findBackgroundImage('sunny');
+setInterval(updateDate, 1000);
