@@ -1,4 +1,5 @@
 .map {
+  text-align: right;
   & > * {
     min-width: 500px;
     @include media-mobile {

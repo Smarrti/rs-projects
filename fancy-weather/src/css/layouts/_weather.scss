@@ -26,10 +26,12 @@
   &__days {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
   }
   & > * {
     margin-bottom: 15px;
+  }
+  @include media-mobile {
+    justify-content: center;
   }
 }
 
