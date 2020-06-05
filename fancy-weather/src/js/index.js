@@ -3,6 +3,7 @@ import { UnsplashKey, IpInfoKey, WeatherApiKey } from './ApiKeys';
 import { IpInfoUrl } from './IpInfoRoute';
 import * as Unsplash from './UnsplashRoute';
 import * as WeatherApi from './WeatherApiRoute';
+import './MapBox';
 
 const body = document.querySelector('body');
 let temperatureType = 'celsius';
