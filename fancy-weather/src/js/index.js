@@ -214,6 +214,17 @@ function updateDaysWeather(daysWeather) {
     dayWrapper.append(createDayWeatherCard(daysWeather.forecast.forecastday[i]));
   }
 }
+
+function replaceLocationOnMap(coordinateX, coordinateY) {
+  const latitudeText = document.querySelector('.map__coordinates p:first-child');
+  const longitudeText = document.querySelector('.map__coordinates p:last-child');
+  const latitude = String(coordinateX).split('.');
+  const longitude = String(coordinateY).split('.');
+  latitudeText.textContent = `Latitude: ${latitude[0]}°${latitude[1]}`;
+  longitudeText.textContent = `Longitude: ${longitude[0]}°${longitude[1]}`;
+  changeCoordinatesOnMap(coordinateX, coordinateY);
+}
+
 async function generateWeatherData(query) {
   const locationOfUser = await getLocationOfUser();
   let city;
@@ -230,7 +241,7 @@ async function generateWeatherData(query) {
   const coordinateX = currentWeather.location.lat;
   const coordinateY = currentWeather.location.lon;
 
-  changeCoordinatesOnMap(coordinateX, coordinateY);
+  replaceLocationOnMap(coordinateX, coordinateY);
   updateCurrentWeather(currentWeather, city, country);
   updateDaysWeather(daysWeather);
 }
