@@ -26,6 +26,9 @@
   &__days {
     display: flex;
     flex-wrap: wrap;
+    @include media-mobile {
+      justify-content: center;
+    }
   }
   & > * {
     margin-bottom: 15px;
@@ -54,7 +57,7 @@
     }
   }
   @include media-mobile {
-    font-size: 10.6rem;
+    font-size: 9.9rem;
   }
   @include media-phone {
     width: 100%;
