@@ -95,6 +95,13 @@ function getMonthOnString(monthNumber) {
   return months[monthNumber];
 }
 
+function addZeroOnTime(time) {
+  if (time < 10) {
+    time = `0${String(time)}`;
+  }
+  return time;
+}
+
 function updateDate() {
   const date = new Date();
   const dayOfTheWeek = getWeekDayOnString(date.getDay());
@@ -102,9 +109,9 @@ function updateDate() {
   const month = getMonthOnString(date.getMonth());
   const dateString = `${dayOfTheWeek} ${day} ${month}`;
 
-  const hour = date.getHours();
-  const minutes = date.getMinutes();
-  const seconds = date.getSeconds();
+  let hour = addZeroOnTime(date.getHours());
+  let minutes = addZeroOnTime(date.getMinutes());
+  let seconds = addZeroOnTime(date.getSeconds());
   const timeString = `${hour}:${minutes}:${seconds}`;
 
   const dateOnPage = document.querySelector('.date');
