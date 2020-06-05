@@ -225,6 +225,7 @@ async function generateWeatherData(query) {
 
   const currentWeather = await getCurrentWeather(city);
   const daysWeather = await getDaysWeather(city);
+  city = currentWeather.location.name;
   const {country} = currentWeather.location;
   const coordinateX = currentWeather.location.lat;
   const coordinateY = currentWeather.location.lon;
@@ -261,6 +262,11 @@ body.addEventListener('click', (e) => {
       generateWeatherData();
       changBacklightOnButtons('type-temperature__button_c');
       break;
+    case target.classList.contains('search__find'): {
+      const query = document.querySelector('.search__input');
+      generateWeatherData(query.value);
+      break;
+    }
     default:
       break;
   }
