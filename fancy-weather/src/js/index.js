@@ -244,6 +244,11 @@ function changBacklightOnButtons(activeButtonClass) {
   willActiveButton.classList.add('button_active');
 }
 
+function getCurrentPickedCity() {
+  const city = document.querySelector('.weather__location').textContent;
+  return city.split(',')[0];
+}
+
 findBackgroundImage('sunny');
 setInterval(updateDate, 1000);
 generateWeatherData();
@@ -252,16 +257,18 @@ body.addEventListener('click', (e) => {
   const {target} = e;
   e.preventDefault();
   switch (true) {
-    case target.classList.contains('type-temperature__button_f'):
+    case target.classList.contains('type-temperature__button_f'): {
       temperatureType = 'fahrenheit';
-      generateWeatherData();
+      generateWeatherData(getCurrentPickedCity());
       changBacklightOnButtons('type-temperature__button_f');
       break;
-    case target.classList.contains('type-temperature__button_c'):
+    }
+    case target.classList.contains('type-temperature__button_c'): {
       temperatureType = 'celsius';
-      generateWeatherData();
+      generateWeatherData(getCurrentPickedCity());
       changBacklightOnButtons('type-temperature__button_c');
       break;
+    }
     case target.classList.contains('search__find'): {
       const query = document.querySelector('.search__input');
       generateWeatherData(query.value);
