@@ -4,7 +4,7 @@ export function methods(type) {
   let url;
   switch (type) {
     case 'findPhotos':
-      url = 'search/photos/'
+      url = 'photos/random'
       break;
   
     default:
