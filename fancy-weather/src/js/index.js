@@ -4,6 +4,7 @@ import { IpInfoUrl } from './IpInfoRoute';
 import * as Unsplash from './UnsplashRoute';
 import * as WeatherApi from './WeatherApiRoute';
 import './MapBox';
+import { changeCoordinatesOnMap } from './MapBox';
 
 const body = document.querySelector('body');
 let temperatureType = 'celsius';
@@ -214,6 +215,11 @@ function updateDaysWeather(daysWeather) {
   }
 }
 
+function changeMapLocation(location) {
+  const coordinates = location.split(',');
+  changeCoordinatesOnMap(coordinates[0], coordinates[1]);
+}
+
 async function generateWeatherData(query) {
   const locationOfUser = await getLocationOfUser();
   let city;
@@ -222,6 +228,7 @@ async function generateWeatherData(query) {
   } else {
     city = locationOfUser.city;
   }
+  changeMapLocation(locationOfUser.loc);
 
   const currentWeather = await getCurrentWeather(city);
   const daysWeather = await getDaysWeather(city);
@@ -258,7 +265,6 @@ body.addEventListener('click', (e) => {
       generateWeatherData();
       changBacklightOnButtons('type-temperature__button_c');
       break;
-  
     default:
       break;
   }
