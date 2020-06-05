@@ -14,4 +14,7 @@ export function changeCoordinatesOnMap(x, y) {
     center: [y, x],
     essential: true
   });
+  var marker = new mapboxgl.Marker()
+    .setLngLat([y, x])
+    .addTo(map);
 }
