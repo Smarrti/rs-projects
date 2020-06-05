@@ -280,15 +280,19 @@ async function generateWeatherData(query) {
 
   const currentWeather = await getCurrentWeather(city);
   const daysWeather = await getDaysWeather(city);
-  city = currentWeather.location.name;
-  const {country} = currentWeather.location;
-  const coordinateX = currentWeather.location.lat;
-  const coordinateY = currentWeather.location.lon;
-
-  replaceLocationOnMap(coordinateX, coordinateY);
-  findBackgroundImage(currentWeather.current.condition.text);
-  updateCurrentWeather(currentWeather, city, country);
-  updateDaysWeather(daysWeather);
+  if (currentWeather && daysWeather) {
+    city = currentWeather.location.name;
+    const {country} = currentWeather.location;
+    const coordinateX = currentWeather.location.lat;
+    const coordinateY = currentWeather.location.lon;
+  
+    replaceLocationOnMap(coordinateX, coordinateY);
+    findBackgroundImage(currentWeather.current.condition.text);
+    updateCurrentWeather(currentWeather, city, country);
+    updateDaysWeather(daysWeather);
+  } else {
+    createMessage('City not founded');
+  }
 }
 
 function changBacklightOnButtons(activeButtonClass) {
