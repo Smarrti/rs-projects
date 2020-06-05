@@ -3,12 +3,22 @@ import { UnsplashKey, IpInfoKey, WeatherApiKey } from './ApiKeys';
 import { IpInfoUrl } from './IpInfoRoute';
 import * as Unsplash from './UnsplashRoute';
 import * as WeatherApi from './WeatherApiRoute';
-import './MapBox';
 import { changeCoordinatesOnMap } from './MapBox';
+
 
 const body = document.querySelector('body');
 const numberDaysToGetAdditionalWeather = 3;
 let temperatureType;
+
+function changBacklightOnButtons(activeButtonClass) {
+  const buttons = document.querySelectorAll('.button');
+  const willActiveButton = document.querySelector(`.${activeButtonClass}`);
+  buttons.forEach(button => {
+    button.classList.remove('button_active');
+  });
+  willActiveButton.classList.add('button_active');
+}
+
 if (localStorage.getItem('temperatureType')) {
   temperatureType = localStorage.getItem('temperatureType');
 } else {
@@ -136,10 +146,11 @@ function getMonthOnString(monthNumber) {
 }
 
 function addZeroOnTime(time) {
+  let response = time;
   if (time < 10) {
-    time = `0${String(time)}`;
+    response = `0${String(time)}`;
   }
-  return time;
+  return response;
 }
 
 function updateDate() {
@@ -149,9 +160,9 @@ function updateDate() {
   const month = getMonthOnString(date.getMonth());
   const dateString = `${dayOfTheWeek} ${day} ${month}`;
 
-  let hour = addZeroOnTime(date.getHours());
-  let minutes = addZeroOnTime(date.getMinutes());
-  let seconds = addZeroOnTime(date.getSeconds());
+  const hour = addZeroOnTime(date.getHours());
+  const minutes = addZeroOnTime(date.getMinutes());
+  const seconds = addZeroOnTime(date.getSeconds());
   const timeString = `${hour}:${minutes}:${seconds}`;
 
   const dateOnPage = document.querySelector('.date');
@@ -295,15 +306,6 @@ async function generateWeatherData(query) {
   }
 }
 
-function changBacklightOnButtons(activeButtonClass) {
-  const buttons = document.querySelectorAll('.button');
-  const willActiveButton = document.querySelector(`.${activeButtonClass}`);
-  buttons.forEach(button => {
-    button.classList.remove('button_active');
-  });
-  willActiveButton.classList.add('button_active');
-}
-
 function getCurrentPickedCity() {
   const city = document.querySelector('.weather__location').textContent;
   return city.split(',')[0];
@@ -355,11 +357,12 @@ body.addEventListener('click', (e) => {
 body.addEventListener('keypress', (key) => {
   const {code} = key;
   switch (code) {
-    case 'Enter':
+    case 'Enter': {
       key.preventDefault();
       const query = document.querySelector('.search__input');
       generateWeatherData(query.value);
       break;
+    }
     default:
       break;
   }
