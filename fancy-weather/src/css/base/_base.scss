@@ -13,6 +13,10 @@ body {
   }
 }
 
+* {
+  transition: all ease 0.3s;
+}
+
 .main {
   justify-content: center;
 }
