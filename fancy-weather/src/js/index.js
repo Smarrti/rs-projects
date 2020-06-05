@@ -19,6 +19,37 @@ if (temperatureType === 'fahrenheit') {
   changBacklightOnButtons('type-temperature__button_f');
 }
 
+function createMessage(text) {
+  const messageWrapper = document.createElement('div');
+  const iconBlock = document.createElement('div');
+  const icon = document.createElement('img');
+  const textBlock = document.createElement('div');
+  const closeBlock = document.createElement('div');
+  const close = document.createElement('img');
+  const textContent = document.createElement('p');
+
+  messageWrapper.classList.add('message');
+  iconBlock.classList.add('message__icon');
+  textBlock.classList.add('message__text');
+  closeBlock.classList.add('message__close-wrapper');
+  close.classList.add('message__close');
+
+  icon.setAttribute('src', './assets/svg/error.svg');
+  close.setAttribute('src', './assets/svg/close.svg');
+
+  textContent.textContent = text;
+
+  iconBlock.append(icon);
+  closeBlock.append(close)
+  textBlock.append(closeBlock, textContent);
+  messageWrapper.append(iconBlock, textBlock);
+  body.append(messageWrapper);
+}
+
+function resolveErrors() {
+  createMessage('Something went wrong');
+}
+
 async function sendRequest(url) {
   let data;
   await fetch(url)
@@ -31,7 +62,7 @@ async function sendRequest(url) {
     .then((res) => res.json())
     .then(json => {data = json})
     .catch(() => {
-      // Oops...
+      resolveErrors()
     })
   return data;
 }
