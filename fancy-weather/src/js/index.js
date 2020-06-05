@@ -309,3 +309,17 @@ body.addEventListener('click', (e) => {
       break;
   }
 })
+
+body.addEventListener('keypress', (key) => {
+  const {code} = key;
+  switch (code) {
+    case 'Enter':
+      key.preventDefault();
+      const query = document.querySelector('.search__input');
+      generateWeatherData(query.value);
+      break;
+  
+    default:
+      break;
+  }
+})
