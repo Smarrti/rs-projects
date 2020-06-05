@@ -7,8 +7,17 @@ import './MapBox';
 import { changeCoordinatesOnMap } from './MapBox';
 
 const body = document.querySelector('body');
-let temperatureType = 'celsius';
 const numberDaysToGetAdditionalWeather = 3;
+let temperatureType;
+if (localStorage.getItem('temperatureType')) {
+  temperatureType = localStorage.getItem('temperatureType');
+} else {
+  localStorage.setItem('temperatureType', 'celsius');
+  temperatureType = 'celsius';
+}
+if (temperatureType === 'fahrenheit') {
+  changBacklightOnButtons('type-temperature__button_f');
+}
 
 async function sendRequest(url) {
   let data;
@@ -264,6 +273,7 @@ function getCurrentPickedCity() {
   const city = document.querySelector('.weather__location').textContent;
   return city.split(',')[0];
 }
+
 setInterval(updateDate, 1000);
 generateWeatherData();
 
@@ -275,12 +285,14 @@ body.addEventListener('click', (e) => {
       temperatureType = 'fahrenheit';
       generateWeatherData(getCurrentPickedCity());
       changBacklightOnButtons('type-temperature__button_f');
+      localStorage.setItem('temperatureType', 'fahrenheit');
       break;
     }
     case target.classList.contains('type-temperature__button_c'): {
       temperatureType = 'celsius';
       generateWeatherData(getCurrentPickedCity());
       changBacklightOnButtons('type-temperature__button_c');
+      localStorage.setItem('temperatureType', 'celsius');
       break;
     }
     case target.classList.contains('search__find'): {
