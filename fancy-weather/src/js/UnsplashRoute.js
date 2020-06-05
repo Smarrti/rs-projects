@@ -1,5 +1,4 @@
 export const source = 'https://api.unsplash.com/';
-export const numberPhotosToSearch = 20;
 export function methods(type) {
   let url;
   switch (type) {
