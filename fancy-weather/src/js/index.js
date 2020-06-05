@@ -336,6 +336,13 @@ body.addEventListener('click', (e) => {
       findBackgroundImage(weatherType.textContent);
       break;
     }
+    case target.classList.contains('message__close'): {
+      const messages = document.querySelectorAll('.message');
+      messages.forEach((message) => {
+        body.removeChild(message);
+      })
+      break;
+    }
     default:
       break;
   }
@@ -349,7 +356,6 @@ body.addEventListener('keypress', (key) => {
       const query = document.querySelector('.search__input');
       generateWeatherData(query.value);
       break;
-  
     default:
       break;
   }
