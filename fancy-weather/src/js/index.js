@@ -89,8 +89,7 @@ async function findBackgroundImage(query) {
   // const find = `${Unsplash.parameters('searchPhoto')}=${query}`;
   // const orientation = `${Unsplash.parameters('orientation')}=landscape`;
   // const apiKey = `${Unsplash.parameters('apiKey')}=${UnsplashKey}`;
-  // const numberPhotos = `${Unsplash.parameters('perPage')}=${Unsplash.numberPhotosToSearch}`;
-  // const parameters = combineParametersForRequest(find, orientation, apiKey, numberPhotos);
+  // const parameters = combineParametersForRequest(find, orientation, apiKey);
   // const url = sourceApi + method + parameters;
   // const response = await sendRequest(url);
   // body.style = `background-image: linear-gradient(rgba(8, 15, 26, 0.59), rgba(17, 17, 46, 0.46)),
@@ -280,6 +279,34 @@ function replaceLocationOnMap(coordinateX, coordinateY) {
   changeCoordinatesOnMap(coordinateX, coordinateY);
 }
 
+function detectTimeOfYear(month) {
+  let response;
+  switch (month) {
+    case 11:
+    case 0:
+    case 1:
+      response = 'Winter';      
+      break;
+    case 2:
+    case 3:
+    case 4:
+      response = 'Spring';      
+      break;
+    case 5:
+    case 6:
+    case 7:
+      response = 'Summer';      
+      break;
+    case 8:
+    case 9:
+    case 10:
+      response = 'Fall';
+    default:
+      break;
+  }
+  return response;
+}
+
 async function generateWeatherData(query) {
   const locationOfUser = await getLocationOfUser();
   let city;
@@ -296,9 +323,15 @@ async function generateWeatherData(query) {
     const {country} = currentWeather.location;
     const coordinateX = currentWeather.location.lat;
     const coordinateY = currentWeather.location.lon;
+
+    const { localtime } = currentWeather.location;
+    const time = new Date(localtime);
+    const timeOfYear = detectTimeOfYear(time.getMonth());
+    const photoTextRequest = `${currentWeather.current.condition.text} ${timeOfYear}`;
   
     replaceLocationOnMap(coordinateX, coordinateY);
-    findBackgroundImage(currentWeather.current.condition.text);
+    findBackgroundImage(photoTextRequest);
+    console.log(`Request for photos sended. Text request: ${photoTextRequest}`);
     updateCurrentWeather(currentWeather, city, country);
     updateDaysWeather(daysWeather);
   } else {
