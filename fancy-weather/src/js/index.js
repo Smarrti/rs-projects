@@ -84,21 +84,20 @@ function combineParametersForRequest(...parameters) {
 }
 
 async function findBackgroundImage(query) {
-  // const sourceApi = Unsplash.source;
-  // const method = Unsplash.methods('findPhotos');
-  // const find = `${Unsplash.parameters('searchPhoto')}=${query}`;
-  // const orientation = `${Unsplash.parameters('orientation')}=landscape`;
-  // const apiKey = `${Unsplash.parameters('apiKey')}=${UnsplashKey}`;
-  // const parameters = combineParametersForRequest(find, orientation, apiKey);
-  // const url = sourceApi + method + parameters;
-  // const response = await sendRequest(url);
-  // const imageForLazyLoad = document.createElement('img');
-  // imageForLazyLoad.src = response.urls.regular;
-  // imageForLazyLoad.addEventListener('load', () => {
-  //   body.style = `background-image: linear-gradient(rgba(8, 15, 26, 0.59), rgba(17, 17, 46, 0.46)),
-  //     url("${response.urls.regular}")`;
-  // })
-  body.style = `background-image: linear-gradient(rgba(8, 15, 26, 0.59), rgba(17, 17, 46, 0.46)), url("https://images.unsplash.com/photo-1465577512280-1c2d41a79862?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEzOTAwNH0")`;
+  const sourceApi = Unsplash.source;
+  const method = Unsplash.methods('findPhotos');
+  const find = `${Unsplash.parameters('searchPhoto')}=${query}`;
+  const orientation = `${Unsplash.parameters('orientation')}=landscape`;
+  const apiKey = `${Unsplash.parameters('apiKey')}=${UnsplashKey}`;
+  const parameters = combineParametersForRequest(find, orientation, apiKey);
+  const url = sourceApi + method + parameters;
+  const response = await sendRequest(url);
+  const imageForLazyLoad = document.createElement('img');
+  imageForLazyLoad.src = response.urls.regular;
+  imageForLazyLoad.addEventListener('load', () => {
+    body.style = `background-image: linear-gradient(rgba(8, 15, 26, 0.59), rgba(17, 17, 46, 0.46)),
+      url("${response.urls.regular}")`;
+  })
 }
 
 async function getLocationOfUser() {
@@ -305,6 +304,7 @@ function detectTimeOfYear(month) {
     case 9:
     case 10:
       response = 'Fall';
+      break;
     default:
       break;
   }
